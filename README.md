@@ -1,4 +1,4 @@
 
 # RDFGraphVis # 
 
-is a RDF Ontology graph viualisation tool.
+is a RDF Ontology graph visualisation tool.
