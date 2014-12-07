@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="utf-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+    <meta name="author" content="">	
+
+	<!-- Bootstrap -->	
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <!-- JointJS -->
+    <link href="lib/jointjs/joint.css" rel="stylesheet" media="screen">
+	<!-- style -->
+	<link href="css/style.css" rel="stylesheet" media="screen">
+
+	<title>RDF GRaph Visualisation</title>
+</head>
+<body>
+
+<div id="paper" class="container" style="border:1px solid gray"></div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+    <!-- jsonld -->
+    <script src="lib/jsonld/jsonld.js"></script>
+    <!-- JointJS -->
+    <script src="lib/jointjs/joint.js"></script>
+    <script src="lib/jointjs/joint.shapes.erd.min.js"></script>
+    
+    <!-- own stuff -->
+    <script src="js/script.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+
+        var data =  '<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .\n' +
+                    '<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/2000/01/rdf-schema#label> "Person"@de .\n' +
+                    '<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/2000/01/rdf-schema#label> "Person"@en .\n' +
+                    '<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/2000/01/rdf-schema#comment> "Das Konzept beschreibt eine historische Person"@de .\n' +
+                    '<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes an historic Person"@en .\n' +
+                    '<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .\n' +
+                    '<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/2000/01/rdf-schema#label> "Professor"@en .\n' +
+                    '<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/2000/01/rdf-schema#label> "Professor"@de .\n' +
+                    '<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Professor describes a person of profession Professor."@en .\n' +
+                    '<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/2000/01/rdf-schema#comment> "Das Konzept Professor beschreibt eine historische Person mit dem Beruf eines Professors"@de .\n' +
+                    '<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Person> .\n'+
+                    '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .\n'+
+                    '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .\n'+
+                    '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#label> "weitere Informationen"@de .\n'+
+                    '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#label> "further information"@en .\n'+
+                    '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .\n'+
+                    '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .\n';
+
+        var rdfgraphvis = new RDFGraphVis(data);
+        rdfgraphvis.parse();
+    });
+    </script>    
+
+</body>
+</html>
