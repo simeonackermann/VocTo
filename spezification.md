@@ -25,4 +25,4 @@ Ziel des Web-Tools ist die Visualisierung einer RDF Ontologie als Graph (ER-Diag
 
 ## Programmablauf
 
-![flow chart](/flow.pdf "RDFGraphVis Programmablauf")
+![flow chart](/flow.png "RDFGraphVis Programmablauf")
