@@ -9,30 +9,95 @@
 	<!-- Bootstrap -->	
 	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <!-- JointJS -->
-    <link href="lib/jointjs/joint.css" rel="stylesheet" media="screen">
-	<!-- style -->
+    <!-- style -->
 	<link href="css/style.css" rel="stylesheet" media="screen">
 
-	<title>RDF GRaph Visualisation</title>
+	<title>RDF Graph Visualisation</title>
 </head>
 <body>
 
-<div id="paper" class="container" style="border:1px solid gray"></div>
+
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>--
+          <a class="navbar-brand" href="#">RDFGraphVis</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Start</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <!--<form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>-->
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 sidebar">
+          <ul class="nav nav-sidebar">
+            <!--
+            <li class="active"><a href="#">Visualisation <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">...</a></li>
+            -->
+            <li>
+                <button id="update-graph" class="btn btn-primary btn-sm" type="button">Update Graph</button>
+                <textarea id="ontologie-editor" style="width:100%" rows="30"></textarea>
+                
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 main">
+          <h1 class="page-header">Ontology Visualisation</h1>
+
+        <div class="container">
+            <form class="form-inline pull-right" role="form" style="margin-bottom:10px;">
+              <div class="form-group">
+                <div class="input-group">
+                  <label class="sr-only" for="graph-id">Model ID</label>
+                  <div class="input-group-addon">ID:</div>
+                  <input type="text" class="form-control" id="graph-id" placeholder="ID for this Model">
+                </div>
+              </div>
+              <button id="save-graph" class="btn btn-primary" type="button">Save Element Positions</button>
+            </form>
+        </div>
+        
+        <div id="graph" class="container" style="border:1px solid gray"></div>
+          
+        </div>
+      </div>
+    </div>
+
+
 
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
     <!-- jsonld -->
     <script src="lib/jsonld/jsonld.js"></script>
-    <!-- JointJS -->
-    <script src="lib/jointjs/joint.js"></script>
-    <script src="lib/jointjs/joint.shapes.erd.min.js"></script>
+    <!-- D3 -->
+    <script src="lib/d3/d3.v3.min.js"></script>
     
     <!-- own stuff -->
     <script src="js/script.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
 
-        var data =  '<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .\n' +
+        var data =  '<http://catalogus-professorum.org/cpm/> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .\n' +
+                    '<http://catalogus-professorum.org/cpm/> <http://purl.org/dc/terms/modified> "2013-09-10" .\n' +
+                    '<http://catalogus-professorum.org/cpm/> <http://www.w3.org/2000/01/rdf-schema#label> "Catalogus Professorum Model (CPM)" .\n' +
+                    '<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .\n' +
                     '<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/2000/01/rdf-schema#label> "Person"@de .\n' +
                     '<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/2000/01/rdf-schema#label> "Person"@en .\n' +
                     '<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/2000/01/rdf-schema#comment> "Das Konzept beschreibt eine historische Person"@de .\n' +
@@ -45,13 +110,31 @@
                     '<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Person> .\n'+
                     '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .\n'+
                     '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .\n'+
-                    '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#label> "weitere Informationen"@de .\n'+
+                    '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#label> "Infos"@de .\n'+
                     '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#label> "further information"@en .\n'+
                     '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .\n'+
-                    '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .\n';
+                    '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Professor> .\n'+
+                    '<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .\n' + 
+                    '<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .\n' +
+                    '<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/2000/01/rdf-schema#label> "Period"@en .\n'+
+                    '<http://catalogus-professorum.org/cpm/has-period> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .\n' +
+                    '<http://catalogus-professorum.org/cpm/has-period> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .\n' +
+                    '<http://catalogus-professorum.org/cpm/has-period> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/PeriodOfLife> .\n'+
+                    '<http://catalogus-professorum.org/cpm/has-period> <http://www.w3.org/2000/01/rdf-schema#label> "has-period"@de .\n';
+
 
         var rdfgraphvis = new RDFGraphVis(data);
-        rdfgraphvis.parse();
+            //rdfgraphvis.init();
+
+
+        $("#save-graph").click( function() {
+            rdfgraphvis.save();
+        } );
+
+        $("#update-graph").click( function() {
+            rdfgraphvis.update();
+        });
+    
     });
     </script>    
 
