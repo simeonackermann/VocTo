@@ -89,6 +89,13 @@ body {
  * ...
  */
 
+ #graph {
+ 	border:1px solid gray;
+ 	width: 1002px;
+ 	margin: 0;
+ 	padding: 0;
+ }
+
 
 /* hide remove link btn */
 .link-tools .tool-remove { display: none }

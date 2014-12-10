@@ -1,7 +1,10 @@
 // the RDFGraphvis class
-RDFGraphVis = function(data) {
-	this.nquads = data;
+RDFGraphVis = function( settings ) {
+	this.nquads = settings.data;
 	this.base = "";
+	if ( settings.id ) {
+		this.base = settings.id;
+	}
 	this.model = new Array();
 	this.storedModel = new Object();
 
@@ -27,7 +30,7 @@ RDFGraphVis.prototype.init = function() {
 		.attr("width", w)
 		.attr("height", h)
 		.attr("pointer-events", "all")
-		.append('svg:g')
+		//.append('svg:g')
 		//.call(d3.behavior.zoom().on("zoom", redraw))
 		.append('svg:g');
 
@@ -69,25 +72,20 @@ RDFGraphVis.prototype.init = function() {
 		$("#ontologie-editor").val( JSON.stringify(_this.model, null, ' ') );
 
 		if ( _this.model[0]["@type"] == "http://www.w3.org/2002/07/owl#Ontology" ) {
-			_this.base = _this.model[0]["@id"];
-			$("#graph-id").val( encodeURIComponent( _this.base ) );
-			var graphId = encodeURIComponent( _this.base );
-			$.post( "ajax/get.php", { name: graphId })		
-				.done(function( jsondata ) {
-					//console.log( "jsondata: ", jsondata );
-					if ( jsondata.result && jsondata.content != "" ) {
-						_this.storedModel = $.parseJSON( jsondata.content );
-						//$("#rdform-org-filename").val(filename);
-						console.log( "storedModel: ", _this.storedModel );
-					} else {
-						// new ontology or file not found...
-
-					}
-					_this.parse();
-			});
-		} else {
-			_this.parse();
+			_this.base = encodeURIComponent( _this.model[0]["@id"] );
 		}
+			
+		//var graphId = encodeURIComponent( _this.base );
+		$.post( "ajax/get.php", { name: _this.base + ".json" })		
+			.done(function( jsondata ) {
+				//console.log( "jsondata: ", jsondata );
+				if ( jsondata.result && jsondata.content != "" ) {
+					_this.storedModel = $.parseJSON( jsondata.content );
+					//console.log( "storedModel: ", _this.storedModel );
+					console.log( "Gespeicherter Graph: " + _this.base + ".json" );
+				} 
+				_this.parse();
+		});
 	});
 
 }
@@ -96,77 +94,131 @@ RDFGraphVis.prototype.init = function() {
 RDFGraphVis.prototype.parse = function(){
 	var _this  = this;
 
+	$("#graph-id").val( encodeURIComponent( _this.base ) );
 
 
-		var classesIs = new Object();
-		var tmpLinks = new Array();
+	var nodeIndexes = new Object();
+	var tmpLinks = new Array();
 
-		//_this.merge();
-		//console.log( "Model:  ", doc );		
+	//_this.merge();
+	//console.log( "Model:  ", doc );		
 
-		// walk model
-		$.each( _this.model, function(classI, element) {
-			//_this.print(element);
-			element["@d3"] = new Object();
+	// walk model
+	$.each( _this.model, function(classI, element) {
+		//_this.print(element);
+		element["@d3"] = new Object();
 
-			if ( ! element.hasOwnProperty("@type") ) {
-				console.log("No @type in: ", element);
-				return false;
-			}
+		if ( ! element.hasOwnProperty("@type") ) {
+			console.log("No @type in: ", element);
+			return false;
+		}
 
-			if ( ! element.hasOwnProperty("@id") ) {
-				console.log("No @id in: ", element);
-				return false;
-			}
+		if ( ! element.hasOwnProperty("@id") ) {
+			console.log("No @id in: ", element);
+			return false;
+		}
 
-			var label = element["@id"];
-			if ( element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#label") ) {
-				label = element["http://www.w3.org/2000/01/rdf-schema#label"][0]["@value"];
-			}
-			element["@d3"].label = label;
+		var label = basename( element["@id"] );
+		/*if ( element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#label") ) {
+			label = element["http://www.w3.org/2000/01/rdf-schema#label"][0]["@value"];
+		}*/
 
-			switch( element["@type"][0] ) {
-				case "http://www.w3.org/2002/07/owl#Ontology":
-					// do nothing...
-					/*element["@d3"].type = "Model";*/
-					break;
+		element["@d3"].label = label;
 
-				case "http://www.w3.org/2002/07/owl#Class":
+		switch( element["@type"][0] ) {
+			case "http://www.w3.org/2002/07/owl#Ontology":
+				// do nothing...
+				/*element["@d3"].type = "Model";*/
+				break;
 
-					element["@d3"].type = "Class";
+			case "http://www.w3.org/2002/07/owl#Class":
 
-					if ( _this.storedModel.hasOwnProperty(element["@id"]) ) {
-						element.x = _this.storedModel[ element["@id"] ].x;
-						element.y = _this.storedModel[ element["@id"] ].y;
+				element["@d3"].type = "Class";
+
+				// maybe merge existing position
+				if ( _this.storedModel.hasOwnProperty(element["@id"]) ) {
+					element.x = _this.storedModel[ element["@id"] ].x;
+					element.y = _this.storedModel[ element["@id"] ].y;
+				}
+
+				// maybe add as subclass
+				if ( element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#subClassOf") ) {
+					$.each( element["http://www.w3.org/2000/01/rdf-schema#subClassOf"], function(key, subClass) {
+						tmpLinks.push( { "source": subClass["@id"], "target": element["@id"], "subClassOf": true } );
+					});
+				}
+
+				nodeIndexes[element["@id"]] = _this.nodes.length;
+				_this.nodes.push( element );
+				break;
+
+			case "http://www.w3.org/2002/07/owl#DatatypeProperty":
+			case "http://www.w3.org/2002/07/owl#FunctionalProperty":
+				if ( ! element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#domain") ) {
+					console.log("No domain in property: ", element);
+					return false;
+				}					
+				element["@d3"].type = "Property";
+				
+				// walk domain classes of the property
+				$.each( element["http://www.w3.org/2000/01/rdf-schema#domain"], function(key, domain) {
+					var thisElement = $.extend( true, {}, element );
+					var thisKey = domain["@id"]+":"+thisElement["@id"];
+
+					// maybe merge existing position
+					if ( _this.storedModel.hasOwnProperty(thisKey) ) {
+						thisElement.x = _this.storedModel[ thisKey ].x;
+						thisElement.y = _this.storedModel[ thisKey ].y;
 					}
 
-					if ( element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#subClassOf") ) {
-						$.each( element["http://www.w3.org/2000/01/rdf-schema#subClassOf"], function(key, subClass) {
-							tmpLinks.push( { "source": subClass["@id"], "target": element["@id"], "subClassOf": true } );
-						});
-					}
+					// add as node and link to its class
+					thisElement["@d3"].domain = domain["@id"];
+					tmpLinks.push( { "source": thisKey, "target": domain["@id"] } );
+					nodeIndexes[thisKey] = _this.nodes.length;					
+					_this.nodes.push( thisElement );
+				});
+				break;
 
-					classesIs[element["@id"]] = _this.nodes.length;
-					_this.nodes.push( element );
-					break;
+			case "http://www.w3.org/2002/07/owl#ObjectProperty":
+				if ( ! element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#domain")
+					|| ! element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#range") ) {
+					console.log("No range or domain in property: ", element);
+					return false;
+				}					
+				element["@d3"].type = "ClassRelation";
 
-				case "http://www.w3.org/2002/07/owl#DatatypeProperty":
-				case "http://www.w3.org/2002/07/owl#FunctionalProperty":
-					if ( ! element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#domain") ) {
-						console.log("No domain in property: ", element);
-						return false;
-					}					
-					element["@d3"].type = "Property";
-					
-					// walk domain classes of the property
-					$.each( element["http://www.w3.org/2000/01/rdf-schema#domain"], function(key, domain) {
+				$.each( element["http://www.w3.org/2000/01/rdf-schema#domain"], function(key, domain) {	
+					$.each( element["http://www.w3.org/2000/01/rdf-schema#range"], function(key, range) {
 						var thisElement = $.extend( true, {}, element );
-						var thisKey = domain["@id"]+":"+thisElement["@id"];
+						var thisKey = domain["@id"]+":"+thisElement["@id"]+":"+range["@id"];
 
 						thisElement["@d3"].domain = domain["@id"];
-						tmpLinks.push( { "source": thisKey, "target": domain["@id"], "propertyOf": true } );
-						classesIs[thisKey] = _this.nodes.length;
+						thisElement["@d3"].range = range["@id"];
+													
+						// range class not found -> create a extern pseudo class
+						if ( ! nodeIndexes.hasOwnProperty(range["@id"]) ) {
+							var externClass = { 
+								"@id" : range["@id"],
+								"@d3" : {
+									"type" : "Class",
+									"label" : basename( range["@id"] )
+								}
+							};
+							// maybe merge existing position
+							if ( _this.storedModel.hasOwnProperty(range["@id"]) ) {
+								externClass.x = _this.storedModel[ range["@id"] ].x;
+								externClass.y = _this.storedModel[ range["@id"] ].y;
+							}
+							nodeIndexes[range["@id"]] = _this.nodes.length;
+							_this.nodes.push( externClass );
+						}
 
+						// add links and relation
+						tmpLinks.push( { "source": domain["@id"], "target": thisKey, } );
+						tmpLinks.push( { "source": thisKey, "target": range["@id"], } );
+						nodeIndexes[thisKey] = _this.nodes.length;
+
+						// maybe merge existing position
 						if ( _this.storedModel.hasOwnProperty(thisKey) ) {
 							thisElement.x = _this.storedModel[ thisKey ].x;
 							thisElement.y = _this.storedModel[ thisKey ].y;
@@ -174,62 +226,37 @@ RDFGraphVis.prototype.parse = function(){
 
 						_this.nodes.push( thisElement );
 					});
-					break;
+				});
+				break;
 
-				case "http://www.w3.org/2002/07/owl#ObjectProperty":
-					if ( ! element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#domain")
-						|| ! element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#range") ) {
-						console.log("No range or domain in property: ", element);
-						return false;
-					}					
-					element["@d3"].type = "ClassRelation";
+			default:
+				console.log("Unknown @type in: ", element);
+				break;
+		}
+	});
+	//console.log( "tmpLinks:  ", tmpLinks );
 
-					$.each( element["http://www.w3.org/2000/01/rdf-schema#domain"], function(key, domain) {	
-						$.each( element["http://www.w3.org/2000/01/rdf-schema#range"], function(key, range) {
-							var thisElement = $.extend( true, {}, element );
-							var thisKey = domain["@id"]+":"+thisElement["@id"]+":"+range["@id"];
+	$.each( tmpLinks, function(key, element) {
+		//console.log( nodeIndexes[element.source] );
+		var link = element;
+		link["source"] = nodeIndexes[element.source];
+		link["target"] = nodeIndexes[element.target];
 
-							thisElement["@d3"].domain = domain["@id"];
-							thisElement["@d3"].range = range["@id"];
-							
-							tmpLinks.push( { "source": domain["@id"], "target": thisKey, } );
-							tmpLinks.push( { "source": thisKey, "target": range["@id"], } );
-							classesIs[thisKey] = _this.nodes.length;
+		_this.links.push( link );
 
-							if ( _this.storedModel.hasOwnProperty(thisKey) ) {
-								thisElement.x = _this.storedModel[ thisKey ].x;
-								thisElement.y = _this.storedModel[ thisKey ].y;
-							}
+	});		
 
-							_this.nodes.push( thisElement );
-						});
-					});
-					break;
+	//console.log( "nodeIndexes:  ", nodeIndexes );
+	//console.log( "Model:  ", _this.model );
+	console.log( "Nodes:  ", _this.nodes );
+	//console.log( "Links:  ", _this.links );
 
-				default:
-					console.log("Unknown @type in: ", element);
-					break;
-			}
-		});
-		//console.log( "tmpLinks:  ", tmpLinks );
+	_this.print();
 
-		$.each( tmpLinks, function(key, element) {
-			//console.log( classesIs[element.source] );
-			var link = element;
-			link["source"] = classesIs[element.source];
-			link["target"] = classesIs[element.target];
-
-			_this.links.push( link );
-
-		});		
-
-		//console.log( "classesIs:  ", classesIs );
-		//console.log( "Model:  ", _this.model );
-		console.log( "Nodes:  ", _this.nodes );
-		//console.log( "Links:  ", _this.links );
-
-		_this.print();
-}
+	function basename (str) {
+		return str.split(/[\\/]/).pop();
+	}
+} // end of parsing
 
 
 // print the model as JointJS graph
@@ -258,8 +285,10 @@ RDFGraphVis.prototype.print = function(){
 		.data(_this.nodes)
 		.enter().append("svg:g")
 		.attr("class", "node")
-		//.attr("transform", "translate(530,250)")
-		.call(node_drag);
+		/*.on("mousedown", function(d) {
+			_this.vis.call(d3.behavior.zoom().on("zoom"), null);
+		})*/
+		.call(node_drag);		
 
 	// add classes
 	node.filter(function(d){
@@ -271,8 +300,8 @@ RDFGraphVis.prototype.print = function(){
 		.attr("x", "-30px")
 		.attr("y", "-12px")
 		.attr("width", "60px")
-		.attr("height", "24px") 
-		.attr("rx", "5").attr("ry", "5")
+		.attr("height", "24px") 		
+		.attr("rx", "5").attr("ry", "5")		
 		.style("fill", "#4987AC")
 		.style("stroke", "#1D3C4F");
 
@@ -332,15 +361,40 @@ RDFGraphVis.prototype.print = function(){
 
 	//console.log( "Graph:  ", node );
 
-	// auto width class-boxes
-	/*
+	// auto width class and property-boxes
 	arr1 = d3.selectAll("text.label");
 	arr = arr1[0];
 	for(var i=0; i<arr.length; i++){
-	x = arr[i].previousSibling;
-	d3.select(x).attr("width", arr[i].getBBox().width+50 + "px");
+		x = arr[i].previousSibling;
+		var boxWidth = arr[i].getBBox().width;
+		d3.select(x).filter(function(d){
+				if ( d["@d3"].type == "Class" ) {
+					return true;
+				}
+			})
+			.attr("width", boxWidth+10 + "px")
+			.attr("x",  -((boxWidth+10)/2) + "px");
+
+		
+		d3.select(x).filter(function(d){
+				if ( d["@d3"].type == "ClassRelation" ) {
+					return true;
+				}
+			})
+			//.attr("rx", boxWidth-30);
+			.attr("points", "-"+(boxWidth/2)+",0 0,20 "+(boxWidth/2)+",0 0,-20");
+		//.attr("points", "-30,0 0,20 30,0 0,-20")
+
+		if ( boxWidth < 60 ) {
+			boxWidth = 60;
+		}
+		d3.select(x).filter(function(d){
+				if ( d["@d3"].type == "Property" ) {
+					return true;
+				}
+			})
+			.attr("rx", boxWidth-30);
 	}
-	*/
 
 	_this.force
 		.nodes(_this.nodes)
@@ -350,7 +404,7 @@ RDFGraphVis.prototype.print = function(){
 
 	// drag functions
 	function dragstart(d, i) {
-	    _this.force.stop() // stops the force auto positioning before you start dragging
+	    _this.force.stop() // stops the force auto positioning before you start dragging	    
 	}
 
 	function dragmove(d, i) {
@@ -360,6 +414,8 @@ RDFGraphVis.prototype.print = function(){
 	    d.x += d3.event.dx;
 	    d.y += d3.event.dy; 
 	    tick(); // this is the key to make it work together with updating both px,py,x,y on d !
+
+	    
 	}
 
 	function dragend(d, i) {
@@ -423,7 +479,7 @@ RDFGraphVis.prototype.save = function() {
 
 	content = JSON.stringify( content );
 
-	$.post( "ajax/save.php", { name: graphId, content: content })
+	$.post( "ajax/save.php", { name: graphId + ".json", content: content })
 		.done(function( jsondata ) {
 			if ( jsondata.result ) {
 				//$(resultMsg).addClass("text-success");

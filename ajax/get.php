@@ -7,9 +7,9 @@ $content = "";
 
 if ( $filename ) {
 
-    if( file_exists("../data/" . $filename . ".json") ) {
+    if( file_exists("../data/" . $filename) ) {
 
-    	$content = file_get_contents("../data/" . $filename . ".json");
+    	$content = file_get_contents("../data/" . $filename);
 
     	echo json_encode( array('result' => true, 'content' => $content) );
 

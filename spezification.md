@@ -12,8 +12,9 @@ Ziel des Web-Tools ist die Visualisierung einer RDF Ontologie als Graph (ER-Diag
 ### Future Plans
 
 * Eingabe der Ontologie in Verschiedenen Notationen (n3, owl, turtle, ...)
+* multiple-Selection oder Darg&Drop einer Klasse zieht deren Properties hinterher
 * Ontologie textbasiert (z.B. in Seitenleiste) bearbeiten und Diagramm aktualisieren
-- Einbettung als OntoWiki Extension
+* Einbettung als OntoWiki Extension
 * Diagramm direkt bearbeiten
 
 

@@ -14,7 +14,7 @@ if ( $filename && $content ) {
 		exit;
 	}
 	
-	if (!$handle = fopen( "../data/" . $filename . ".json", "w")) {
+	if (!$handle = fopen( "../data/" . $filename, "w")) {
 		echo json_encode( array('result' => false, 'msg' => 'Cannot open file') );
 		exit;
 	}
