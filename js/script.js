@@ -79,10 +79,11 @@ RDFGraphVis.prototype.init = function() {
 						_this.storedModel = $.parseJSON( jsondata.content );
 						//$("#rdform-org-filename").val(filename);
 						console.log( "storedModel: ", _this.storedModel );
-						_this.parse();
 					} else {
 						// new ontology or file not found...
+
 					}
+					_this.parse();
 			});
 		} else {
 			_this.parse();
