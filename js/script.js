@@ -13,6 +13,7 @@ RDFGraphVis = function( settings ) {
 
 	this.vis = null;
 	this.force = null;
+	this.zoom = true;
 	
 	this.init();
 	return this;
@@ -30,14 +31,14 @@ RDFGraphVis.prototype.init = function() {
 		.attr("width", w)
 		.attr("height", h)
 		.attr("pointer-events", "all")
-		//.append('svg:g')
-		//.call(d3.behavior.zoom().on("zoom", redraw))
+		.append('svg:g')
+		.call(d3.behavior.zoom().on("zoom", redraw))
 		.append('svg:g');
 
 	_this.vis.append('svg:rect')
 		.attr('width', w)
 		.attr('height', h)
-		.call(d3.behavior.zoom().on("zoom", redraw))
+		//.call(d3.behavior.zoom().on("zoom", redraw))
 		.attr('fill', 'rgba(1,1,1,0)');
 
 	// build the arrow.
@@ -62,8 +63,11 @@ RDFGraphVis.prototype.init = function() {
 		.size([w, h]);
 
 	function redraw() {
-		_this.vis.attr("transform","translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
+		if ( _this.zoom )
+			_this.vis.attr("transform","translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
 	}
+
+	
 
 	jsonld.fromRDF(_this.nquads, {format: 'application/nquads'}, function(err, doc) {		
 		_this.model = doc;
@@ -265,6 +269,7 @@ RDFGraphVis.prototype.print = function(){
 
 	// node drag funktion
 	// http://bl.ocks.org/norrs/2883411
+	
 	var node_drag = d3.behavior.drag()
 	    .on("dragstart", dragstart)
 	    .on("drag", dragmove)
@@ -285,9 +290,6 @@ RDFGraphVis.prototype.print = function(){
 		.data(_this.nodes)
 		.enter().append("svg:g")
 		.attr("class", "node")
-		/*.on("mousedown", function(d) {
-			_this.vis.call(d3.behavior.zoom().on("zoom"), null);
-		})*/
 		.call(node_drag);		
 
 	// add classes
@@ -404,6 +406,7 @@ RDFGraphVis.prototype.print = function(){
 
 	// drag functions
 	function dragstart(d, i) {
+		_this.zoom = false;
 	    _this.force.stop() // stops the force auto positioning before you start dragging	    
 	}
 
@@ -419,6 +422,7 @@ RDFGraphVis.prototype.print = function(){
 	}
 
 	function dragend(d, i) {
+		_this.zoom = true;
 	    //d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
 	    //tick();
 	    //force.resume();
