@@ -8,6 +8,7 @@ RDFGraphVis = function( settings ) {
 	this.model = []; // store json-ls model
 	this.graphModel = { "nodes" : [], "links" : [] }; // store nodes and links
 	this.storedModel = {}; // stored model with positions
+	this.classProperties = {};
 
 	this.vis = null;
 	this.force = null;
@@ -129,6 +130,7 @@ RDFGraphVis.prototype.parse = function(){
 				/*element["@d3"].type = "Model";*/
 				break;
 
+			// add a class
 			case "http://www.w3.org/2002/07/owl#Class":
 
 				element["@d3"].type = "Class";
@@ -146,10 +148,12 @@ RDFGraphVis.prototype.parse = function(){
 					});
 				}
 
+				_this.classProperties[element["@id"]] = [];
 				nodeIndexes[element["@id"]] = _this.graphModel.nodes.length;
 				_this.graphModel.nodes.push( element );
 				break;
 
+			// add a property
 			case "http://www.w3.org/2002/07/owl#DatatypeProperty":
 			case "http://www.w3.org/2002/07/owl#FunctionalProperty":
 				if ( ! element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#domain") ) {
@@ -163,20 +167,23 @@ RDFGraphVis.prototype.parse = function(){
 					var thisElement = $.extend( true, {}, element );
 					var thisKey = domain["@id"]+":"+thisElement["@id"];
 
+					thisElement["@d3"].domain = domain["@id"];
+
 					// maybe merge existing position
 					if ( _this.storedModel.hasOwnProperty(thisKey) ) {
 						thisElement.x = _this.storedModel[ thisKey ].x;
 						thisElement.y = _this.storedModel[ thisKey ].y;
 					}
 
-					// add as node and link to its class
-					thisElement["@d3"].domain = domain["@id"];
+					// add as node and link to its class					
+					_this.classProperties[domain["@id"]].push( thisElement );
 					tmpLinks.push( { "source": thisKey, "target": domain["@id"] } );
-					nodeIndexes[thisKey] = _this.graphModel.nodes.length;					
+					nodeIndexes[thisKey] = _this.graphModel.nodes.length;
 					_this.graphModel.nodes.push( thisElement );
 				});
 				break;
 
+			// add a class relation
 			case "http://www.w3.org/2002/07/owl#ObjectProperty":
 				if ( ! element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#domain")
 					|| ! element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#range") ) {
@@ -209,11 +216,7 @@ RDFGraphVis.prototype.parse = function(){
 							}
 							nodeIndexes[range["@id"]] = _this.graphModel.nodes.length;
 							_this.graphModel.nodes.push( externClass );
-						}
-
-						// add links and relation
-						tmpLinks.push( { "source": domain["@id"], "target": thisKey, } );
-						tmpLinks.push( { "source": thisKey, "target": range["@id"], } );						
+						}						
 
 						// maybe merge existing position
 						if ( _this.storedModel.hasOwnProperty(thisKey) ) {
@@ -221,6 +224,11 @@ RDFGraphVis.prototype.parse = function(){
 							thisElement.y = _this.storedModel[ thisKey ].y;
 						}
 
+						// add links to its domain and range class
+						tmpLinks.push( { "source": domain["@id"], "target": thisKey, } );
+						tmpLinks.push( { "source": thisKey, "target": range["@id"], } );
+
+						// add node
 						nodeIndexes[thisKey] = _this.graphModel.nodes.length;
 						_this.graphModel.nodes.push( thisElement );
 					});
@@ -259,9 +267,8 @@ RDFGraphVis.prototype.parse = function(){
 RDFGraphVis.prototype.print = function(){
 	var _this = this;
 
-	// node drag funktion
-	// http://bl.ocks.org/norrs/2883411
-	
+	// node drag by funktion
+	// http://bl.ocks.org/norrs/2883411	
 	var node_drag = d3.behavior.drag()
 	    .on("dragstart", dragstart)
 	    .on("drag", dragmove)
@@ -275,23 +282,12 @@ RDFGraphVis.prototype.print = function(){
 		.attr("marker-end", function(d) { if ( d.hasOwnProperty("subClassOf") ) { return "url(#end)" } } )
 		.style("stroke-width", "2")
 		.style("stroke", "gray");    
-
 		
 	// add nodes
 	var node = _this.vis.selectAll(".node")
 		.data(_this.graphModel.nodes)
 		.enter().append("svg:g")
 		.attr("class", "node")
-		/*.on("mousedown", function(d) {
-			_this.vis.call(d3.behavior.zoom().on("zoom"), null);
-		})
-		.on("mouseover", function(d) {
-			console.log("zomm disabled!");
-			_this.vis.call(d3.behavior.zoom().on("zoom", null));
-			
-			_this.redraw1 = null;
-			         //.call(d3.behavior.zoom().on("zoom", redraw))
-		})*/
 		.call(node_drag);		
 
 	// add classes
@@ -306,9 +302,9 @@ RDFGraphVis.prototype.print = function(){
 		.attr("width", "60px")
 		.attr("height", "24px") 		
 		.attr("rx", "5").attr("ry", "5")
-		.on("mousedown", function(d) {
+		/*.on("mousedown", function(d) {
 			console.log("...");
-		})		
+		})		*/
 		.style("fill", "#4987AC")
 		.style("stroke", "#1D3C4F");
 
@@ -320,7 +316,6 @@ RDFGraphVis.prototype.print = function(){
 		}).append("svg:polygon")
 		.attr("class", "class-relation")
 		.attr("points", "-30,0 0,20 30,0 0,-20")
-		//.attr("rx", "5").attr("ry", "5")
 		.style("fill", "#70A897")
 		.style("stroke", "#0E543F");	
 
@@ -403,6 +398,7 @@ RDFGraphVis.prototype.print = function(){
 			.attr("rx", boxWidth-30);
 	}
 
+	// force layout
 	_this.force
 		.nodes(_this.graphModel.nodes)
 		.links(_this.graphModel.links)
@@ -423,6 +419,15 @@ RDFGraphVis.prototype.print = function(){
 	    d.y += d3.event.dy; 
 	    tick(); // this is the key to make it work together with updating both px,py,x,y on d !
 
+	    if ( d["@d3"].type == "Class" ) {
+	    	// move the properties of this class
+	    	$.each( _this.classProperties[d["@id"]], function() {
+	    		this.px += d3.event.dx;
+			    this.py += d3.event.dy;
+			    this.x += d3.event.dx;
+			    this.y += d3.event.dy; 
+	    	});
+	    }
 	    
 	}
 
