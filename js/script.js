@@ -1,15 +1,13 @@
 // the RDFGraphvis class
 RDFGraphVis = function( settings ) {
 	this.nquads = settings.data;
-	this.base = "";
+	this.id = "";
 	if ( settings.id ) {
-		this.base = settings.id;
+		this.id = settings.id;
 	}
-	this.model = new Array();
-	this.storedModel = new Object();
-
-	this.nodes = new Array();
-	this.links = new Array();
+	this.model = []; // store json-ls model
+	this.graphModel = { "nodes" : [], "links" : [] }; // store nodes and links
+	this.storedModel = {}; // stored model with positions
 
 	this.vis = null;
 	this.force = null;
@@ -27,6 +25,7 @@ RDFGraphVis.prototype.init = function() {
 	var w = 1000;
 	var h = 600;
 
+	// init root svg, add zoom/pan g
 	_this.vis = d3.select("#graph").append("svg:svg")
 		.attr("width", w)
 		.attr("height", h)
@@ -35,13 +34,13 @@ RDFGraphVis.prototype.init = function() {
 		.call(d3.behavior.zoom().on("zoom", redraw))
 		.append('svg:g');
 
+	// append content rect
 	_this.vis.append('svg:rect')
 		.attr('width', w)
 		.attr('height', h)
-		//.call(d3.behavior.zoom().on("zoom", redraw))
 		.attr('fill', 'rgba(1,1,1,0)');
 
-	// build the arrow.
+	// define the arrow.
 	_this.vis.append("svg:defs").selectAll("marker")
 		.data(["end"])      // Different link/path types can be defined here
 		.enter().append("svg:marker")    // This section adds in the arrows
@@ -55,6 +54,7 @@ RDFGraphVis.prototype.init = function() {
 		.append("svg:path")
 		.attr("d", "M0,-5L10,0L0,5");
 
+	// basic force layout
 	_this.force = d3.layout.force()
 		.gravity(.05)
 		.charge(-100)
@@ -67,49 +67,43 @@ RDFGraphVis.prototype.init = function() {
 			_this.vis.attr("transform","translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
 	}
 
-	
-
+	// get nquads to json
 	jsonld.fromRDF(_this.nquads, {format: 'application/nquads'}, function(err, doc) {		
 		_this.model = doc;
 
 		console.log( "Model:  ", _this.model );
 		$("#ontologie-editor").val( JSON.stringify(_this.model, null, ' ') );
 
-		if ( _this.model[0]["@type"] == "http://www.w3.org/2002/07/owl#Ontology" ) {
-			_this.base = encodeURIComponent( _this.model[0]["@id"] );
+		// try to get bas from ontology		
+		if ( _this.id == "" && _this.model[0]["@type"] == "http://www.w3.org/2002/07/owl#Ontology" ) {
+			_this.id = encodeURIComponent( _this.model[0]["@id"] );
 		}
 			
-		//var graphId = encodeURIComponent( _this.base );
-		$.post( "ajax/get.php", { name: _this.base + ".json" })		
+		// maybe get stored graph
+		$.post( "ajax/get.php", { name: _this.id + ".json" })		
 			.done(function( jsondata ) {
-				//console.log( "jsondata: ", jsondata );
 				if ( jsondata.result && jsondata.content != "" ) {
 					_this.storedModel = $.parseJSON( jsondata.content );
-					//console.log( "storedModel: ", _this.storedModel );
-					console.log( "Gespeicherter Graph: " + _this.base + ".json" );
+					console.log( "Got saved graph model: " + _this.id + ".json" );
 				} 
 				_this.parse();
 		});
 	});
 
-}
+} // end of init
 
 // parse the rdf to json-ld
 RDFGraphVis.prototype.parse = function(){
 	var _this  = this;
 
-	$("#graph-id").val( encodeURIComponent( _this.base ) );
+	$("#graph-id").val( encodeURIComponent( _this.id ) );
 
 
 	var nodeIndexes = new Object();
-	var tmpLinks = new Array();
-
-	//_this.merge();
-	//console.log( "Model:  ", doc );		
+	var tmpLinks = new Array();	
 
 	// walk model
 	$.each( _this.model, function(classI, element) {
-		//_this.print(element);
 		element["@d3"] = new Object();
 
 		if ( ! element.hasOwnProperty("@type") ) {
@@ -152,8 +146,8 @@ RDFGraphVis.prototype.parse = function(){
 					});
 				}
 
-				nodeIndexes[element["@id"]] = _this.nodes.length;
-				_this.nodes.push( element );
+				nodeIndexes[element["@id"]] = _this.graphModel.nodes.length;
+				_this.graphModel.nodes.push( element );
 				break;
 
 			case "http://www.w3.org/2002/07/owl#DatatypeProperty":
@@ -178,8 +172,8 @@ RDFGraphVis.prototype.parse = function(){
 					// add as node and link to its class
 					thisElement["@d3"].domain = domain["@id"];
 					tmpLinks.push( { "source": thisKey, "target": domain["@id"] } );
-					nodeIndexes[thisKey] = _this.nodes.length;					
-					_this.nodes.push( thisElement );
+					nodeIndexes[thisKey] = _this.graphModel.nodes.length;					
+					_this.graphModel.nodes.push( thisElement );
 				});
 				break;
 
@@ -213,14 +207,13 @@ RDFGraphVis.prototype.parse = function(){
 								externClass.x = _this.storedModel[ range["@id"] ].x;
 								externClass.y = _this.storedModel[ range["@id"] ].y;
 							}
-							nodeIndexes[range["@id"]] = _this.nodes.length;
-							_this.nodes.push( externClass );
+							nodeIndexes[range["@id"]] = _this.graphModel.nodes.length;
+							_this.graphModel.nodes.push( externClass );
 						}
 
 						// add links and relation
 						tmpLinks.push( { "source": domain["@id"], "target": thisKey, } );
-						tmpLinks.push( { "source": thisKey, "target": range["@id"], } );
-						nodeIndexes[thisKey] = _this.nodes.length;
+						tmpLinks.push( { "source": thisKey, "target": range["@id"], } );						
 
 						// maybe merge existing position
 						if ( _this.storedModel.hasOwnProperty(thisKey) ) {
@@ -228,7 +221,8 @@ RDFGraphVis.prototype.parse = function(){
 							thisElement.y = _this.storedModel[ thisKey ].y;
 						}
 
-						_this.nodes.push( thisElement );
+						nodeIndexes[thisKey] = _this.graphModel.nodes.length;
+						_this.graphModel.nodes.push( thisElement );
 					});
 				});
 				break;
@@ -246,14 +240,12 @@ RDFGraphVis.prototype.parse = function(){
 		link["source"] = nodeIndexes[element.source];
 		link["target"] = nodeIndexes[element.target];
 
-		_this.links.push( link );
+		_this.graphModel.links.push( link );
 
 	});		
 
 	//console.log( "nodeIndexes:  ", nodeIndexes );
-	//console.log( "Model:  ", _this.model );
-	console.log( "Nodes:  ", _this.nodes );
-	//console.log( "Links:  ", _this.links );
+	console.log( "Graph:  ", _this.graphModel );
 
 	_this.print();
 
@@ -277,7 +269,7 @@ RDFGraphVis.prototype.print = function(){
 
 	// add links
 	var link = _this.vis.selectAll(".link")
-		.data(_this.links)
+		.data(_this.graphModel.links)
 		.enter().append("line")
 		.attr("class", "link")
 		.attr("marker-end", function(d) { if ( d.hasOwnProperty("subClassOf") ) { return "url(#end)" } } )
@@ -287,9 +279,19 @@ RDFGraphVis.prototype.print = function(){
 		
 	// add nodes
 	var node = _this.vis.selectAll(".node")
-		.data(_this.nodes)
+		.data(_this.graphModel.nodes)
 		.enter().append("svg:g")
 		.attr("class", "node")
+		/*.on("mousedown", function(d) {
+			_this.vis.call(d3.behavior.zoom().on("zoom"), null);
+		})
+		.on("mouseover", function(d) {
+			console.log("zomm disabled!");
+			_this.vis.call(d3.behavior.zoom().on("zoom", null));
+			
+			_this.redraw1 = null;
+			         //.call(d3.behavior.zoom().on("zoom", redraw))
+		})*/
 		.call(node_drag);		
 
 	// add classes
@@ -303,7 +305,10 @@ RDFGraphVis.prototype.print = function(){
 		.attr("y", "-12px")
 		.attr("width", "60px")
 		.attr("height", "24px") 		
-		.attr("rx", "5").attr("ry", "5")		
+		.attr("rx", "5").attr("ry", "5")
+		.on("mousedown", function(d) {
+			console.log("...");
+		})		
 		.style("fill", "#4987AC")
 		.style("stroke", "#1D3C4F");
 
@@ -399,8 +404,8 @@ RDFGraphVis.prototype.print = function(){
 	}
 
 	_this.force
-		.nodes(_this.nodes)
-		.links(_this.links)
+		.nodes(_this.graphModel.nodes)
+		.links(_this.graphModel.links)
 		.on("tick", tick)
 		.start();
 
@@ -444,8 +449,8 @@ RDFGraphVis.prototype.update = function() {
 
 	_this.model = $.parseJSON( $( "#ontologie-editor" ).val() );
 	
-	this.nodes = new Array();
-	this.links = new Array();
+	_this.graphModel.nodes = [];
+	_this.graphModel.links = [];
 
 	_this.vis.selectAll("g.node").remove();
 	_this.vis.selectAll("line").remove();
@@ -463,7 +468,7 @@ RDFGraphVis.prototype.save = function() {
 		return false;
 	}
 
-	$.each( _this.nodes, function(key, element) {
+	$.each( _this.graphModel.nodes, function(key, element) {
 
 		var thisKey = element["@id"];
 
