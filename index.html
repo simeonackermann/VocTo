@@ -65,6 +65,11 @@
             <form class="form-inline pull-right" role="form" style="margin-bottom:10px;">
               <div class="form-group">
                 <div class="input-group">
+                  <button id="hide-properties" class="btn btn-primary btn-xs" type="button">Toggle Properties</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
                   <label class="sr-only" for="graph-id">Model ID</label>
                   <div class="input-group-addon">ID:</div>
                   <input type="text" class="form-control" id="graph-id" placeholder="ID for this Model">
@@ -103,7 +108,7 @@
                     var data = jsondata.content;
                     var rdfgraphvis = new RDFGraphVis({
                         data: data,
-                        id : "example"
+                        //id : "example"
                     });
 
 
@@ -113,6 +118,12 @@
 
                     $("#update-graph").click( function() {
                         rdfgraphvis.update();
+                    });
+
+                    var hide = true;
+                    $("#hide-properties").click( function() {
+                        rdfgraphvis.toggleProperties(hide);
+                        hide = ! hide;
                     });
                 }
         });

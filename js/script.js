@@ -124,6 +124,13 @@ RDFGraphVis.prototype.parse = function(){
 
 		element["@d3"].label = label;
 
+		/*
+		TODO: parse every types
+		$.each( element["@type"], function( typeKey, type ) {
+
+		});
+		*/
+
 		switch( element["@type"][0] ) {
 			case "http://www.w3.org/2002/07/owl#Ontology":
 				// do nothing...
@@ -177,7 +184,7 @@ RDFGraphVis.prototype.parse = function(){
 
 					// add as node and link to its class					
 					_this.classProperties[domain["@id"]].push( thisElement );
-					tmpLinks.push( { "source": thisKey, "target": domain["@id"] } );
+					tmpLinks.push( { "source": thisKey, "target": domain["@id"], "isProperty" : true } );
 					nodeIndexes[thisKey] = _this.graphModel.nodes.length;
 					_this.graphModel.nodes.push( thisElement );
 				});
@@ -278,7 +285,13 @@ RDFGraphVis.prototype.print = function(){
 	var link = _this.vis.selectAll(".link")
 		.data(_this.graphModel.links)
 		.enter().append("line")
-		.attr("class", "link")
+		.attr("class", function(d) {
+			var c = "link";
+			if ( d.hasOwnProperty("isProperty") ) { c += " property-link" }
+			if ( d.hasOwnProperty("subClassOf") ) { c += " subclass-link" }
+			if ( d.hasOwnProperty("isClassRelation") ) { c += " class-relation" }
+			return c;
+		})
 		.attr("marker-end", function(d) { if ( d.hasOwnProperty("subClassOf") ) { return "url(#end)" } } )
 		.style("stroke-width", "2")
 		.style("stroke", "gray");    
@@ -287,7 +300,14 @@ RDFGraphVis.prototype.print = function(){
 	var node = _this.vis.selectAll(".node")
 		.data(_this.graphModel.nodes)
 		.enter().append("svg:g")
-		.attr("class", "node")
+		//.attr("class", "node")
+		.attr("class", function(d) {
+			var c = "node";
+			if ( d["@d3"].type == "Class" ) { c += " class-node" }
+			if ( d["@d3"].type == "ClassRelation" ) { c += " class-relation-node" }
+			if ( d["@d3"].type == "Property" ) { c += " property-node" }
+			return c;
+		})
 		.call(node_drag);		
 
 	// add classes
@@ -352,16 +372,12 @@ RDFGraphVis.prototype.print = function(){
 	node.append("title")
 		.text(function(d) { return d["@id"] } );
 
-	// set node position if given
+	// set nodes fixed position if they already have x and y
 	_this.vis.selectAll("g.node").filter(function(d){
-		if ( d.hasOwnProperty("x") ) {
-			//console.log("g.node fiex pos: ", d);
+		if ( d.hasOwnProperty("x") && d.hasOwnProperty("y") ) {
 			d.fixed = true;
 			return true;
 		}})
-		.attr("data-test", "ja");
-
-	//console.log( "Graph:  ", node );
 
 	// auto width class and property-boxes
 	arr1 = d3.selectAll("text.label");
@@ -412,14 +428,13 @@ RDFGraphVis.prototype.print = function(){
 	}
 
 	function dragmove(d, i) {
-	    //console.log( d );
 	    d.px += d3.event.dx;
 	    d.py += d3.event.dy;
 	    d.x += d3.event.dx;
 	    d.y += d3.event.dy; 
 	    tick(); // this is the key to make it work together with updating both px,py,x,y on d !
 
-	    if ( d["@d3"].type == "Class" ) {
+	    if ( d["@d3"].type == "Class" && _this.classProperties.hasOwnProperty(d["@id"]) ) {
 	    	// move the properties of this class
 	    	$.each( _this.classProperties[d["@id"]], function() {
 	    		this.px += d3.event.dx;
@@ -428,7 +443,6 @@ RDFGraphVis.prototype.print = function(){
 			    this.y += d3.event.dy; 
 	    	});
 	    }
-	    
 	}
 
 	function dragend(d, i) {
@@ -503,4 +517,15 @@ RDFGraphVis.prototype.save = function() {
 			//$(resultMsg).text( jsondata.msg );
 			alert( jsondata.msg );
 	});	
+}
+
+// sow or hide proprties
+RDFGraphVis.prototype.toggleProperties = function(hide) {
+	var _this = this;
+	var display = hide ? "none" : "inline";
+	_this.vis.selectAll(".property-node")
+		.style("display", display);
+
+	_this.vis.selectAll(".property-link")
+		.style("display", display);
 }
