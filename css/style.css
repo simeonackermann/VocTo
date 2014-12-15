@@ -4,7 +4,10 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  padding-top: 50px;
+  //padding-top: 50px;
+  padding: 0;
+  margin: 0;
+  overflow:hidden;
 }
 
 
@@ -89,11 +92,31 @@ body {
  * ...
  */
 
+ .sidebar {
+ 	position: absolute;
+ 	//width: 40%;
+ 	height: 100%;
+ 	left: 0;
+ 	top: 50px;
+ 	overflow: visible;
+
+ }
+ .sidebar-content {
+ 	position: relative;
+ 	width: 100%;
+ 	min-width: 600px;
+ 	display: none;
+ }
+ .toggle-sidebar {
+ 	margin-right: -50px;
+ }
+
  #graph {
- 	border:1px solid gray;
- 	width: 1002px;
+ 	//border:1px solid gray;
+ 	//width: 1002px;
+ 	width:auto;
  	margin: 0;
- 	padding: 0;
+ 	padding: 0; 	
  }
 
 

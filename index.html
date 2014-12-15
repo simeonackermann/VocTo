@@ -31,9 +31,26 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Start</a></li>
+            <!--<li><a href="#">Start</a></li>
             <li><a href="#">About</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="#">Help</a></li>-->
+            <li>
+                <form class="form-inline pull-right" role="form" style="margin:7px;">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <button id="hide-properties" class="btn btn-primary btn-xs" type="button">Toggle Properties</button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <label class="sr-only" for="graph-id">Model ID</label>
+                      <div class="input-group-addon">ID:</div>
+                      <input type="text" class="form-control" id="graph-id" placeholder="ID for this Model">
+                    </div>
+                  </div>
+                  <button id="save-graph" class="btn btn-primary" type="button">Save Element Positions</button>
+                </form>
+            </li>
           </ul>
           <!--<form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -42,50 +59,17 @@
       </div>
     </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 sidebar">
-          <ul class="nav nav-sidebar">
-            <!--
-            <li class="active"><a href="#">Visualisation <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">...</a></li>
-            -->
-            <li>
-                <button id="update-graph" class="btn btn-primary btn-sm" type="button">Update Graph</button>
-                <textarea id="ontologie-editor" style="width:100%" rows="30"></textarea>
-                
-            </li>
-          </ul>
-        </div>
-
-        <div class="col-sm-9 col-sm-offset-3 main">
-          <h1 class="page-header">Ontology Visualisation</h1>
-
-        <div class="container">
-            <form class="form-inline pull-right" role="form" style="margin-bottom:10px;">
-              <div class="form-group">
-                <div class="input-group">
-                  <button id="hide-properties" class="btn btn-primary btn-xs" type="button">Toggle Properties</button>
+    <div class="sidebar">
+                <button type="button" class="btn btn-default toggle-sidebar pull-right">
+                    <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+                </button>
+                <div class="sidebar-content">
+                    <button id="update-graph" class="btn btn-primary btn-sm" type="button">Update Graph</button>
+                    <textarea id="ontologie-editor" style="width:100%;white-space: nowrap;overflow: scroll; " wrap="off" rows="30"></textarea>
                 </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <label class="sr-only" for="graph-id">Model ID</label>
-                  <div class="input-group-addon">ID:</div>
-                  <input type="text" class="form-control" id="graph-id" placeholder="ID for this Model">
-                </div>
-              </div>
-              <button id="save-graph" class="btn btn-primary" type="button">Save Element Positions</button>
-            </form>
-        </div>
-        
-        <div id="graph" class="container"></div>
-          
-        </div>
-      </div>
     </div>
 
-
+    <div id="graph" class="container"></div>
 
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
@@ -93,22 +77,47 @@
     <script src="lib/jsonld/jsonld.js"></script>
     <!-- D3 -->
     <script src="lib/d3/d3.v3.min.js"></script>
+
+    <script src="lib/n3/n3-browser.min.js"></script>
     
     <!-- own stuff -->
     <script src="js/script.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
 
-        //$.post( "ajax/get.php", { name: "http%3A%2F%2Fcatalogus-professorum.org%2Fcpm%2F.n3" })      
-        $.post( "ajax/get.php", { name: "example.n3" })      
+        $.post( "ajax/get.php", { name: "http%3A%2F%2Fcatalogus-professorum.org%2Fcpm%2F.n3" })      
+        //$.post( "ajax/get.php", { name: "example.n3" })      
             .done(function( jsondata ) {
-                //console.log( "jsondata: ", jsondata );
+
+                //return false;
+                
+                /*
+                var triples = jsondata.content.split("\n");
+                var writer = N3.Writer({ 'cpm': 'http://catalogus-professorum.org/cpm/' });
+                var parser = new N3.Parser();
+                $.each( triples, function( key, value) {
+                    new N3.Parser().parse(value, function() {
+                        writer.addTriple( this._subject, this._predicate, this._object );
+                        
+                        if ( key+1 == triples.length  ) {
+                            writerEnd();
+                        }
+                    });
+                } );
+
+                function writerEnd() {
+                    writer.end(function (error, result) { 
+                        $("#ontologie-editor").val( result );
+                    });
+                }*/
+
+
                 if ( jsondata.result && jsondata.content != "" ) {
                     //console.log( "big: ", jsondata );
                     var data = jsondata.content;
                     var rdfgraphvis = new RDFGraphVis({
                         data: data,
-                        //id : "example"
+                        //id : "cpm"
                     });
 
 
@@ -127,6 +136,25 @@
                     });
                 }
         });
+
+        $(".toggle-sidebar").click(function() {
+            //if ( $(".sidebar").width() > 0 ) {
+                $( ".sidebar-content" ).animate({
+                    width: "toggle"
+                    }, 100, function() {
+                    // Animation complete.
+                    });
+            
+        });
+/*
+//var writer = N3.Writer({ 'c': 'http://example.org/cartoons#' });
+var writer = N3.Writer();
+writer.addTriple('http://example.org/cartoons#Tom',
+                 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+                 'http://example.org/cartoons#Cat');
+writer.end(function (error, result) { console.log(result); });
+*/
+
     
     });
     </script>    
