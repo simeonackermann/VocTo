@@ -1,10 +1,10 @@
 // the RDFGraphvis class
 RDFGraphVis = function( settings ) {
 	this.nquads = settings.data;
-	this.id = "";
-	if ( settings.id ) {
+	this.id = settings.id;
+	/*if ( settings.id ) {
 		this.id = settings.id;
-	}
+	}*/
 
 	this.state = {
 
@@ -90,7 +90,7 @@ RDFGraphVis.prototype.init = function() {
 	}
 	*/
 
-	_this.svgGraph = _this.svg.append("g")
+	_this.svgGraph = _this.svg.append("g")	
 		.attr("class", "this-graph");
 
 
@@ -104,7 +104,7 @@ RDFGraphVis.prototype.init = function() {
     _this.drag = d3.behavior.drag()
           .origin(function(d){
             return {x: d.x, y: d.y};
-          })
+          })          
           .on("drag", function(args){
             _this.state.justDragged = true;
             _this.dragmove.call(_this, args);
@@ -148,18 +148,61 @@ RDFGraphVis.prototype.init = function() {
     window.onresize = function(){_this.updateWindow();};
 
     //return false;
+    //console.log("nquads", _this.nquads);
+    var triples = _this.nquads.split("\n");
+    //console.log("triples:", triples);
+    var prefixes = {
+    	'rdfs' : 'http://www.w3.org/2000/01/rdf-schema#'
+    };
+	var writer = N3.Writer( {
+		//'cpm': 'http://catalogus-professorum.org/cpm/',
+		'rdfs' : 'http://www.w3.org/2000/01/rdf-schema#',
+		'owl': 'http://www.w3.org/2002/07/owl#'
+	});
+	//var parser = new N3.Parser();
+	$.each( triples, function( key, value) {
+		//console.log("vaue: " + value);
+		var parser = new N3.Parser();
+	    parser.parse(value, function (error, triple, prefixes) {
 
-	// get nquads to json
+	    	//var predicate = this._predicate.replace(/\<http:\/\/www\.w3\.org\/2000\/01\/rdf-schema#label\>/g, "rdfs:label");
+	    	//console.log(this._subject, this._predicate, this._object);
+	    	//var predicate = this._predicate.replace(/http:\/\/www\.w3\.org\/2000\/01\/rdf-schema#label/g, "XXX");
+
+	    	if (triple) {
+                 //console.log("TRIPLES", triple.subject, triple.predicate, triple.object, '.');
+                 writer.addTriple( triple.subject, triple.predicate, triple.object );
+             }
+	        /*
+	        	else
+                 console.log("# That's all, folks!", prefixes)
+             */
+
+	        //console.log(error);
+	        
+	        if ( key+1 == triples.length  ) {
+	            writer.end(function (error, result) { 
+	            	result = result.replace(/\.\n/g, ".\n\n");
+	            	result = result.replace(/\n@/g, "@");
+			        $("#ontologie-editor").val( result );
+			        //console.log("result:", result);
+			    });
+	        }
+	    });
+	} );
+
+
+	// parse nquads to json
 	jsonld.fromRDF(_this.nquads, {format: 'application/nquads'}, function(err, doc) {		
 		_this.model = doc;
 
 		console.log( "Model:  ", _this.model );
-		$("#ontologie-editor").val( JSON.stringify(_this.model, null, ' ') );
+		//$("#ontologie-editor").val( JSON.stringify(_this.model, null, ' ') );
 
-		// try to get bas from ontology		
-		if ( _this.id == "" && _this.model[0]["@type"] == "http://www.w3.org/2002/07/owl#Ontology" ) {
+		// try to get base from ontology		
+		/*if ( _this.id == "" && _this.model[0]["@type"] == "http://www.w3.org/2002/07/owl#Ontology" ) {
 			_this.id = _this.model[0]["@id"];
-		}
+		}*/
 			
 		// maybe get stored graph
 		$.post( "ajax/get.php", { name: encodeURIComponent( _this.id ) + ".json" })		
@@ -176,6 +219,7 @@ RDFGraphVis.prototype.init = function() {
 
 RDFGraphVis.prototype.zoomed = function(){
     //this.state.justScaleTransGraph = true;
+    //console.log( d3.event );
     if ( this.zoom )
     	d3.select(".this-graph")
       		.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")"); 
@@ -198,6 +242,7 @@ RDFGraphVis.prototype.zoomed = function(){
  // mouseup on main svg
   RDFGraphVis.prototype.svgMouseUp = function(){
     this.state.graphMouseDown = false;
+    $(".status-bar").text("");	
   };  
 
   RDFGraphVis.prototype.svgKeyDown = function(){
@@ -238,6 +283,15 @@ RDFGraphVis.prototype.parse = function(){
 		}*/
 
 		element["@d3"].label = label;
+		/*
+		element["@d3"].attributes = {};
+		$.each(element,function(key,val) {
+			if ( key[0] != "@" ) {
+				element["@d3"].attributes[key] = val;
+			}
+			//console.log("Class-Key-"+key+": ", val);
+		});
+		*/
 
 		/*
 		TODO: parse every types
@@ -423,26 +477,32 @@ RDFGraphVis.prototype.print = function(){
 			if ( d["@d3"].type == "ClassRelation" ) { c += " class-relation-node" }
 			if ( d["@d3"].type == "Property" ) { c += " property-node" }
 			return c;
-		})
+		})		
+		.on("click", function(d) {
+			//console.log( d );
+			//$(".status-bar").text( JSON.stringify( d ) );
+			showNodeAttributes(d);
+		})		
 		.call(node_drag);		
 
 	// add classes
 	node.filter(function(d){
-		if ( d["@d3"].type == "Class" ) {
-			return true;
-		}
+			if ( d["@d3"].type == "Class" ) { return true; }
 		}).append("svg:rect")
 		.attr("class", "class")
 		.attr("x", "-30px")
 		.attr("y", "-12px")
 		.attr("width", "60px")
 		.attr("height", "24px") 		
-		.attr("rx", "5").attr("ry", "5")
-		/*.on("mousedown", function(d) {
-			console.log("...");
-		})		*/
+		.attr("rx", "5").attr("ry", "5")		
 		.style("fill", "#4987AC")
 		.style("stroke", "#1D3C4F");
+		/*.on("mouseover", function(d){
+			d3.select(this).classed("class-hover", true);
+      	})
+      	.on("mouseout", function(d){
+        	d3.select(this).classed("class-hover", false);
+      	});*/
 
 	// add classe relations
 	node.filter(function(d){
@@ -603,11 +663,85 @@ RDFGraphVis.prototype.print = function(){
 	        .attr("y2", function(d) { return d.target.y; });
 	    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });    
 	}
+	function showNodeAttributes(d) {
+		//$(".status-bar").text( JSON.stringify( d ) );
+		//console.log(d);
+		if ( d.hasOwnProperty("@id") ) {
+			_this.addStatusMsg( "@id: " + d["@id"] );
+		}
+		if ( d.hasOwnProperty("@type") ) {
+			_this.addStatusMsg( "@type: " + d["@type"] );
+		}
+		if ( d.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#comment") ) {
+			_this.addStatusMsg( "rdfs:comment: " + JSON.stringify(d["http://www.w3.org/2000/01/rdf-schema#comment"]) );
+		}
+		if ( d.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#label") ) {
+			_this.addStatusMsg( "rdfs:label: " + JSON.stringify(d["http://www.w3.org/2000/01/rdf-schema#label"]) );
+		}	
+	}
 }
 
 // update the graph
 RDFGraphVis.prototype.update = function() {
 	var _this = this;
+
+	_this.setStatusMsg("Updating Graph...");
+
+	// from turtle to triples to json-ld
+	var parser = N3.Parser();
+	var triples = "";
+
+	parser.parse( $( "#ontologie-editor" ).val() ,
+		function (error, triple, prefixes) {
+			if (triple) {
+		 		//console.log("Triple:", triple.subject, triple.predicate, triple.object, '.');
+		 		triple.object = triple.object.replace(/\n/g, "\\n");
+		 		triple.object = triple.object.replace(/\r/g, "\\r");
+		 		triple.object = triple.object.replace(/\t/g, "\\t");
+		 		triple.object = triple.object.replace(/\f/g, "\\f");
+		 		triple.object = triple.object.replace(/^(http:\/\/\S*)/g, "<$1>");
+		 		triple.object = triple.object.replace(/\^\^(http:\/\/\S*)/g, "^^<$1>");
+		 		//console.log("Object: " + triple.object);
+
+		 		triples += "<" + triple.subject + "> <" + triple.predicate + "> " + triple.object + " .\n";
+		 		
+			} else {
+		 		//console.log("# That's all, folks!", prefixes);		 		
+		 		
+		 		//triples = triples.replace(/(http:\/\/\S*)/g, "<$1>");
+		 		//console.log("TRIPLES VOR REPLACE", triples);
+		 		//triples = triples.replace(/(http:\/\/[a-zA-Z0-9_\-\.\/#]*)/g, "<$1>");
+		 		
+		 		//triples = triples.replace(/(http:\/\/\S*)/g, "<$1>");
+		 		//triples = triples.replace(/"<(.*)">/g, "\"$1\"");
+		 		
+		 		//console.log("TRIPLES NACH REPLACE: " + triples);
+		 		
+		 		jsonld.fromRDF(triples, {format: 'application/nquads'}, function(err, doc) {		
+		 			_this.setStatusMsg("");
+					//_this.model = doc;
+					//console.log("jsonld:" ,doc);
+					_this.model = doc;
+	
+					_this.graphModel.nodes = [];
+					_this.graphModel.links = [];
+
+					_this.svg.selectAll("g.node").remove();
+					_this.svg.selectAll("line").remove();
+					
+					_this.parse();					
+				});
+			}
+		}
+		/*,
+		function( prefix, uri ) {
+			console.log(prefix, uri);
+		}*/
+	);
+	
+//console.log(triples)
+
+	/*
 
 	_this.model = $.parseJSON( $( "#ontologie-editor" ).val() );
 	
@@ -618,48 +752,76 @@ RDFGraphVis.prototype.update = function() {
 	_this.svg.selectAll("line").remove();
 	
 	_this.parse();
+
+	*/
 }
 
 // save the graph
 RDFGraphVis.prototype.save = function() {
 	var _this = this;
 	var content = new Object();
-	var graphId = $("#graph-id").val();
+	//var graphId = $("#graph-id").val();
+	var graphId = _this.id;
+	_this.setStatusMsg("");
 	if ( graphId == "" ) {
 		alert( "Please give an unique ID for this Graph" );
 		return false;
 	}
 
 	$.each( _this.graphModel.nodes, function(key, element) {
-
 		var thisKey = element["@id"];
 
 		if ( element["@d3"].hasOwnProperty("domain") ) {
 			thisKey = element["@d3"].domain + ":" + thisKey;
 		}
-
 		if ( element["@d3"].hasOwnProperty("range") ) {
 			thisKey = thisKey + ":" + element["@d3"].range;
 		}
-
 		content[thisKey] = { "x" : element.x, "y": element.y };
-
 	});
 
 	//console.log("Save, Graph: ", content);
-
 	content = JSON.stringify( content );
 
 	$.post( "ajax/save.php", { name: encodeURIComponent( graphId ) + ".json", content: content })
+		.fail(function(e) {
+			console.log("Error", e);
+			_this.addStatusMsg("Error: cannot write " + graphId + ".json");
+		})
 		.done(function( jsondata ) {
-			if ( jsondata.result ) {
-				//$(resultMsg).addClass("text-success");
+			_this.addStatusMsg(jsondata.msg);
+	});
+
+
+	// save vocabulary
+	var parser = N3.Parser();
+	var triples = "";
+	parser.parse( $( "#ontologie-editor" ).val() ,
+		function (error, triple, prefixes) {
+			if (triple) {
+		 		//console.log("Triple:", triple.subject, triple.predicate, triple.object, '.');
+		 		triple.object = triple.object.replace(/\n/g, "\\n");
+		 		triple.object = triple.object.replace(/\r/g, "\\r");
+		 		triple.object = triple.object.replace(/\t/g, "\\t");
+		 		triple.object = triple.object.replace(/\f/g, "\\f");
+		 		triple.object = triple.object.replace(/^(http:\/\/\S*)/g, "<$1>");
+		 		triple.object = triple.object.replace(/\^\^(http:\/\/\S*)/g, "^^<$1>");
+		 		//console.log("Object: " + triple.object);
+
+		 		triples += "<" + triple.subject + "> <" + triple.predicate + "> " + triple.object + " .\n";
+		 		
 			} else {
-				//$(resultMsg).addClass("text-danger");
+				//console.log( "Save: ", triples );
+				$.post( "ajax/save.php", { name: encodeURIComponent( graphId ) + ".n3", content: triples })
+					.fail(function(e) {
+						console.log("Error", e);
+						_this.addStatusMsg("Error: cannot write " + graphId + ".n3");
+					})
+					.done(function( jsondata ) {
+						_this.addStatusMsg(jsondata.msg);
+				});
 			}
-			//$(resultMsg).text( jsondata.msg );
-			alert( jsondata.msg );
-	});	
+		});
 }
 
 // sow or hide proprties
@@ -671,4 +833,20 @@ RDFGraphVis.prototype.toggleProperties = function(hide) {
 
 	_this.svgGraph.selectAll(".property-link")
 		.style("display", display);
+}
+
+RDFGraphVis.prototype.addStatusMsg = function(msg) {
+	$(".status-bar").html( $(".status-bar").html() + "<br />" + msg );
+}
+
+RDFGraphVis.prototype.setStatusMsg = function(msg) {	
+	if( typeof msg === "string" ) {
+		$(".status-bar").text(msg);
+	} else {
+		var txt = "";
+		$.each(msg,function() {
+			txt += this+"<br />";
+		})
+		$(".status-bar").text(txt);
+	}
 }

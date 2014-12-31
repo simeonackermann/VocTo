@@ -32,23 +32,32 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <!--<li><a href="#">Start</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Help</a></li>-->
+            <li><a href="#">About</a></li>-->
+            <li><a href="#">Help</a></li>
+            <li><a href="#">View</a></li>
+            <!--<li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                  Dropdown <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>ddg</li>
+                </ul>
+            </li>-->
+            <li><a id="hide-properties" href="#">Toggle Properties</a></li>
+            <li>
+                <button class="btn btn-primary save-graph" type="button" style="margin:7px;">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save
+                </button>
+            </li>
             <li>
                 <form class="form-inline pull-right" role="form" style="margin:7px;">
                   <div class="form-group">
                     <div class="input-group">
-                      <button id="hide-properties" class="btn btn-primary btn-xs" type="button">Toggle Properties</button>
+                      <!--<button id="hide-properties" class="btn btn-primary btn-xs" type="button">Toggle Properties</button>-->
                     </div>
                   </div>
-                  <div class="form-group">
-                    <div class="input-group">
-                      <label class="sr-only" for="graph-id">Model ID</label>
-                      <div class="input-group-addon">ID:</div>
-                      <input type="text" class="form-control" id="graph-id" placeholder="ID for this Model">
-                    </div>
-                  </div>
-                  <button id="save-graph" class="btn btn-primary" type="button">Save Element Positions</button>
+                  <input type="hidden" class="form-control" id="graph-id" placeholder="ID for this Model">
+                  <!--<button class="btn btn-primary save-graph" type="button">Save Element Positions</button>-->
                 </form>
             </li>
           </ul>
@@ -64,12 +73,16 @@
                     <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
                 </button>
                 <div class="sidebar-content">
-                    <button id="update-graph" class="btn btn-primary btn-sm" type="button">Update Graph</button>
+                    <!--<button id="update-graph" class="btn btn-primary btn-sm" type="button">Update Graph</button>-->
                     <textarea id="ontologie-editor" style="width:100%;white-space: nowrap;overflow: scroll; " wrap="off" rows="30"></textarea>
                 </div>
     </div>
 
     <div id="graph" class="container"></div>
+
+    <footer class="footer">
+        <p class="text-muted status-bar"></p>
+    </footer>
 
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
@@ -77,7 +90,6 @@
     <script src="lib/jsonld/jsonld.js"></script>
     <!-- D3 -->
     <script src="lib/d3/d3.v3.min.js"></script>
-
     <script src="lib/n3/n3-browser.min.js"></script>
     
     <!-- own stuff -->
@@ -85,49 +97,37 @@
     <script type="text/javascript">
     $(document).ready(function(){
 
-        $.post( "ajax/get.php", { name: "http%3A%2F%2Fcatalogus-professorum.org%2Fcpm%2F.n3" })      
-        //$.post( "ajax/get.php", { name: "example.n3" })      
+        var fileID = "example";
+
+        //$.post( "ajax/get.php", { name: "http%3A%2F%2Fcatalogus-professorum.org%2Fcpm%2F.n3" })      
+        $.post( "ajax/get.php", { name: fileID + ".n3" })      
             .done(function( jsondata ) {
-
-                //return false;
-                
-                /*
-                var triples = jsondata.content.split("\n");
-                var writer = N3.Writer({ 'cpm': 'http://catalogus-professorum.org/cpm/' });
-                var parser = new N3.Parser();
-                $.each( triples, function( key, value) {
-                    new N3.Parser().parse(value, function() {
-                        writer.addTriple( this._subject, this._predicate, this._object );
-                        
-                        if ( key+1 == triples.length  ) {
-                            writerEnd();
-                        }
-                    });
-                } );
-
-                function writerEnd() {
-                    writer.end(function (error, result) { 
-                        $("#ontologie-editor").val( result );
-                    });
-                }*/
-
 
                 if ( jsondata.result && jsondata.content != "" ) {
                     //console.log( "big: ", jsondata );
                     var data = jsondata.content;
                     var rdfgraphvis = new RDFGraphVis({
                         data: data,
-                        //id : "cpm"
+                        id : fileID
                     });
 
 
-                    $("#save-graph").click( function() {
+                    $(".save-graph").click( function() {
                         rdfgraphvis.save();
                     } );
 
                     $("#update-graph").click( function() {
                         rdfgraphvis.update();
                     });
+
+                    autoUpdateInterval = null;
+                    $( "#ontologie-editor" ).keypress(function() {
+                        window.clearTimeout(autoUpdateInterval);
+                        autoUpdateInterval = window.setTimeout(function() {
+                            rdfgraphvis.update();
+                        }, 1500);
+                    })
+                    
 
                     var hide = true;
                     $("#hide-properties").click( function() {
@@ -139,23 +139,23 @@
 
         $(".toggle-sidebar").click(function() {
             //if ( $(".sidebar").width() > 0 ) {
-                $( ".sidebar-content" ).animate({
-                    width: "toggle"
-                    }, 100, function() {
-                    // Animation complete.
-                    });
+            $( ".sidebar-content" ).animate({
+                width: "toggle"
+                }, 100, function() {
+                // Animation complete.
+                });
+            $( "#graph" ).toggleClass("leftMargin");
+            $( ".footer" ).toggleClass("leftMargin");
+            /*
+
+            $( "#graph" ).animate({
+                marginLeft: "600"
+                }, 100, function() {
+                // Animation complete.
+                });
+        */
             
         });
-/*
-//var writer = N3.Writer({ 'c': 'http://example.org/cartoons#' });
-var writer = N3.Writer();
-writer.addTriple('http://example.org/cartoons#Tom',
-                 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-                 'http://example.org/cartoons#Cat');
-writer.end(function (error, result) { console.log(result); });
-*/
-
-    
     });
     </script>    
 

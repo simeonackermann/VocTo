@@ -10,6 +10,20 @@ body {
   overflow:hidden;
 }
 
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: auto;
+  background-color: #f5f5f5;
+  margin: 10px;
+}
+
+.container .text-muted {
+  
+}
+
 
 /*
  * Global add-ons
@@ -99,16 +113,19 @@ body {
  	left: 0;
  	top: 50px;
  	overflow: visible;
-
+  border-right:1px solid gray;
+  padding: 0;
  }
  .sidebar-content {
  	position: relative;
  	width: 100%;
  	min-width: 600px;
  	display: none;
+  padding: 10px;
  }
  .toggle-sidebar {
- 	margin-right: -50px;
+ 	margin-right: -30px;
+  margin-top: 10px;
  }
 
  #graph {
@@ -118,9 +135,22 @@ body {
  	margin: 0;
  	padding: 0; 	
  }
+ .leftMargin {
+  margin-left: 600px !important;
+  width:auto !important;
+ }
 
 
 /* hide remove link btn */
 .link-tools .tool-remove { display: none }
 .link-tools .tool-options { display: none }
 /*.marker-vertices { display: none };*/
+
+rect.class,
+ellipse.property,
+polygon.class-relation {
+  cursor: move;
+}
+rect.class-hover {
+  fill: rgb(100,100,100);
+}
