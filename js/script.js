@@ -18,7 +18,7 @@ RDFGraphVis = function( settings ) {
 
 	this.model = []; // store json-ls model
 	this.graphModel = { "nodes" : [], "links" : [] }; // store nodes and links
-	this.storedModel = {}; // stored model with positions
+	this.graphLayout = {}; // stored model-layout with xy-positions
 	this.classProperties = {};
 
 	//this.vis = null;
@@ -142,54 +142,37 @@ RDFGraphVis.prototype.init = function() {
           });
 
     _this.svg.call(dragSvg).on("dblclick.zoom", null);        
-
-	//return false;
+	
 	// listen for resize
     window.onresize = function(){_this.updateWindow();};
 
-    //return false;
-    //console.log("nquads", _this.nquads);
+    // parse n3 to turtle for textarea editor
     var triples = _this.nquads.split("\n");
-    //console.log("triples:", triples);
     var prefixes = {
-    	'rdfs' : 'http://www.w3.org/2000/01/rdf-schema#'
+    	'rdfs' : 'http://www.w3.org/2000/01/rdf-schema#',
+    	'owl': 'http://www.w3.org/2002/07/owl#'
     };
-	var writer = N3.Writer( {
-		//'cpm': 'http://catalogus-professorum.org/cpm/',
-		'rdfs' : 'http://www.w3.org/2000/01/rdf-schema#',
-		'owl': 'http://www.w3.org/2002/07/owl#'
-	});
-	//var parser = new N3.Parser();
+	var writer = N3.Writer( prefixes );
 	$.each( triples, function( key, value) {
-		//console.log("vaue: " + value);
 		var parser = new N3.Parser();
 	    parser.parse(value, function (error, triple, prefixes) {
 
-	    	//var predicate = this._predicate.replace(/\<http:\/\/www\.w3\.org\/2000\/01\/rdf-schema#label\>/g, "rdfs:label");
-	    	//console.log(this._subject, this._predicate, this._object);
-	    	//var predicate = this._predicate.replace(/http:\/\/www\.w3\.org\/2000\/01\/rdf-schema#label/g, "XXX");
-
 	    	if (triple) {
-                 //console.log("TRIPLES", triple.subject, triple.predicate, triple.object, '.');
                  writer.addTriple( triple.subject, triple.predicate, triple.object );
-             }
-	        /*
-	        	else
-                 console.log("# That's all, folks!", prefixes)
-             */
-
-	        //console.log(error);
+			}
+			/*else
+				console.log("# That's all, folks!", prefixes)*/
 	        
 	        if ( key+1 == triples.length  ) {
 	            writer.end(function (error, result) { 
 	            	result = result.replace(/\.\n/g, ".\n\n");
 	            	result = result.replace(/\n@/g, "@");
-			        $("#ontologie-editor").val( result );
-			        //console.log("result:", result);
+			        $("#editor").val( result );
+			        $( "#editor" ).height( $(".sidebar").height() - 75 );
 			    });
 	        }
 	    });
-	} );
+	});
 
 
 	// parse nquads to json
@@ -197,7 +180,7 @@ RDFGraphVis.prototype.init = function() {
 		_this.model = doc;
 
 		console.log( "Model:  ", _this.model );
-		//$("#ontologie-editor").val( JSON.stringify(_this.model, null, ' ') );
+		//$("#editor").val( JSON.stringify(_this.model, null, ' ') );
 
 		// try to get base from ontology		
 		/*if ( _this.id == "" && _this.model[0]["@type"] == "http://www.w3.org/2002/07/owl#Ontology" ) {
@@ -205,11 +188,11 @@ RDFGraphVis.prototype.init = function() {
 		}*/
 			
 		// maybe get stored graph
-		$.post( "ajax/get.php", { name: encodeURIComponent( _this.id ) + ".json" })		
+		$.post( "ajax/get.php", { name: _this.id + ".json" })		
 			.done(function( jsondata ) {
 				if ( jsondata.result && jsondata.content != "" ) {
-					_this.storedModel = $.parseJSON( jsondata.content );
-					console.log( "Got saved graph model: " + _this.id + ".json" );
+					_this.graphLayout = $.parseJSON( jsondata.content );
+					//console.log( "Got graph layout for this model." );
 				} 
 				_this.parse();
 		});
@@ -232,6 +215,8 @@ RDFGraphVis.prototype.zoomed = function(){
     var x = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth;
     var y = window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
     _this.svg.attr("width", x).attr("height", y);
+
+    $( "#editor" ).height( $(".sidebar").height() - 75 );
   };
 
 // mousedown on main svg
@@ -312,9 +297,9 @@ RDFGraphVis.prototype.parse = function(){
 				element["@d3"].type = "Class";
 
 				// maybe merge existing position
-				if ( _this.storedModel.hasOwnProperty(element["@id"]) ) {
-					element.x = _this.storedModel[ element["@id"] ].x;
-					element.y = _this.storedModel[ element["@id"] ].y;
+				if ( _this.graphLayout.hasOwnProperty(element["@id"]) ) {
+					element.x = _this.graphLayout[ element["@id"] ].x;
+					element.y = _this.graphLayout[ element["@id"] ].y;
 				}
 
 				// maybe add as subclass
@@ -346,9 +331,9 @@ RDFGraphVis.prototype.parse = function(){
 					thisElement["@d3"].domain = domain["@id"];
 
 					// maybe merge existing position
-					if ( _this.storedModel.hasOwnProperty(thisKey) ) {
-						thisElement.x = _this.storedModel[ thisKey ].x;
-						thisElement.y = _this.storedModel[ thisKey ].y;
+					if ( _this.graphLayout.hasOwnProperty(thisKey) ) {
+						thisElement.x = _this.graphLayout[ thisKey ].x;
+						thisElement.y = _this.graphLayout[ thisKey ].y;
 					}
 
 					// add as node and link to its class					
@@ -386,18 +371,18 @@ RDFGraphVis.prototype.parse = function(){
 								}
 							};
 							// maybe merge existing position
-							if ( _this.storedModel.hasOwnProperty(range["@id"]) ) {
-								externClass.x = _this.storedModel[ range["@id"] ].x;
-								externClass.y = _this.storedModel[ range["@id"] ].y;
+							if ( _this.graphLayout.hasOwnProperty(range["@id"]) ) {
+								externClass.x = _this.graphLayout[ range["@id"] ].x;
+								externClass.y = _this.graphLayout[ range["@id"] ].y;
 							}
 							nodeIndexes[range["@id"]] = _this.graphModel.nodes.length;
 							_this.graphModel.nodes.push( externClass );
 						}						
 
 						// maybe merge existing position
-						if ( _this.storedModel.hasOwnProperty(thisKey) ) {
-							thisElement.x = _this.storedModel[ thisKey ].x;
-							thisElement.y = _this.storedModel[ thisKey ].y;
+						if ( _this.graphLayout.hasOwnProperty(thisKey) ) {
+							thisElement.x = _this.graphLayout[ thisKey ].x;
+							thisElement.y = _this.graphLayout[ thisKey ].y;
 						}
 
 						// add links to its domain and range class
@@ -566,7 +551,7 @@ RDFGraphVis.prototype.print = function(){
 
 	/*
 	// TODO: initial zoom/translation
-	if ( Object.keys(_this.storedModel).length > 0 ) {
+	if ( Object.keys(_this.graphLayout).length > 0 ) {
 		var translX = (parseInt(_this.svg.attr("width")) - ( maxX - minX )) / 2;
 		var translY = (parseInt(_this.svg.attr("height")) - ( maxY - minY )) / 2;
 		//console.log( d3.event.translate );		
@@ -664,34 +649,55 @@ RDFGraphVis.prototype.print = function(){
 	    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });    
 	}
 	function showNodeAttributes(d) {
-		//$(".status-bar").text( JSON.stringify( d ) );
-		//console.log(d);
+		var msg = {};
 		if ( d.hasOwnProperty("@id") ) {
-			_this.addStatusMsg( "@id: " + d["@id"] );
+			msg["@id"] = d["@id"];
+			_this.scrollEditorTo("<" + d["@id"] + "> a");
 		}
 		if ( d.hasOwnProperty("@type") ) {
-			_this.addStatusMsg( "@type: " + d["@type"] );
-		}
-		if ( d.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#comment") ) {
-			_this.addStatusMsg( "rdfs:comment: " + JSON.stringify(d["http://www.w3.org/2000/01/rdf-schema#comment"]) );
+			msg["@type"] = d["@type"];
 		}
 		if ( d.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#label") ) {
-			_this.addStatusMsg( "rdfs:label: " + JSON.stringify(d["http://www.w3.org/2000/01/rdf-schema#label"]) );
+			msg["rdfs:label"] = JSON.stringify(d["http://www.w3.org/2000/01/rdf-schema#label"])			
 		}	
+		if ( d.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#comment") ) {
+			msg["rdfs:comment"] = JSON.stringify(d["http://www.w3.org/2000/01/rdf-schema#comment"]);
+		}		
+		_this.setStatusMsg(msg);	
 	}
+} // end of print
+
+// return the layout for the graph
+RDFGraphVis.prototype.createGraphLayout = function() {
+	var _this = this;
+	var graphLayout = new Object();
+	$.each( _this.graphModel.nodes, function(key, element) {
+		var thisKey = element["@id"];
+
+		if ( element["@d3"].hasOwnProperty("domain") ) {
+			thisKey = element["@d3"].domain + ":" + thisKey;
+		}
+		if ( element["@d3"].hasOwnProperty("range") ) {
+			thisKey = thisKey + ":" + element["@d3"].range;
+		}
+		graphLayout[thisKey] = { "x" : element.x, "y": element.y };
+	});
+	//graphLayout = JSON.stringify( graphLayout );
+	return graphLayout;
 }
 
 // update the graph
 RDFGraphVis.prototype.update = function() {
 	var _this = this;
 
-	_this.setStatusMsg("Updating Graph...");
+	_this.setStatusMsg("Updating the graph...");
+	//console.log("Layout:", _this.graphLayout);	
 
 	// from turtle to triples to json-ld
 	var parser = N3.Parser();
 	var triples = "";
 
-	parser.parse( $( "#ontologie-editor" ).val() ,
+	parser.parse( $( "#editor" ).val() ,
 		function (error, triple, prefixes) {
 			if (triple) {
 		 		//console.log("Triple:", triple.subject, triple.predicate, triple.object, '.');
@@ -719,84 +725,47 @@ RDFGraphVis.prototype.update = function() {
 		 		
 		 		jsonld.fromRDF(triples, {format: 'application/nquads'}, function(err, doc) {		
 		 			_this.setStatusMsg("");
-					//_this.model = doc;
-					//console.log("jsonld:" ,doc);
+		 			// set model
 					_this.model = doc;
-	
+
+					// create new layout
+					_this.graphLayout =_this.createGraphLayout();
+
+					// reset model
 					_this.graphModel.nodes = [];
 					_this.graphModel.links = [];
-
+					// remove nodes and links
 					_this.svg.selectAll("g.node").remove();
 					_this.svg.selectAll("line").remove();
 					
-					_this.parse();					
+					_this.parse();
 				});
 			}
 		}
-		/*,
-		function( prefix, uri ) {
-			console.log(prefix, uri);
-		}*/
 	);
-	
-//console.log(triples)
 
-	/*
-
-	_this.model = $.parseJSON( $( "#ontologie-editor" ).val() );
-	
-	_this.graphModel.nodes = [];
-	_this.graphModel.links = [];
-
-	_this.svg.selectAll("g.node").remove();
-	_this.svg.selectAll("line").remove();
-	
-	_this.parse();
-
-	*/
 }
 
 // save the graph
 RDFGraphVis.prototype.save = function() {
 	var _this = this;
-	var content = new Object();
-	//var graphId = $("#graph-id").val();
+	//var graphLayout = new Object();
 	var graphId = _this.id;
 	_this.setStatusMsg("");
+	
 	if ( graphId == "" ) {
-		alert( "Please give an unique ID for this Graph" );
+		alert( "Error: Empty Graph-ID!" );
 		return false;
 	}
 
-	$.each( _this.graphModel.nodes, function(key, element) {
-		var thisKey = element["@id"];
-
-		if ( element["@d3"].hasOwnProperty("domain") ) {
-			thisKey = element["@d3"].domain + ":" + thisKey;
-		}
-		if ( element["@d3"].hasOwnProperty("range") ) {
-			thisKey = thisKey + ":" + element["@d3"].range;
-		}
-		content[thisKey] = { "x" : element.x, "y": element.y };
-	});
-
-	//console.log("Save, Graph: ", content);
-	content = JSON.stringify( content );
-
-	$.post( "ajax/save.php", { name: encodeURIComponent( graphId ) + ".json", content: content })
-		.fail(function(e) {
-			console.log("Error", e);
-			_this.addStatusMsg("Error: cannot write " + graphId + ".json");
-		})
-		.done(function( jsondata ) {
-			_this.addStatusMsg(jsondata.msg);
-	});
+	// get graph layout 
+	var graphLayout = JSON.stringify( _this.createGraphLayout() );
 
 
-	// save vocabulary
+	// get vocabulary from frontend-editor
 	var parser = N3.Parser();
-	var triples = "";
-	parser.parse( $( "#ontologie-editor" ).val() ,
+	var voc = "";
+	parser.parse( $( "#editor" ).val() ,
 		function (error, triple, prefixes) {
 			if (triple) {
 		 		//console.log("Triple:", triple.subject, triple.predicate, triple.object, '.');
@@ -808,20 +777,52 @@ RDFGraphVis.prototype.save = function() {
 		 		triple.object = triple.object.replace(/\^\^(http:\/\/\S*)/g, "^^<$1>");
 		 		//console.log("Object: " + triple.object);
 
-		 		triples += "<" + triple.subject + "> <" + triple.predicate + "> " + triple.object + " .\n";
+		 		voc += "<" + triple.subject + "> <" + triple.predicate + "> " + triple.object + " .\n";
 		 		
 			} else {
-				//console.log( "Save: ", triples );
-				$.post( "ajax/save.php", { name: encodeURIComponent( graphId ) + ".n3", content: triples })
+				// save voc and graph-layout
+				$.post( "ajax/save.php", { name: graphId, voc: voc, layout: graphLayout })
 					.fail(function(e) {
 						console.log("Error", e);
-						_this.addStatusMsg("Error: cannot write " + graphId + ".n3");
+						//_this.addStatusMsg("Error: cannot write " + graphId + ".n3");
+						_this.addStatusMsg("Error: cannot save graph");
 					})
 					.done(function( jsondata ) {
 						_this.addStatusMsg(jsondata.msg);
 				});
 			}
 		});
+}
+
+// scroll to specific word in texteditor
+// thanks to: http://blog.blupixelit.eu/scroll-textarea-to-selected-word-using-javascript-jquery/
+RDFGraphVis.prototype.scrollEditorTo = function(str) {
+	var $editor = $('#editor');
+	if ( ! $editor.is(':visible') ) {
+		return false;
+	}
+	var posi = $editor.val().indexOf(str); // take the position of the word in the text
+	if (posi != -1) {
+		//var target = document.getElementById("editor");
+	        // select the textarea and the word
+		$editor.get(0).focus();
+	    if ($editor.get(0).setSelectionRange)
+	        $editor.get(0).setSelectionRange(posi, posi+str.length);
+	    else {
+	        var r = $editor.get(0).createTextRange();
+	        r.collapse(true);
+	        r.moveEnd('character',  posi+str);
+	        r.moveStart('character', posi);
+	        r.select();
+	    }
+		//var objDiv = document.getElementById("editor");
+		var sh = $editor.get(0).scrollHeight; //height in pixel of the textarea (n_rows*line_height)
+		var line_ht = $editor.css('line-height').replace('px',''); //height in pixel of each row
+		var n_lines = sh/line_ht; // the total amount of lines
+		var char_in_line = $editor.val().length / n_lines; // amount of chars for each line
+		var height = Math.floor(posi/char_in_line); // amount of lines in the textarea
+		$editor.scrollTop(height*line_ht); // scroll to the selected line
+	}
 }
 
 // sow or hide proprties
@@ -843,10 +844,11 @@ RDFGraphVis.prototype.setStatusMsg = function(msg) {
 	if( typeof msg === "string" ) {
 		$(".status-bar").text(msg);
 	} else {
-		var txt = "";
-		$.each(msg,function() {
-			txt += this+"<br />";
+		var txt = "<table class='table table-condensed'>";
+		$.each(msg,function(key, value) {
+			txt += "<tr><td>"+key+"&nbsp;</td><td>"+value+"</td></tr>";
 		})
-		$(".status-bar").text(txt);
+		txt += "</table>";
+		$(".status-bar").html(txt);
 	}
 }

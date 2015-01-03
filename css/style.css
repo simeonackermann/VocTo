@@ -17,11 +17,15 @@ body {
   /* Set the fixed height of the footer here */
   height: auto;
   background-color: #f5f5f5;
-  margin: 10px;
+  padding: 7px;
+  color: #333;
 }
 
 .container .text-muted {
   
+}
+.footer table {
+  display: inline;
 }
 
 
@@ -61,8 +65,10 @@ body {
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    /*
     background-color: #f5f5f5;
     border-right: 1px solid #eee;
+    */
   }
 }
 
@@ -113,7 +119,7 @@ body {
  	left: 0;
  	top: 50px;
  	overflow: visible;
-  border-right:1px solid gray;
+  //border-right:1px solid gray;
   padding: 0;
  }
  .sidebar-content {

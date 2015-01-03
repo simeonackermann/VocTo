@@ -44,6 +44,7 @@
                 </ul>
             </li>-->
             <li><a id="hide-properties" href="#">Toggle Properties</a></li>
+            <li><a href="#">History</a></li>
             <li>
                 <button class="btn btn-primary save-graph" type="button" style="margin:7px;">
                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save
@@ -70,18 +71,18 @@
 
     <div class="sidebar">
                 <button type="button" class="btn btn-default toggle-sidebar pull-right">
-                    <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </button>
                 <div class="sidebar-content">
                     <!--<button id="update-graph" class="btn btn-primary btn-sm" type="button">Update Graph</button>-->
-                    <textarea id="ontologie-editor" style="width:100%;white-space: nowrap;overflow: scroll; " wrap="off" rows="30"></textarea>
+                    <textarea id="editor" style="width:100%;white-space: nowrap;overflow: scroll; " wrap="off" rows="30"></textarea>
                 </div>
     </div>
 
     <div id="graph" class="container"></div>
 
     <footer class="footer">
-        <p class="text-muted status-bar"></p>
+        <p class="status-bar"></p>
     </footer>
 
     <!-- jQuery -->
@@ -97,7 +98,7 @@
     <script type="text/javascript">
     $(document).ready(function(){
 
-        var fileID = "example";
+        var fileID = "http%3A%2F%2Fcatalogus-professorum.org%2Fcpm%2F";
 
         //$.post( "ajax/get.php", { name: "http%3A%2F%2Fcatalogus-professorum.org%2Fcpm%2F.n3" })      
         $.post( "ajax/get.php", { name: fileID + ".n3" })      
@@ -110,18 +111,22 @@
                         data: data,
                         id : fileID
                     });
+                    //rdfgraphvis.id = "bla bla ";
 
 
                     $(".save-graph").click( function() {
+                        //rdfgraphvis.id = "test123";
                         rdfgraphvis.save();
                     } );
 
+                    /*
                     $("#update-graph").click( function() {
                         rdfgraphvis.update();
                     });
+                    */
 
                     autoUpdateInterval = null;
-                    $( "#ontologie-editor" ).keypress(function() {
+                    $( "#editor" ).keypress(function() {
                         window.clearTimeout(autoUpdateInterval);
                         autoUpdateInterval = window.setTimeout(function() {
                             rdfgraphvis.update();
@@ -135,7 +140,10 @@
                         hide = ! hide;
                     });
                 }
-        });
+            })
+            .fail(function(e) {
+                console.log("Error", e);
+        });        
 
         $(".toggle-sidebar").click(function() {
             //if ( $(".sidebar").width() > 0 ) {

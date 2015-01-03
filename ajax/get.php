@@ -7,6 +7,8 @@ $content = "";
 
 if ( $filename ) {
 
+	$filename = addslashes($filename);
+
     if( file_exists("../data/" . $filename) ) {
 
     	$content = file_get_contents("../data/" . $filename);
@@ -14,7 +16,7 @@ if ( $filename ) {
     	echo json_encode( array('result' => true, 'content' => $content) );
 
     } else {
-    	echo json_encode( array('result' => false, 'msg' => 'File not found') );	
+    	echo json_encode( array('result' => false, 'msg' => 'File "'.$filename.'" not found') );	
     }
 
     //closedir($handle);
