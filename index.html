@@ -43,24 +43,24 @@
                   <li>ddg</li>
                 </ul>
             </li>-->
-            <li><a id="hide-properties" href="#">Toggle Properties</a></li>
-            <li><a href="#">History</a></li>
+            <li><a class="toggle-properties" href="#">Toggle Properties</a></li>
+            <li><a class="toggle-history" href="#">History</a></li>
             <li>
                 <button class="btn btn-primary save-graph" type="button" style="margin:7px;">
-                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save, Bug: after change History - double-save...
                 </button>
             </li>
-            <li>
+            <!--<li>
                 <form class="form-inline pull-right" role="form" style="margin:7px;">
                   <div class="form-group">
                     <div class="input-group">
-                      <!--<button id="hide-properties" class="btn btn-primary btn-xs" type="button">Toggle Properties</button>-->
+                      <button id="hide-properties" class="btn btn-primary btn-xs" type="button">Toggle Properties</button>
                     </div>
                   </div>
                   <input type="hidden" class="form-control" id="graph-id" placeholder="ID for this Model">
-                  <!--<button class="btn btn-primary save-graph" type="button">Save Element Positions</button>-->
+                  <button class="btn btn-primary save-graph" type="button">Save Element Positions</button>
                 </form>
-            </li>
+            </li>-->
           </ul>
           <!--<form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -81,8 +81,10 @@
 
     <div id="graph" class="container"></div>
 
+    <div id="history" style="display:none"><div class="list-group history-list"></div></div>
+
     <footer class="footer">
-        <p class="status-bar"></p>
+        <p class="status-bar" style="display:none;"></p>
     </footer>
 
     <!-- jQuery -->
@@ -94,11 +96,12 @@
     <script src="lib/n3/n3-browser.min.js"></script>
     
     <!-- own stuff -->
-    <script src="js/script.js"></script>
+    <script src="js/rdfgraphvis.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
 
-        var fileID = "http%3A%2F%2Fcatalogus-professorum.org%2Fcpm%2F";
+        //var fileID = "http%3A%2F%2Fcatalogus-professorum.org%2Fcpm%2F";
+        var fileID = "example";
 
         //$.post( "ajax/get.php", { name: "http%3A%2F%2Fcatalogus-professorum.org%2Fcpm%2F.n3" })      
         $.post( "ajax/get.php", { name: fileID + ".n3" })      
@@ -107,63 +110,17 @@
                 if ( jsondata.result && jsondata.content != "" ) {
                     //console.log( "big: ", jsondata );
                     var data = jsondata.content;
-                    var rdfgraphvis = new RDFGraphVis({
+                    rdfgraphvis = new RDFGraphVis({
                         data: data,
                         id : fileID
                     });
                     //rdfgraphvis.id = "bla bla ";
-
-
-                    $(".save-graph").click( function() {
-                        //rdfgraphvis.id = "test123";
-                        rdfgraphvis.save();
-                    } );
-
-                    /*
-                    $("#update-graph").click( function() {
-                        rdfgraphvis.update();
-                    });
-                    */
-
-                    autoUpdateInterval = null;
-                    $( "#editor" ).keypress(function() {
-                        window.clearTimeout(autoUpdateInterval);
-                        autoUpdateInterval = window.setTimeout(function() {
-                            rdfgraphvis.update();
-                        }, 1500);
-                    })
-                    
-
-                    var hide = true;
-                    $("#hide-properties").click( function() {
-                        rdfgraphvis.toggleProperties(hide);
-                        hide = ! hide;
-                    });
                 }
             })
             .fail(function(e) {
                 console.log("Error", e);
-        });        
-
-        $(".toggle-sidebar").click(function() {
-            //if ( $(".sidebar").width() > 0 ) {
-            $( ".sidebar-content" ).animate({
-                width: "toggle"
-                }, 100, function() {
-                // Animation complete.
-                });
-            $( "#graph" ).toggleClass("leftMargin");
-            $( ".footer" ).toggleClass("leftMargin");
-            /*
-
-            $( "#graph" ).animate({
-                marginLeft: "600"
-                }, 100, function() {
-                // Animation complete.
-                });
-        */
-            
-        });
+        });                
+        
     });
     </script>    
 

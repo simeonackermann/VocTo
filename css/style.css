@@ -16,9 +16,9 @@ body {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: auto;
-  background-color: #f5f5f5;
-  padding: 7px;
+  background-color: #f5f5f5;  
   color: #333;
+  font-size: 0.9em;
 }
 
 .container .text-muted {
@@ -26,6 +26,9 @@ body {
 }
 .footer table {
   display: inline;
+}
+.footer p {
+  padding: 7px;
 }
 
 
@@ -159,4 +162,16 @@ polygon.class-relation {
 }
 rect.class-hover {
   fill: rgb(100,100,100);
+}
+
+#history {
+  position: absolute;
+  width: 300px;
+  max-height: 300px;
+  overflow: scroll;
+  top: 80px;
+  right: 50px;
+  background: white;
+  border: 2px solid lightGray;
+  border-radius: 10px;
 }
