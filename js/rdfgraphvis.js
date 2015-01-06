@@ -898,6 +898,7 @@ RDFGraphVis.prototype.interface = function(){
 
 		                    _this.nquads = jsondata.content;
 		                    _this.id = _this.id + "-" + time;
+		                    _this.updateEditor();
 		                    _this.parse();
 
 		                    // set old id as new id (without timestamp)
@@ -950,29 +951,35 @@ RDFGraphVis.prototype.updateEditor = function() {
 	            writer.end(function (error, result) { 
 	            	result = result.replace(/\.\n/g, ".\n\n");
 	            	result = result.replace(/\n@/g, "@");
-			        $("#editor").val( result );			        
+			        $("#editor").val( result );
+
+					// add tynax highlighting editor CodeMirror
+					$(".CodeMirror").remove(); // may remove old codeMirror fields
+					var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+						mode: "text/turtle",
+						matchBrackets: true,
+						autofocus: true,
+						//lineWrapping: true,
+						//lineNumbers: true
+					});
+					
+					editor.on('change',function(cMirror){
+						// get value right from instance
+						$("#editor").val(cMirror.getValue());
+						$("#editor").trigger("keypress");
+					});
+
+					$("#editor").height( window.innerHeight - $(".navbar").height() );
+					$(".CodeMirror").height( window.innerHeight - $(".navbar").height() );
+
 			    });
 	        }
 	    });
 	});
 
-	// add tynax highlighting editor CodeMirror
-	var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
-		mode: "text/turtle",
-		matchBrackets: true,
-		autofocus: true,
-		//lineWrapping: true,
-		//lineNumbers: true
-	});
 	
-	editor.on('change',function(cMirror){
-		// get value right from instance
-		$("#editor").val(cMirror.getValue());
-		$("#editor").trigger("keypress");
-	});
 
-	$("#editor").height( window.innerHeight - $(".navbar").height() );
-	$(".CodeMirror").height( window.innerHeight - $(".navbar").height() );
+	
 }
 
 // scroll to specific word in texteditor
