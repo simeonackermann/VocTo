@@ -116,25 +116,28 @@ body {
  */
 
  .sidebar {
- 	position: absolute;
- 	//width: 40%;
+ 	//position: absolute;
  	height: 100%;
+  width: 40%;
  	left: 0;
  	top: 50px;
- 	overflow: visible;
-  //border-right:1px solid gray;
+ 	overflow: visible;  
   padding: 0;
+  border-right:1px solid gray;
  }
  .sidebar-content {
- 	position: relative;
- 	width: 100%;
- 	min-width: 600px;
- 	display: none;
-  padding: 10px;
+ 	//position: relative;
+ 	//width: 40%;  
+ 	//padding: 10px;
  }
  .toggle-sidebar {
+  /*
  	margin-right: -30px;
   margin-top: 10px;
+  */
+  position: absolute;
+  left: 100%;
+  top: 10px;
  }
 
  #graph {
@@ -145,7 +148,7 @@ body {
  	padding: 0; 	
  }
  .leftMargin {
-  margin-left: 600px !important;
+  margin-left: 40% !important;
   width:auto !important;
  }
 
@@ -174,4 +177,14 @@ rect.class-hover {
   background: white;
   border: 2px solid lightGray;
   border-radius: 10px;
+}
+
+.CodeMirror {
+  width: 100%;
+}
+
+#editor {
+  width: 100%;
+  white-space: nowrap;
+  overflow: scroll;
 }

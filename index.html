@@ -9,6 +9,9 @@
 	<!-- Bootstrap -->	
 	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <!-- JointJS -->
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="lib/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="lib/codemirror/addon/dialog/dialog.css">
     <!-- style -->
 	<link href="css/style.css" rel="stylesheet" media="screen">
 
@@ -32,9 +35,9 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <!--<li><a href="#">Start</a></li>
-            <li><a href="#">About</a></li>-->
+            <li><a href="#">About</a></li>
             <li><a href="#">Help</a></li>
-            <li><a href="#">View</a></li>
+            <li><a href="#">View</a></li>-->
             <!--<li role="presentation" class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                   Dropdown <span class="caret"></span>
@@ -43,7 +46,9 @@
                   <li>ddg</li>
                 </ul>
             </li>-->
+            <li><a class="toggle-editorSyntax" href="#">Toggle Syntax Highlighting</a></li>
             <li><a class="toggle-properties" href="#">Toggle Properties</a></li>
+            
             <li><a class="toggle-history" href="#">History</a></li>
             <li>
                 <button class="btn btn-primary save-graph" type="button" style="margin:7px;">
@@ -70,13 +75,14 @@
     </nav>
 
     <div class="sidebar">
-                <button type="button" class="btn btn-default toggle-sidebar pull-right">
+                <button type="button" class="btn btn-default toggle-sidebar">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </button>
-                <div class="sidebar-content">
-                    <!--<button id="update-graph" class="btn btn-primary btn-sm" type="button">Update Graph</button>-->
-                    <textarea id="editor" style="width:100%;white-space: nowrap;overflow: scroll; " wrap="off" rows="30"></textarea>
-                </div>
+                
+                <!--<button id="update-graph" class="btn btn-primary btn-sm" type="button">Update Graph</button>-->
+                <textarea id="editor" wrap="off" rows="30"></textarea>
+                <!--<input type="text" class="form-control input-sm editor-search" placeholder="Search..." value="">-->
+                
     </div>
 
     <div id="graph" class="container"></div>
@@ -94,14 +100,20 @@
     <!-- D3 -->
     <script src="lib/d3/d3.v3.min.js"></script>
     <script src="lib/n3/n3-browser.min.js"></script>
+    <!-- CodeMirror -->    
+    <script src="lib/codemirror/lib/codemirror.js"></script>
+    <script src="lib/codemirror/mode/turtle/turtle.js"></script>
+    <script src="lib/codemirror/addon/search/search.js"></script>
+    <script src="lib/codemirror/addon/search/searchcursor.js"></script>
+    <script src="lib/codemirror/addon/dialog/dialog.js"></script>
     
     <!-- own stuff -->
     <script src="js/rdfgraphvis.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
 
-        //var fileID = "http%3A%2F%2Fcatalogus-professorum.org%2Fcpm%2F";
-        var fileID = "example";
+        var fileID = "http%3A%2F%2Fcatalogus-professorum.org%2Fcpm%2F";
+        //var fileID = "example";
 
         //$.post( "ajax/get.php", { name: "http%3A%2F%2Fcatalogus-professorum.org%2Fcpm%2F.n3" })      
         $.post( "ajax/get.php", { name: fileID + ".n3" })      

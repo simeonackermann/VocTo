@@ -7,7 +7,7 @@ RDFGraphVis = function( settings ) {
 	}*/
 
 	this.state = {
-
+		'editorMarks' : []
 	};
 
 	//this.thisGraph = null;
@@ -166,7 +166,8 @@ RDFGraphVis.prototype.init = function() {
 	    var y = window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
 	    _this.svg.attr("width", x).attr("height", y);
 
-	    $( "#editor" ).height( $(".sidebar").height() - 75 );
+	    $( "#editor" ).height( window.innerHeight - $(".navbar").height() );
+	    $(".CodeMirror").height( window.innerHeight - $(".navbar").height() );
 	}
 
 	function svgMouseDown() {
@@ -822,12 +823,7 @@ RDFGraphVis.prototype.interface = function(){
 	    _this.save();
 	} );
 
-	/*
-	$("#update-graph").click( function() {
-	    _this.update();
-	});
-	*/
-
+	// update graph after keypress in editor
 	autoUpdateInterval = null;
 	$( "#editor" ).keypress(function() {
 	    window.clearTimeout(autoUpdateInterval);
@@ -836,25 +832,31 @@ RDFGraphVis.prototype.interface = function(){
 	    }, 1500);
 	})
 
-
+	// toggle properties
 	var hide = true;
 	$(".toggle-properties").click( function() {
 	    _this.toggleProperties(hide);
 	    hide = ! hide;
 	});
 
+	// toggle sidebar	
 	$(".toggle-sidebar").click(function() {
-        //if ( $(".sidebar").width() > 0 ) {
-        $( ".sidebar-content" ).animate({
-            width: "toggle"
-            }, 100, function() {
-            // Animation complete.
-            });
-        $( "#graph" ).toggleClass("leftMargin");
+		if ( $(".sidebar").width() > 0 ) {
+			$( ".sidebar" ).animate({ width: "0" });
+		} else {
+			$( ".sidebar" ).animate({ width: "40%" });
+		}
+		$( "#graph" ).toggleClass("leftMargin");
         $( ".footer" ).toggleClass("leftMargin");
     });
+    $( ".sidebar" ).animate({ width: "0" }); // CodeMirror autofocus bugfix
 
-    //history
+    // toggle history
+    $(".toggle-history").click(function() {
+        $("#history").toggle();
+    });
+
+    // fill history
     $.post( "ajax/get.php", { name: "log-" + _this.id + ".txt" })  
 		.done(function( jsondata ) {
 
@@ -864,7 +866,6 @@ RDFGraphVis.prototype.interface = function(){
 		    
 		    var lines = jsondata.content.split("\n");;
 		    var $list = $(".history-list");
-		    //console.log("log:", lines);
 		    $.each(lines, function(lineIndex, line){
 		        if (line == "") {
 		            return true;
@@ -899,16 +900,9 @@ RDFGraphVis.prototype.interface = function(){
 		                    _this.id = _this.id + "-" + time;
 		                    _this.parse();
 
+		                    // set old id as new id (without timestamp)
+		                    // TODO: do it a better way!
 		                    window.setTimeout( function() { _this.id = oldId; }, 1000 );
-		                    /*
-		                    $("#graph").html("");
-		                    rdfgraphvis = new RDFGraphVis({
-		                        data: data,
-		                        id : fileID + "-" + time
-		                    });
-		                    //rdfgraphvis.id = fileID;
-		                    window.setTimeout( function() { rdfgraphvis.id = _this.id; }, 1000 );
-		                    */
 		                }
 		        });
 
@@ -916,41 +910,23 @@ RDFGraphVis.prototype.interface = function(){
 		    });
 		}
 		);
+	
+    // editor search
+    /*
+	$(".editor-search").keyup(function() {
+		var search = $(this).val();
+		window.setTimeout(function(){
+			//searchStore(search)
+			_this.scrollEditorTo(search);
+		}, 300);
+	})
+	*/
 
-    $(".toggle-history").click(function() {
-        $("#history").toggle();
-    });
-}
-
-// scroll to specific word in texteditor
-// thanks to: http://blog.blupixelit.eu/scroll-textarea-to-selected-word-using-javascript-jquery/
-RDFGraphVis.prototype.scrollEditorTo = function(str) {
-	var $editor = $('#editor');
-	if ( ! $editor.is(':visible') ) {
-		return false;
-	}
-	var posi = $editor.val().indexOf(str); // take the position of the word in the text
-	if (posi != -1) {
-		//var target = document.getElementById("editor");
-	        // select the textarea and the word
-		$editor.get(0).focus();
-	    if ($editor.get(0).setSelectionRange)
-	        $editor.get(0).setSelectionRange(posi, posi+str.length);
-	    else {
-	        var r = $editor.get(0).createTextRange();
-	        r.collapse(true);
-	        r.moveEnd('character',  posi+str);
-	        r.moveStart('character', posi);
-	        r.select();
-	    }
-		//var objDiv = document.getElementById("editor");
-		var sh = $editor.get(0).scrollHeight; //height in pixel of the textarea (n_rows*line_height)
-		var line_ht = $editor.css('line-height').replace('px',''); //height in pixel of each row
-		var n_lines = sh/line_ht; // the total amount of lines
-		var char_in_line = $editor.val().length / n_lines; // amount of chars for each line
-		var height = Math.floor(posi/char_in_line); // amount of lines in the textarea
-		$editor.scrollTop(height*line_ht); // scroll to the selected line
-	}
+	// toggle editor syntax highlighting
+	$(".toggle-editorSyntax").click(function() {
+		$(".CodeMirror").toggle();
+		$("#editor").toggle();
+	});
 }
 
 // fill editor with turtle
@@ -967,24 +943,94 @@ RDFGraphVis.prototype.updateEditor = function() {
 	$.each( triples, function( key, value) {
 		var parser = new N3.Parser();
 	    parser.parse(value, function (error, triple, prefixes) {
-
 	    	if (triple) {
                  writer.addTriple( triple.subject, triple.predicate, triple.object );
 			}
-			/*else
-				console.log("# That's all, folks!", prefixes)*/
-	        
-	        if ( key+1 == triples.length  ) {
+			if ( key+1 == triples.length  ) {
 	            writer.end(function (error, result) { 
 	            	result = result.replace(/\.\n/g, ".\n\n");
 	            	result = result.replace(/\n@/g, "@");
-			        $("#editor").val( result );
-			        $("#editor").height( $(".sidebar").height() - 75 );
+			        $("#editor").val( result );			        
 			    });
 	        }
 	    });
 	});
+
+	// add tynax highlighting editor CodeMirror
+	var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+		mode: "text/turtle",
+		matchBrackets: true,
+		autofocus: true,
+		//lineWrapping: true,
+		//lineNumbers: true
+	});
+	
+	editor.on('change',function(cMirror){
+		// get value right from instance
+		$("#editor").val(cMirror.getValue());
+		$("#editor").trigger("keypress");
+	});
+
+	$("#editor").height( window.innerHeight - $(".navbar").height() );
+	$(".CodeMirror").height( window.innerHeight - $(".navbar").height() );
 }
+
+// scroll to specific word in texteditor
+// credits to: http://blog.blupixelit.eu/scroll-textarea-to-selected-word-using-javascript-jquery/
+RDFGraphVis.prototype.scrollEditorTo = function(str) {
+	var _this = this;
+	var $editor = $('#editor');
+	if ( ( ! $('.CodeMirror').is(':visible') && ! $editor.is(':visible') ) || typeof str === undefined || str == "" ) {
+		return false;
+	}
+	// scroll to syntax hihglighted editor line
+	if ( $('.CodeMirror').is(':visible') ) {
+
+		// clear old marker
+		var editor = $('.CodeMirror')[0].CodeMirror;
+		$.each(_this.state.editorMarks, function(key, mark){
+			mark.clear();
+		});
+		_this.state.editorMarks = [];
+
+		// set new marker
+		var cursor = editor.getSearchCursor(str);
+		while( cursor.findNext() ) {
+			var mark = editor.markText( cursor.from(), cursor.to(), {
+				className: "cm-searching"
+			});
+			_this.state.editorMarks.push(mark);
+			editor.scrollIntoView( cursor.from() );
+		}
+
+	}
+	// scroll to syntax snmple texteditor line
+	if ( $editor.is(':visible') ) {
+		var posi = $editor.val().indexOf(str); // take the position of the word in the text
+		if (posi != -1) {
+			// select the textarea and the word
+			$editor.get(0).focus();
+		    if ($editor.get(0).setSelectionRange)
+		        $editor.get(0).setSelectionRange(posi, posi+str.length);
+		    else {
+		        var r = $editor.get(0).createTextRange();
+		        r.collapse(true);
+		        r.moveEnd('character',  posi+str);
+		        r.moveStart('character', posi);
+		        r.select();
+		    }
+		    
+		    // scroll to word
+			var sh = $editor.get(0).scrollHeight; //height in pixel of the textarea (n_rows*line_height)
+			var line_ht = $editor.css('line-height').replace('px',''); //height in pixel of each row
+			var n_lines = sh/line_ht; // the total amount of lines
+			var char_in_line = $editor.val().length / n_lines; // amount of chars for each line
+			var height = Math.floor(posi/char_in_line); // amount of lines in the textarea
+			$editor.scrollTop(height*line_ht); // scroll to the selected line
+		}
+	}
+}
+
 
 // sow or hide proprties
 RDFGraphVis.prototype.toggleProperties = function(hide) {
