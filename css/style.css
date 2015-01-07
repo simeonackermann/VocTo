@@ -116,21 +116,15 @@ body {
  */
 
  .sidebar {
- 	//position: absolute;
  	height: 100%;
   width: 40%;
- 	left: 0;
+ 	left: -40%;
  	top: 50px;
  	overflow: visible;  
   padding: 0;
   border-right:1px solid gray;
  }
- .sidebar-content {
- 	//position: relative;
- 	//width: 40%;  
- 	//padding: 10px;
- }
- .toggle-sidebar {
+  .toggle-sidebar {
   /*
  	margin-right: -30px;
   margin-top: 10px;

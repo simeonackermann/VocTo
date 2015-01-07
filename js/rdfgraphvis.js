@@ -841,15 +841,14 @@ RDFGraphVis.prototype.interface = function(){
 
 	// toggle sidebar	
 	$(".toggle-sidebar").click(function() {
-		if ( $(".sidebar").width() > 0 ) {
-			$( ".sidebar" ).animate({ width: "0" });
+		if ( $(".sidebar").position().left < 0 ) {
+			$( ".sidebar" ).animate({ left: "0" });
 		} else {
-			$( ".sidebar" ).animate({ width: "40%" });
+			$( ".sidebar" ).animate({ left: "-40%" });
 		}
 		$( "#graph" ).toggleClass("leftMargin");
         $( ".footer" ).toggleClass("leftMargin");
     });
-    $( ".sidebar" ).animate({ width: "0" }); // CodeMirror autofocus bugfix
 
     // toggle history
     $(".toggle-history").click(function() {
@@ -859,20 +858,19 @@ RDFGraphVis.prototype.interface = function(){
     // fill history
     $.post( "ajax/get.php", { name: "log-" + _this.id + ".txt" })  
 		.done(function( jsondata ) {
-
+			var $list = $(".history-list");
 		    if ( ! jsondata.result || jsondata.content == "" ) {
+		    	$list.append('No older versions found');
 		        return false;
 		    }
 		    
-		    var lines = jsondata.content.split("\n");;
-		    var $list = $(".history-list");
+		    var lines = jsondata.content.split("\n");;		    
 		    $.each(lines, function(lineIndex, line){
 		        if (line == "") {
 		            return true;
 		        }
 		        var vals = line.split(" ");
 		        var date = new Date(parseInt(vals[0])*1000);
-		        //console.log(date);
 		        $list.append('<a href="#" class="list-group-item" data-time="'+vals[0]+'">'+date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+', '+date.getHours()+'h '+date.getMinutes()+':'+date.getSeconds()+'s</a>');
 		    });
 
@@ -906,11 +904,8 @@ RDFGraphVis.prototype.interface = function(){
 		                    window.setTimeout( function() { _this.id = oldId; }, 1000 );
 		                }
 		        });
-
-
 		    });
-		}
-		);
+	});
 	
     // editor search
     /*
@@ -958,7 +953,7 @@ RDFGraphVis.prototype.updateEditor = function() {
 					var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
 						mode: "text/turtle",
 						matchBrackets: true,
-						autofocus: true,
+						//autofocus: true,
 						//lineWrapping: true,
 						//lineNumbers: true
 					});
@@ -971,15 +966,10 @@ RDFGraphVis.prototype.updateEditor = function() {
 
 					$("#editor").height( window.innerHeight - $(".navbar").height() );
 					$(".CodeMirror").height( window.innerHeight - $(".navbar").height() );
-
 			    });
 	        }
 	    });
 	});
-
-	
-
-	
 }
 
 // scroll to specific word in texteditor
