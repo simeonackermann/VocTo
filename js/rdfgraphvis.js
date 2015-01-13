@@ -843,11 +843,11 @@ RDFGraphVis.prototype.interface = function(){
 	$(".toggle-sidebar").click(function() {
 		if ( $(".sidebar").position().left < 0 ) {
 			$( ".sidebar" ).animate({ left: "0" });
+			$( "#graph, .footer" ).animate({ marginLeft: "40%" });
 		} else {
 			$( ".sidebar" ).animate({ left: "-40%" });
+			$( "#graph, .footer" ).animate({ marginLeft: "0" });
 		}
-		$( "#graph" ).toggleClass("leftMargin");
-        $( ".footer" ).toggleClass("leftMargin");
     });
 
     // toggle history
