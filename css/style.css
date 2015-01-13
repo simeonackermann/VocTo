@@ -141,12 +141,7 @@ body {
  	margin: 0;
  	padding: 0; 	
  }
- .leftMargin {
-  margin-left: 40% !important;
-  width:auto !important;
- }
-
-
+ 
 /* hide remove link btn */
 .link-tools .tool-remove { display: none }
 .link-tools .tool-options { display: none }
