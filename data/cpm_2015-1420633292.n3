@@ -1,0 +1,1071 @@
+<http://catalogus-professorum.org/cpm/> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .
+<http://catalogus-professorum.org/cpm/> <http://purl.org/dc/terms/modified> "2013-09-10" .
+<http://catalogus-professorum.org/cpm/> <http://www.w3.org/2000/01/rdf-schema#label> "Catalogus Professorum Model (CPM)" .
+<http://catalogus-professorum.org/cpm/> <http://www.w3.org/2002/07/owl#versionInfo> "\n    version 2.0 - 2013-09-09 - Thomas Riechert\n    version 1.9 - 2013-04-24 - Thomas Riechert\n    version 1.0 (inital) - 2007-05-24 - Thomas Riechert\n    " .
+<http://catalogus-professorum.org/cpm/> <http://purl.org/dc/terms/contributor> "Ulf Morgenstern" .
+<http://catalogus-professorum.org/cpm/> <http://purl.org/dc/terms/contributor> "Christian Rau" .
+<http://catalogus-professorum.org/cpm/> <http://purl.org/dc/terms/contributor> "Christian Augustin" .
+<http://catalogus-professorum.org/cpm/> <http://purl.org/dc/terms/contributor> "Fredrike Bulka" .
+<http://catalogus-professorum.org/cpm/> <http://purl.org/dc/terms/contributor> "Lydia Steiner" .
+<http://catalogus-professorum.org/cpm/> <http://purl.org/dc/terms/contributor> "Thomas Riechert" .
+<http://catalogus-professorum.org/cpm/> <http://purl.org/dc/terms/contributor> "Norman Radtke" .
+<http://catalogus-professorum.org/cpm/> <http://purl.org/dc/terms/license> "http://creativecommons.org/licenses/by/3.0/" .
+<http://catalogus-professorum.org/cpm/> <http://xmlns.com/foaf/0.1/depiction> "http://catalogus-professorum.org/images/cpm.png" .
+<http://catalogus-professorum.org/cpm/AcademicSociety> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/AcademicSociety> <http://www.w3.org/2000/01/rdf-schema#label> "Wissenschaftliche Gesellschaft"@de .
+<http://catalogus-professorum.org/cpm/AcademicSociety> <http://www.w3.org/2000/01/rdf-schema#label> "Academic Society"@en .
+<http://catalogus-professorum.org/cpm/AcademicSociety> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine wissenschaftliche Gesellschaft"@de .
+<http://catalogus-professorum.org/cpm/AcademicSociety> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes an academic society"@en .
+<http://catalogus-professorum.org/cpm/AcademicSociety> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 04.12.2009" .
+<http://catalogus-professorum.org/cpm/AcademicSociety> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/AcademicSociety> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Organisation> .
+<http://catalogus-professorum.org/cpm/Academy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Academy> <http://www.w3.org/2000/01/rdf-schema#label> "Academy"@en .
+<http://catalogus-professorum.org/cpm/Academy> <http://www.w3.org/2000/01/rdf-schema#label> "Hochschule"@de .
+<http://catalogus-professorum.org/cpm/Academy> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine Hochschule"@de .
+<http://catalogus-professorum.org/cpm/Academy> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes an academy"@en .
+<http://catalogus-professorum.org/cpm/Academy> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/Academy> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Academy> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Institution> .
+<http://catalogus-professorum.org/cpm/Archive> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Archive> <http://www.w3.org/2000/01/rdf-schema#label> "Archiv"@de .
+<http://catalogus-professorum.org/cpm/Archive> <http://www.w3.org/2000/01/rdf-schema#label> "Archive"@en .
+<http://catalogus-professorum.org/cpm/Archive> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes an archive"@en .
+<http://catalogus-professorum.org/cpm/Archive> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt ein Archiv"@de .
+<http://catalogus-professorum.org/cpm/Archive> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Archive> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 31.03.2008" .
+<http://catalogus-professorum.org/cpm/Archive> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Institution> .
+<http://catalogus-professorum.org/cpm/Birth> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Birth> <http://www.w3.org/2000/01/rdf-schema#label> "Birth"@en .
+<http://catalogus-professorum.org/cpm/Birth> <http://www.w3.org/2000/01/rdf-schema#label> "Geburt"@de .
+<http://catalogus-professorum.org/cpm/Birth> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Birth describes a birth day"@en .
+<http://catalogus-professorum.org/cpm/Birth> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt den Geburtstag"@de .
+<http://catalogus-professorum.org/cpm/Birth> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Birth> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 09.09.2013" .
+<http://catalogus-professorum.org/cpm/Birth> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/Body> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Body> <http://www.w3.org/2000/01/rdf-schema#label> "Körperschaft"@de .
+<http://catalogus-professorum.org/cpm/Body> <http://www.w3.org/2000/01/rdf-schema#label> "Body"@en .
+<http://catalogus-professorum.org/cpm/Body> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt Körperschaften"@de .
+<http://catalogus-professorum.org/cpm/Body> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a Body"@en .
+<http://catalogus-professorum.org/cpm/Body> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 04.12.2009" .
+<http://catalogus-professorum.org/cpm/Body> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Career> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Career> <http://www.w3.org/2000/01/rdf-schema#label> "Career step"@en .
+<http://catalogus-professorum.org/cpm/Career> <http://www.w3.org/2000/01/rdf-schema#label> "Karriereschritt"@de .
+<http://catalogus-professorum.org/cpm/Career> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes of career step"@en .
+<http://catalogus-professorum.org/cpm/Career> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt einen Karriereschritt"@de .
+<http://catalogus-professorum.org/cpm/Career> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/Career> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Career> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/RelationToInstitution> .
+<http://catalogus-professorum.org/cpm/Death> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Death> <http://www.w3.org/2000/01/rdf-schema#label> "Death"@en .
+<http://catalogus-professorum.org/cpm/Death> <http://www.w3.org/2000/01/rdf-schema#label> "Gestorben"@de .
+<http://catalogus-professorum.org/cpm/Death> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept describes a day of death"@en .
+<http://catalogus-professorum.org/cpm/Death> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt den Sterbetag"@de .
+<http://catalogus-professorum.org/cpm/Death> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Death> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 09.09.2013" .
+<http://catalogus-professorum.org/cpm/Death> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/Department> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Department> <http://www.w3.org/2000/01/rdf-schema#label> "Department"@en .
+<http://catalogus-professorum.org/cpm/Department> <http://www.w3.org/2000/01/rdf-schema#label> "Abteilung"@de .
+<http://catalogus-professorum.org/cpm/Department> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a department"@en .
+<http://catalogus-professorum.org/cpm/Department> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine Abteilung"@de .
+<http://catalogus-professorum.org/cpm/Department> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/Department> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Department> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Institution> .
+<http://catalogus-professorum.org/cpm/Faculty> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Faculty> <http://www.w3.org/2000/01/rdf-schema#label> "Fakultät"@de .
+<http://catalogus-professorum.org/cpm/Faculty> <http://www.w3.org/2000/01/rdf-schema#label> "Faculty"@en .
+<http://catalogus-professorum.org/cpm/Faculty> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a faculty"@en .
+<http://catalogus-professorum.org/cpm/Faculty> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine Fakultät"@de .
+<http://catalogus-professorum.org/cpm/Faculty> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/Faculty> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Faculty> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Institution> .
+<http://catalogus-professorum.org/cpm/Family> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Family> <http://www.w3.org/2000/01/rdf-schema#label> "Familie"@de .
+<http://catalogus-professorum.org/cpm/Family> <http://www.w3.org/2000/01/rdf-schema#label> "Family"@en .
+<http://catalogus-professorum.org/cpm/Family> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes families"@en .
+<http://catalogus-professorum.org/cpm/Family> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt Familien"@de .
+<http://catalogus-professorum.org/cpm/Family> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Family> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 19.01.2010" .
+<http://catalogus-professorum.org/cpm/Family> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/Forename> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Forename> <http://www.w3.org/2000/01/rdf-schema#label> "Vorname"@de .
+<http://catalogus-professorum.org/cpm/Forename> <http://www.w3.org/2000/01/rdf-schema#label> "Forename"@en .
+<http://catalogus-professorum.org/cpm/Forename> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes forenames"@en .
+<http://catalogus-professorum.org/cpm/Forename> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt Vornamen"@de .
+<http://catalogus-professorum.org/cpm/Forename> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/Forename> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Forename> <http://www.w3.org/2002/07/owl#versionInfo> "version 0.2  10.03.2008" .
+<http://catalogus-professorum.org/cpm/Forename> <http://ns.ontowiki.net/SysOnt/order> "200" .
+<http://catalogus-professorum.org/cpm/GeneralPeriod> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/GeneralPeriod> <http://www.w3.org/2000/01/rdf-schema#label> "Allgemeiner Abschnitt"@de .
+<http://catalogus-professorum.org/cpm/GeneralPeriod> <http://www.w3.org/2000/01/rdf-schema#label> "General Period"@en .
+<http://catalogus-professorum.org/cpm/GeneralPeriod> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a general period of life"@en .
+<http://catalogus-professorum.org/cpm/GeneralPeriod> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt einen allgemeineren Lebensabschnitt"@de .
+<http://catalogus-professorum.org/cpm/GeneralPeriod> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/GeneralPeriod> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable changed from cpm:General to cpm:GeneralPeriod on 09.09.2013" .
+<http://catalogus-professorum.org/cpm/GeneralPeriod> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/Graduation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Graduation> <http://www.w3.org/2000/01/rdf-schema#label> "Graduation"@en .
+<http://catalogus-professorum.org/cpm/Graduation> <http://www.w3.org/2000/01/rdf-schema#label> "Abschluss"@de .
+<http://catalogus-professorum.org/cpm/Graduation> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt einen Abschluss"@de .
+<http://catalogus-professorum.org/cpm/Graduation> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept describes a graduation"@en .
+<http://catalogus-professorum.org/cpm/Graduation> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Graduation> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 09.09.2013" .
+<http://catalogus-professorum.org/cpm/Graduation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/GraduationDoctorate> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/GraduationDoctorate> <http://www.w3.org/2000/01/rdf-schema#label> "Promotion"@de .
+<http://catalogus-professorum.org/cpm/GraduationDoctorate> <http://www.w3.org/2000/01/rdf-schema#label> "Graduation Doctorate"@en .
+<http://catalogus-professorum.org/cpm/GraduationDoctorate> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept describes a graduation at university"@en .
+<http://catalogus-professorum.org/cpm/GraduationDoctorate> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt den Abschluss einer Promotion"@de .
+<http://catalogus-professorum.org/cpm/GraduationDoctorate> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/GraduationDoctorate> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 09.09.2013" .
+<http://catalogus-professorum.org/cpm/GraduationDoctorate> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Graduation> .
+<http://catalogus-professorum.org/cpm/GraduationSchool> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/GraduationSchool> <http://www.w3.org/2000/01/rdf-schema#label> "Schulabschluss"@de .
+<http://catalogus-professorum.org/cpm/GraduationSchool> <http://www.w3.org/2000/01/rdf-schema#label> "Graduation from School"@en .
+<http://catalogus-professorum.org/cpm/GraduationSchool> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt den Schulabschluss"@de .
+<http://catalogus-professorum.org/cpm/GraduationSchool> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept describes a graduation of school"@en .
+<http://catalogus-professorum.org/cpm/GraduationSchool> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/GraduationSchool> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 09.09.2013" .
+<http://catalogus-professorum.org/cpm/GraduationSchool> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Graduation> .
+<http://catalogus-professorum.org/cpm/GraduationUniversity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/GraduationUniversity> <http://www.w3.org/2000/01/rdf-schema#label> "Hochschulabschluss"@de .
+<http://catalogus-professorum.org/cpm/GraduationUniversity> <http://www.w3.org/2000/01/rdf-schema#label> "Graduation University"@en .
+<http://catalogus-professorum.org/cpm/GraduationUniversity> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept describes a graduation at university"@en .
+<http://catalogus-professorum.org/cpm/GraduationUniversity> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt den Abschluss an einer Universität"@de .
+<http://catalogus-professorum.org/cpm/GraduationUniversity> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/GraduationUniversity> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 09.09.2013" .
+<http://catalogus-professorum.org/cpm/GraduationUniversity> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Graduation> .
+<http://catalogus-professorum.org/cpm/Home> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Home> <http://www.w3.org/2000/01/rdf-schema#label> "Home"@en .
+<http://catalogus-professorum.org/cpm/Home> <http://www.w3.org/2000/01/rdf-schema#label> "Wohnung"@de .
+<http://catalogus-professorum.org/cpm/Home> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine Wohnung"@de .
+<http://catalogus-professorum.org/cpm/Home> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a home, flat or appartement"@en .
+<http://catalogus-professorum.org/cpm/Home> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/Home> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Home> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/Institute> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Institute> <http://www.w3.org/2000/01/rdf-schema#label> "Institute"@en .
+<http://catalogus-professorum.org/cpm/Institute> <http://www.w3.org/2000/01/rdf-schema#label> "Institut"@de .
+<http://catalogus-professorum.org/cpm/Institute> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes an institute"@en .
+<http://catalogus-professorum.org/cpm/Institute> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine Institut"@de .
+<http://catalogus-professorum.org/cpm/Institute> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/Institute> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Institute> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Institution> .
+<http://catalogus-professorum.org/cpm/Institution> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Institution> <http://www.w3.org/2000/01/rdf-schema#label> "Institution"@de .
+<http://catalogus-professorum.org/cpm/Institution> <http://www.w3.org/2000/01/rdf-schema#label> "Institution"@en .
+<http://catalogus-professorum.org/cpm/Institution> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes an institution"@en .
+<http://catalogus-professorum.org/cpm/Institution> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine Institution"@de .
+<http://catalogus-professorum.org/cpm/Institution> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/Institution> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Institution> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/Office> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Office> <http://www.w3.org/2000/01/rdf-schema#label> "Amt"@de .
+<http://catalogus-professorum.org/cpm/Office> <http://www.w3.org/2000/01/rdf-schema#label> "Office"@en .
+<http://catalogus-professorum.org/cpm/Office> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes of a office"@en .
+<http://catalogus-professorum.org/cpm/Office> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eines Amtes"@de .
+<http://catalogus-professorum.org/cpm/Office> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/Office> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Office> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/RelationToInstitution> .
+<http://catalogus-professorum.org/cpm/Organisation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Organisation> <http://www.w3.org/2000/01/rdf-schema#label> "Organisation"@de .
+<http://catalogus-professorum.org/cpm/Organisation> <http://www.w3.org/2000/01/rdf-schema#label> "Organisation"@en .
+<http://catalogus-professorum.org/cpm/Organisation> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine Organisation"@de .
+<http://catalogus-professorum.org/cpm/Organisation> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a organization"@en .
+<http://catalogus-professorum.org/cpm/Organisation> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 04.12.2009" .
+<http://catalogus-professorum.org/cpm/Organisation> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Organisation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/OtherOrganisation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/OtherOrganisation> <http://www.w3.org/2000/01/rdf-schema#label> "Sonstige Organisation"@de .
+<http://catalogus-professorum.org/cpm/OtherOrganisation> <http://www.w3.org/2000/01/rdf-schema#label> "Other Organisation"@en .
+<http://catalogus-professorum.org/cpm/OtherOrganisation> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine sonstige Organisation"@de .
+<http://catalogus-professorum.org/cpm/OtherOrganisation> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a other Organisation"@en .
+<http://catalogus-professorum.org/cpm/OtherOrganisation> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 04.12.2009" .
+<http://catalogus-professorum.org/cpm/OtherOrganisation> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable 09.09.2013 Organization changed to Organisation" .
+<http://catalogus-professorum.org/cpm/OtherOrganisation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Organisation> .
+<http://catalogus-professorum.org/cpm/Party> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Party> <http://www.w3.org/2000/01/rdf-schema#label> "Party"@en .
+<http://catalogus-professorum.org/cpm/Party> <http://www.w3.org/2000/01/rdf-schema#label> "Partei"@de .
+<http://catalogus-professorum.org/cpm/Party> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine politische Partei"@de .
+<http://catalogus-professorum.org/cpm/Party> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a party"@en .
+<http://catalogus-professorum.org/cpm/Party> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 04.12.2009" .
+<http://catalogus-professorum.org/cpm/Party> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Party> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Organisation> .
+<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/2000/01/rdf-schema#label> "Lebensabschnitt"@de .
+<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/2000/01/rdf-schema#label> "Period of Life"@en .
+<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt einen Lebensabschnitt"@de .
+<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a period of life "@en .
+<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/2000/01/rdf-schema#label> "Person"@de .
+<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/2000/01/rdf-schema#label> "Person"@en .
+<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/2000/01/rdf-schema#comment> "Das Konzept beschreibt eine historische Person"@de .
+<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes an historic Person"@en .
+<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Person> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 25.5.2007" .
+<http://catalogus-professorum.org/cpm/PoliticalOrganisation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/PoliticalOrganisation> <http://www.w3.org/2000/01/rdf-schema#label> "Politische Organisation"@de .
+<http://catalogus-professorum.org/cpm/PoliticalOrganisation> <http://www.w3.org/2000/01/rdf-schema#label> "Political Organisation"@en .
+<http://catalogus-professorum.org/cpm/PoliticalOrganisation> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine politische Organisation"@de .
+<http://catalogus-professorum.org/cpm/PoliticalOrganisation> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a politcal Organisation"@en .
+<http://catalogus-professorum.org/cpm/PoliticalOrganisation> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 04.12.2009" .
+<http://catalogus-professorum.org/cpm/PoliticalOrganisation> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/PoliticalOrganisation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Organisation> .
+<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/2000/01/rdf-schema#label> "Professor"@en .
+<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/2000/01/rdf-schema#label> "Professor"@de .
+<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Professor describes a person of profession Professor."@en .
+<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/2000/01/rdf-schema#comment> "Das Konzept Professor beschreibt eine historische Person mit dem Beruf eines Professors"@de .
+<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 is now subclass of Person, moved several attributes to Person - 25.5.2007 0.1 initial creation - 24.05.07" .
+<http://catalogus-professorum.org/cpm/Professor> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/Publication> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Publication> <http://www.w3.org/2000/01/rdf-schema#label> "Publication"@en .
+<http://catalogus-professorum.org/cpm/Publication> <http://www.w3.org/2000/01/rdf-schema#label> "Veröffentlichung"@de .
+<http://catalogus-professorum.org/cpm/Publication> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine Publikation"@de .
+<http://catalogus-professorum.org/cpm/Publication> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a publication"@en .
+<http://catalogus-professorum.org/cpm/Publication> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/Publication> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Publication> <http://www.w3.org/2002/07/owl#versionInfo> "version 0.2  10.03.2008" .
+<http://catalogus-professorum.org/cpm/QualificationPaper> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/QualificationPaper> <http://www.w3.org/2000/01/rdf-schema#label> "Qualifikationsschrift"@de .
+<http://catalogus-professorum.org/cpm/QualificationPaper> <http://www.w3.org/2000/01/rdf-schema#label> "Qualification Paper"@en .
+<http://catalogus-professorum.org/cpm/QualificationPaper> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a qualification paper"@en .
+<http://catalogus-professorum.org/cpm/QualificationPaper> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine Qualifikationsschrift"@de .
+<http://catalogus-professorum.org/cpm/QualificationPaper> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/QualificationPaper> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/QualificationPaper> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/RelationToInstitution> .
+<http://catalogus-professorum.org/cpm/RelationToInstitution> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/RelationToInstitution> <http://www.w3.org/2000/01/rdf-schema#label> "Beziehung zu einer Institution"@de .
+<http://catalogus-professorum.org/cpm/RelationToInstitution> <http://www.w3.org/2000/01/rdf-schema#label> "Relation to an Institution"@en .
+<http://catalogus-professorum.org/cpm/RelationToInstitution> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine Beziehung zu einer Institution"@de .
+<http://catalogus-professorum.org/cpm/RelationToInstitution> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a relation to an institution"@en .
+<http://catalogus-professorum.org/cpm/RelationToInstitution> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/RelationToInstitution> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/RelationToInstitution> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/SocialRole> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/SocialRole> <http://www.w3.org/2000/01/rdf-schema#label> "Social Role"@en .
+<http://catalogus-professorum.org/cpm/SocialRole> <http://www.w3.org/2000/01/rdf-schema#label> "Gesellschaftliche Funktion"@de .
+<http://catalogus-professorum.org/cpm/SocialRole> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a social role"@en .
+<http://catalogus-professorum.org/cpm/SocialRole> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt eine gesellschaftliche Funktion"@de .
+<http://catalogus-professorum.org/cpm/SocialRole> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/SocialRole> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/SocialRole> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/Study> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/Study> <http://www.w3.org/2000/01/rdf-schema#label> "Studium"@de .
+<http://catalogus-professorum.org/cpm/Study> <http://www.w3.org/2000/01/rdf-schema#label> "Study"@en .
+<http://catalogus-professorum.org/cpm/Study> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a study"@en .
+<http://catalogus-professorum.org/cpm/Study> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt ein Studium"@de .
+<http://catalogus-professorum.org/cpm/Study> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/Study> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/Study> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://catalogus-professorum.org/cpm/RelationToInstitution> .
+<http://catalogus-professorum.org/cpm/academyType> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/academyType> <http://www.w3.org/2000/01/rdf-schema#label> "Hochschultyp"@de .
+<http://catalogus-professorum.org/cpm/academyType> <http://www.w3.org/2000/01/rdf-schema#label> "Academy type"@en .
+<http://catalogus-professorum.org/cpm/academyType> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Academy> .
+<http://catalogus-professorum.org/cpm/academyType> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/academyType> <http://www.w3.org/2000/01/rdf-schema#comment> "Describes the academy type in more detail"@en .
+<http://catalogus-professorum.org/cpm/academyType> <http://www.w3.org/2000/01/rdf-schema#comment> "Beschreibt den Typ der Hochschule genauer"@de .
+<http://catalogus-professorum.org/cpm/additionToSurname> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/additionToSurname> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/additionToSurname> <http://www.w3.org/2000/01/rdf-schema#label> "Namenszusatz"@de .
+<http://catalogus-professorum.org/cpm/additionToSurname> <http://www.w3.org/2000/01/rdf-schema#label> "Additions to Surename"@en .
+<http://catalogus-professorum.org/cpm/additionToSurname> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/additionToSurname> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/additionToSurname> <http://www.w3.org/2000/01/rdf-schema#comment> "Namenszusätze sind zum Beispiel von, zu, etc."@de .
+<http://catalogus-professorum.org/cpm/additionToSurname> <http://www.w3.org/2000/01/rdf-schema#comment> "Additions to the surname can be of, etc."@en .
+<http://catalogus-professorum.org/cpm/additionToSurname> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/additionToSurname> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 changed Domain from Professor to Person 0.1 initial creation - 24.05.07" .
+<http://catalogus-professorum.org/cpm/alternativeWritingOfSurname> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/alternativeWritingOfSurname> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/alternativeWritingOfSurname> <http://www.w3.org/2000/01/rdf-schema#label> "Alternative Namensschreibweisen"@de .
+<http://catalogus-professorum.org/cpm/alternativeWritingOfSurname> <http://www.w3.org/2000/01/rdf-schema#label> "Alternative writings of the surname"@en .
+<http://catalogus-professorum.org/cpm/alternativeWritingOfSurname> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/alternativeWritingOfSurname> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/alternativeWritingOfSurname> <http://www.w3.org/2000/01/rdf-schema#comment> "For Example Meier, Meyer, Maier"@en .
+<http://catalogus-professorum.org/cpm/alternativeWritingOfSurname> <http://www.w3.org/2000/01/rdf-schema#comment> "Bsp: Meier, Meyer, Maier"@de .
+<http://catalogus-professorum.org/cpm/alternativeWritingOfSurname> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 under discussion" .
+<http://catalogus-professorum.org/cpm/alternativeWritingOfSurname> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.07" .
+<http://catalogus-professorum.org/cpm/alternativeWritingOfSurname> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 changed Domain from Professor to Person" .
+<http://catalogus-professorum.org/cpm/alternativeWritingOfSurname> <http://ns.ontowiki.net/SysOnt/order> "20" .
+<http://catalogus-professorum.org/cpm/archiveCode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/archiveCode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/archiveCode> <http://www.w3.org/2000/01/rdf-schema#label> "Archivkürzel"@de .
+<http://catalogus-professorum.org/cpm/archiveCode> <http://www.w3.org/2000/01/rdf-schema#label> "Archive Code"@en .
+<http://catalogus-professorum.org/cpm/archiveCode> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Archive> .
+<http://catalogus-professorum.org/cpm/archiveCode> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/archiveCode> <http://www.w3.org/2000/01/rdf-schema#comment> "Describes the code of the archive"@en .
+<http://catalogus-professorum.org/cpm/archiveCode> <http://www.w3.org/2000/01/rdf-schema#comment> "Beschreibt das Kürzel des Archievs"@de .
+<http://catalogus-professorum.org/cpm/archiveCode> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/archiveCode> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 31.03.2008" .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/2000/01/rdf-schema#label> "Birthday"@en .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/2000/01/rdf-schema#label> "Gebrtstag"@de .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gDay> .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gMonth> .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gMonthDay> .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYear> .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYearMonth> .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/2000/01/rdf-schema#comment> "Geburtstag, kann auch nur Jahr oder Monat Jahr sein."@de .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/2000/01/rdf-schema#comment> "Birthday may also birth year or month of the year"@en .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 changed Domain from Professor to Person 0.1 initial creation - 24.05.07" .
+<http://catalogus-professorum.org/cpm/birthDate> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 deprecated, because of new class Birth" .
+<http://catalogus-professorum.org/cpm/birthDate> <http://ns.ontowiki.net/SysOnt/order> "60" .
+<http://catalogus-professorum.org/cpm/birthPlace> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/birthPlace> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/birthPlace> <http://www.w3.org/2000/01/rdf-schema#label> "Geburtsort"@de .
+<http://catalogus-professorum.org/cpm/birthPlace> <http://www.w3.org/2000/01/rdf-schema#label> "Birth place"@en .
+<http://catalogus-professorum.org/cpm/birthPlace> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/birthPlace> <http://www.w3.org/2000/01/rdf-schema#range> <http://ns.aksw.org/spatialHierarchy/SpatialArea> .
+<http://catalogus-professorum.org/cpm/birthPlace> <http://www.w3.org/2000/01/rdf-schema#comment> "Relation to a Birth place, this could be eather a City, a District or a Country"@en .
+<http://catalogus-professorum.org/cpm/birthPlace> <http://www.w3.org/2000/01/rdf-schema#comment> "Beziehung zu einem Geburtsort. Dies kann eine Stadt, eine Verwaltungseinheit oder ein Land sein"@de .
+<http://catalogus-professorum.org/cpm/birthPlace> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 deprecated, because of new class Birth" .
+<http://catalogus-professorum.org/cpm/birthPlace> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 19.01.2010" .
+<http://catalogus-professorum.org/cpm/bodyPlace> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/bodyPlace> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/bodyPlace> <http://www.w3.org/2000/01/rdf-schema#label> "Ort der Körperschaft"@de .
+<http://catalogus-professorum.org/cpm/bodyPlace> <http://www.w3.org/2000/01/rdf-schema#label> "Body place"@en .
+<http://catalogus-professorum.org/cpm/bodyPlace> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/bodyPlace> <http://www.w3.org/2000/01/rdf-schema#range> <http://ns.aksw.org/spatialHierarchy/SpatialArea> .
+<http://catalogus-professorum.org/cpm/bodyPlace> <http://www.w3.org/2000/01/rdf-schema#comment> "Relation to a place of a body, this could be eather a City, a District or a Country"@en .
+<http://catalogus-professorum.org/cpm/bodyPlace> <http://www.w3.org/2000/01/rdf-schema#comment> "Beziehung zu einem Ort einer Körperschaft. Dies kann eine Stadt, eine Verwaltungseinheit oder ein Land sein"@de .
+<http://catalogus-professorum.org/cpm/bodyPlace> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/bodyPlace> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 19.01.2010" .
+<http://catalogus-professorum.org/cpm/cognateBody> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/cognateBody> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/cognateBody> <http://www.w3.org/2000/01/rdf-schema#label> "Verwandte Körperschaft"@de .
+<http://catalogus-professorum.org/cpm/cognateBody> <http://www.w3.org/2000/01/rdf-schema#label> "cognate body"@en .
+<http://catalogus-professorum.org/cpm/cognateBody> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/cognateBody> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/cognateBody> <http://www.w3.org/2000/01/rdf-schema#comment> "verwandte Institutionen (manche Akademien wurden mehrfach umbenannt bzw. aufgelöst und wenig später neu gegründet; diese sollten dann verlinkt werden können) (Related Institutions)" .
+<http://catalogus-professorum.org/cpm/cognateBody> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/cognateBody> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.12.2009" .
+<http://catalogus-professorum.org/cpm/consists-of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/consists-of> <http://www.w3.org/2000/01/rdf-schema#label> "eine Institution besteht aus"@de .
+<http://catalogus-professorum.org/cpm/consists-of> <http://www.w3.org/2000/01/rdf-schema#label> "institution consists of"@en .
+<http://catalogus-professorum.org/cpm/consists-of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/consists-of> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/consists-of> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/consists-of> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/consists-of> <http://www.w3.org/2002/07/owl#inverseOf> <http://catalogus-professorum.org/cpm/is-part-of> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#label> "Date"@en .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#label> "Datum"@de .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#label> "date"@en .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gDay> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gMonth> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gMonthDay> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYear> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYearMonth> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#comment> "The date within a period of life"@en .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#comment> "Zeitpunkt innerhalb eines Lebensabschnitts"@de .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#comment> "0.1 initial creation - 21.11.13"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 initial creation date: 09.09.2013" .
+<http://catalogus-professorum.org/cpm/denomination> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/denomination> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/denomination> <http://www.w3.org/2000/01/rdf-schema#label> "religious denomination"@en .
+<http://catalogus-professorum.org/cpm/denomination> <http://www.w3.org/2000/01/rdf-schema#label> "Konfession"@de .
+<http://catalogus-professorum.org/cpm/denomination> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/denomination> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/denomination> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/denomination> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 changed Domain from Professor to Person" .
+<http://catalogus-professorum.org/cpm/denomination> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/denomination> <http://ns.ontowiki.net/SysOnt/order> "140" .
+<http://catalogus-professorum.org/cpm/dissolved> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/dissolved> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/dissolved> <http://www.w3.org/2000/01/rdf-schema#label> "Auflösungsjahr"@de .
+<http://catalogus-professorum.org/cpm/dissolved> <http://www.w3.org/2000/01/rdf-schema#label> "Dissolved (year)"@en .
+<http://catalogus-professorum.org/cpm/dissolved> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/dissolved> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
+<http://catalogus-professorum.org/cpm/dissolved> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYear> .
+<http://catalogus-professorum.org/cpm/dissolved> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYearMonth> .
+<http://catalogus-professorum.org/cpm/dissolved> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/dissolved> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.12.2009" .
+<http://catalogus-professorum.org/cpm/familyAdoptiveChild> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/familyAdoptiveChild> <http://www.w3.org/2000/01/rdf-schema#label> "Adoptive child"@en .
+<http://catalogus-professorum.org/cpm/familyAdoptiveChild> <http://www.w3.org/2000/01/rdf-schema#label> "Adoptivkind"@de .
+<http://catalogus-professorum.org/cpm/familyAdoptiveChild> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Family> .
+<http://catalogus-professorum.org/cpm/familyAdoptiveChild> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/familyAdoptiveChild> <http://www.w3.org/2000/01/rdf-schema#comment> "A property that adds a adoptive child to a family"@en .
+<http://catalogus-professorum.org/cpm/familyAdoptiveChild> <http://www.w3.org/2000/01/rdf-schema#comment> "Ein Prädikat zur Angabe eines zur Familie gehörenden Adoptivkindes"@de .
+<http://catalogus-professorum.org/cpm/familyAdoptiveChild> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable not often used so far" .
+<http://catalogus-professorum.org/cpm/familyAdoptiveChild> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 19.01.2010" .
+<http://catalogus-professorum.org/cpm/familyChild> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/familyChild> <http://www.w3.org/2000/01/rdf-schema#label> "Kind"@de .
+<http://catalogus-professorum.org/cpm/familyChild> <http://www.w3.org/2000/01/rdf-schema#label> "Child"@en .
+<http://catalogus-professorum.org/cpm/familyChild> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Family> .
+<http://catalogus-professorum.org/cpm/familyChild> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/familyChild> <http://www.w3.org/2000/01/rdf-schema#comment> "Ein Prädikat zur Angabe eines zur Familie gehörenden Kindes"@de .
+<http://catalogus-professorum.org/cpm/familyChild> <http://www.w3.org/2000/01/rdf-schema#comment> "A property that adds a child to a family"@en .
+<http://catalogus-professorum.org/cpm/familyChild> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable not often used so far" .
+<http://catalogus-professorum.org/cpm/familyChild> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 19.01.2010" .
+<http://catalogus-professorum.org/cpm/familyCohabitant> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/familyCohabitant> <http://www.w3.org/2000/01/rdf-schema#label> "Cohabitant"@en .
+<http://catalogus-professorum.org/cpm/familyCohabitant> <http://www.w3.org/2000/01/rdf-schema#label> "Lebenspartner"@de .
+<http://catalogus-professorum.org/cpm/familyCohabitant> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Family> .
+<http://catalogus-professorum.org/cpm/familyCohabitant> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/familyCohabitant> <http://www.w3.org/2000/01/rdf-schema#comment> "Ein Prädikat zur Angabe eines Lebenspartners einer Familie"@de .
+<http://catalogus-professorum.org/cpm/familyCohabitant> <http://www.w3.org/2000/01/rdf-schema#comment> "A proprtery that adds a cohabitant to a family"@en .
+<http://catalogus-professorum.org/cpm/familyCohabitant> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable not often used so far" .
+<http://catalogus-professorum.org/cpm/familyCohabitant> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 19.01.2010" .
+<http://catalogus-professorum.org/cpm/familyFosterChild> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/familyFosterChild> <http://www.w3.org/2000/01/rdf-schema#label> "Foster child"@en .
+<http://catalogus-professorum.org/cpm/familyFosterChild> <http://www.w3.org/2000/01/rdf-schema#label> "Pflegekind"@de .
+<http://catalogus-professorum.org/cpm/familyFosterChild> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Family> .
+<http://catalogus-professorum.org/cpm/familyFosterChild> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/familyFosterChild> <http://www.w3.org/2000/01/rdf-schema#comment> "A property that adds a foster child to a family"@en .
+<http://catalogus-professorum.org/cpm/familyFosterChild> <http://www.w3.org/2000/01/rdf-schema#comment> "Ein Prädikat zur Angabe eines zur Familie gehörenden Pflegekindes"@de .
+<http://catalogus-professorum.org/cpm/familyFosterChild> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable not often used so far" .
+<http://catalogus-professorum.org/cpm/familyFosterChild> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 19.01.2010" .
+<http://catalogus-professorum.org/cpm/familyParent> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/familyParent> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Family> .
+<http://catalogus-professorum.org/cpm/familyParent> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/familyParent> <http://www.w3.org/2000/01/rdf-schema#comment> "A proprtery that adds a parent to a family"@en .
+<http://catalogus-professorum.org/cpm/familyParent> <http://www.w3.org/2000/01/rdf-schema#comment> "Ein Prädikat zur Angabe eines Elternteils einer Familie"@de .
+<http://catalogus-professorum.org/cpm/familyParent> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable not often used so far" .
+<http://catalogus-professorum.org/cpm/familyParent> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 19.01.2010" .
+<http://catalogus-professorum.org/cpm/fatherName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/fatherName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/fatherName> <http://www.w3.org/2000/01/rdf-schema#label> "fathers name"@en .
+<http://catalogus-professorum.org/cpm/fatherName> <http://www.w3.org/2000/01/rdf-schema#label> "Vatersname"@de .
+<http://catalogus-professorum.org/cpm/fatherName> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/fatherName> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/fatherName> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.03.2008" .
+<http://catalogus-professorum.org/cpm/fatherName> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 deprecated use cpm:Family" .
+<http://catalogus-professorum.org/cpm/fatherName> <http://ns.ontowiki.net/SysOnt/order> "190" .
+<http://catalogus-professorum.org/cpm/fatherProfession> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/fatherProfession> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/fatherProfession> <http://www.w3.org/2000/01/rdf-schema#label> "Beruf des Vaters"@de .
+<http://catalogus-professorum.org/cpm/fatherProfession> <http://www.w3.org/2000/01/rdf-schema#label> "fathers profession"@en .
+<http://catalogus-professorum.org/cpm/fatherProfession> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/fatherProfession> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/fatherProfession> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/fatherProfession> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.03.2008" .
+<http://catalogus-professorum.org/cpm/fatherProfession> <http://ns.ontowiki.net/SysOnt/order> "210" .
+<http://catalogus-professorum.org/cpm/forenamePosition> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/forenamePosition> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/forenamePosition> <http://www.w3.org/2000/01/rdf-schema#label> "Position des Vornamens"@de .
+<http://catalogus-professorum.org/cpm/forenamePosition> <http://www.w3.org/2000/01/rdf-schema#label> "forename - position"@en .
+<http://catalogus-professorum.org/cpm/forenamePosition> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Forename> .
+<http://catalogus-professorum.org/cpm/forenamePosition> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#int> .
+<http://catalogus-professorum.org/cpm/forenamePosition> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/forenamePosition> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/founded> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/founded> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/founded> <http://www.w3.org/2000/01/rdf-schema#label> "Gründungsjahr"@de .
+<http://catalogus-professorum.org/cpm/founded> <http://www.w3.org/2000/01/rdf-schema#label> "founded (year)"@en .
+<http://catalogus-professorum.org/cpm/founded> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/founded> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
+<http://catalogus-professorum.org/cpm/founded> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYear> .
+<http://catalogus-professorum.org/cpm/founded> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYearMonth> .
+<http://catalogus-professorum.org/cpm/founded> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/founded> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.12.2009" .
+<http://catalogus-professorum.org/cpm/from> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/from> <http://www.w3.org/2000/01/rdf-schema#label> "From"@en .
+<http://catalogus-professorum.org/cpm/from> <http://www.w3.org/2000/01/rdf-schema#label> "Von"@de .
+<http://catalogus-professorum.org/cpm/from> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/from> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
+<http://catalogus-professorum.org/cpm/from> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gDay> .
+<http://catalogus-professorum.org/cpm/from> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gMonth> .
+<http://catalogus-professorum.org/cpm/from> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gMonthDay> .
+<http://catalogus-professorum.org/cpm/from> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYear> .
+<http://catalogus-professorum.org/cpm/from> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYearMonth> .
+<http://catalogus-professorum.org/cpm/from> <http://www.w3.org/2000/01/rdf-schema#comment> "Das Startdatum eines Lebensabschnitts"@de .
+<http://catalogus-professorum.org/cpm/from> <http://www.w3.org/2000/01/rdf-schema#comment> "The date of the beginning of a period of life"@en .
+<http://catalogus-professorum.org/cpm/from> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date:  24.05.2007" .
+<http://catalogus-professorum.org/cpm/from> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable other types added" .
+<http://catalogus-professorum.org/cpm/fullAcademicalTitle> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/fullAcademicalTitle> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/fullAcademicalTitle> <http://www.w3.org/2000/01/rdf-schema#label> "voller akademischer Titel"@de .
+<http://catalogus-professorum.org/cpm/fullAcademicalTitle> <http://www.w3.org/2000/01/rdf-schema#label> "full academical title"@en .
+<http://catalogus-professorum.org/cpm/fullAcademicalTitle> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Professor> .
+<http://catalogus-professorum.org/cpm/fullAcademicalTitle> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/fullAcademicalTitle> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/fullAcademicalTitle> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/fullAcademicalTitle> <http://ns.ontowiki.net/SysOnt/order> "30" .
+<http://catalogus-professorum.org/cpm/functionInOrganisation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/functionInOrganisation> <http://www.w3.org/2000/01/rdf-schema#label> "function in organisation"@en .
+<http://catalogus-professorum.org/cpm/functionInOrganisation> <http://www.w3.org/2000/01/rdf-schema#label> "Funktion in der Organisation"@de .
+<http://catalogus-professorum.org/cpm/functionInOrganisation> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/SocialRole> .
+<http://catalogus-professorum.org/cpm/functionInOrganisation> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/functionInOrganisation> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/functionInOrganisation> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 changed to DatatypeProperty - 13.11.07 by TR" .
+<http://catalogus-professorum.org/cpm/functionInOrganisation> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 25.05.2007" .
+<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#label> "weitere Informationen"@de .
+<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#label> "further information"@en .
+<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/furtherInformation> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 28.06.2007" .
+<http://catalogus-professorum.org/cpm/furtherInformation> <http://ns.ontowiki.net/SysOnt/order> "340" .
+<http://catalogus-professorum.org/cpm/gender> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/gender> <http://www.w3.org/2000/01/rdf-schema#label> "Gender"@en .
+<http://catalogus-professorum.org/cpm/gender> <http://www.w3.org/2000/01/rdf-schema#label> "Geschlecht"@de .
+<http://catalogus-professorum.org/cpm/gender> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/gender> <http://www.w3.org/2000/01/rdf-schema#comment> "Das Geschlecht einer Person"@de .
+<http://catalogus-professorum.org/cpm/gender> <http://www.w3.org/2000/01/rdf-schema#comment> "Important to get family relations lie mother and father" .
+<http://catalogus-professorum.org/cpm/gender> <http://www.w3.org/2000/01/rdf-schema#comment> "Gender of a person"@en .
+<http://catalogus-professorum.org/cpm/gender> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/gender> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 19.01.2009" .
+<http://catalogus-professorum.org/cpm/graduationSchool> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/graduationSchool> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/graduationSchool> <http://www.w3.org/2000/01/rdf-schema#label> "Abitur Schule"@de .
+<http://catalogus-professorum.org/cpm/graduationSchool> <http://www.w3.org/2000/01/rdf-schema#label> "graduation school"@en .
+<http://catalogus-professorum.org/cpm/graduationSchool> <http://www.w3.org/2000/01/rdf-schema#label> "the school where the professor graduatet for university"@en .
+<http://catalogus-professorum.org/cpm/graduationSchool> <http://www.w3.org/2000/01/rdf-schema#label> "Schule an der das Abitur abgelegt wurde"@de .
+<http://catalogus-professorum.org/cpm/graduationSchool> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Professor> .
+<http://catalogus-professorum.org/cpm/graduationSchool> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/graduationSchool> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/graduationSchool> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 deprecated use Class GraduationSchool" .
+<http://catalogus-professorum.org/cpm/graduationSchool> <http://ns.ontowiki.net/SysOnt/order> "280" .
+<http://catalogus-professorum.org/cpm/graduationType> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/graduationType> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/graduationType> <http://www.w3.org/2000/01/rdf-schema#label> "graduation type"@en .
+<http://catalogus-professorum.org/cpm/graduationType> <http://www.w3.org/2000/01/rdf-schema#label> "Abitur Schulart"@de .
+<http://catalogus-professorum.org/cpm/graduationType> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Graduation> .
+<http://catalogus-professorum.org/cpm/graduationType> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/graduationType> <http://www.w3.org/2000/01/rdf-schema#comment> "Bsp: Gymnasium, etc." .
+<http://catalogus-professorum.org/cpm/graduationType> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/graduationType> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/graduationType> <http://ns.ontowiki.net/SysOnt/order> "290" .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/2000/01/rdf-schema#label> "Abitur Jahr"@de .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/2000/01/rdf-schema#label> "Jahr in dem der Professor das Abitur gemacht hat."@de .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/2000/01/rdf-schema#label> "The year the professor graduatet to university."@en .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/2000/01/rdf-schema#label> "graduation year"@en .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Professor> .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gDay> .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gMonth> .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gMonthDay> .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYear> .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYearMonth> .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 deprecated use Class GraduationSchool" .
+<http://catalogus-professorum.org/cpm/graduationYear> <http://ns.ontowiki.net/SysOnt/order> "270" .
+<http://catalogus-professorum.org/cpm/has-forename> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/has-forename> <http://www.w3.org/2000/01/rdf-schema#label> "a person has forenames"@en .
+<http://catalogus-professorum.org/cpm/has-forename> <http://www.w3.org/2000/01/rdf-schema#label> "eine Person hat Vornamen"@de .
+<http://catalogus-professorum.org/cpm/has-forename> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/has-forename> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Forename> .
+<http://catalogus-professorum.org/cpm/has-forename> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/has-forename> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/has-forename> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 domain changed to Person - 18.01.2010 by Thomas Riechert" .
+<http://catalogus-professorum.org/cpm/has-forename> <http://ns.ontowiki.net/SysOnt/order> "40" .
+<http://catalogus-professorum.org/cpm/has-period> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/has-period> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/has-period> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/has-period> <http://www.w3.org/2000/01/rdf-schema#comment> "This property connects a person to their period of life"@en .
+<http://catalogus-professorum.org/cpm/has-period> <http://www.w3.org/2000/01/rdf-schema#comment> "Ein Prädikat, das einer Person einen Lebensabschnitt zuordnet"@de .
+<http://catalogus-professorum.org/cpm/has-period> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 change to professor - 14.02.2008" .
+<http://catalogus-professorum.org/cpm/has-period> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date:  24.05.2007" .
+<http://catalogus-professorum.org/cpm/has-period> <http://www.w3.org/2002/07/owl#versionInfo> "0.3 changed back to person - 17.03.2008" .
+<http://catalogus-professorum.org/cpm/has-period> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable changed from has-periods to has-period on 09.09.2013" .
+<http://catalogus-professorum.org/cpm/has-tutor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/has-tutor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/has-tutor> <http://www.w3.org/2000/01/rdf-schema#label> "Betreuer"@de .
+<http://catalogus-professorum.org/cpm/has-tutor> <http://www.w3.org/2000/01/rdf-schema#label> "tutor"@en .
+<http://catalogus-professorum.org/cpm/has-tutor> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/QualificationPaper> .
+<http://catalogus-professorum.org/cpm/has-tutor> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/has-tutor> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/has-tutor> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/has-tutor> <http://www.w3.org/2002/07/owl#inverseOf> <http://catalogus-professorum.org/cpm/is-tutor> .
+<http://catalogus-professorum.org/cpm/hasFamilyRelation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/hasFamilyRelation> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/hasFamilyRelation> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Family> .
+<http://catalogus-professorum.org/cpm/hasFamilyRelation> <http://www.w3.org/2000/01/rdf-schema#comment> "This property connects a person to a family"@en .
+<http://catalogus-professorum.org/cpm/hasFamilyRelation> <http://www.w3.org/2000/01/rdf-schema#comment> "Ein Prädikat, das einer Person eine Familie zuordnet"@de .
+<http://catalogus-professorum.org/cpm/hasFamilyRelation> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable not often used so far" .
+<http://catalogus-professorum.org/cpm/hasFamilyRelation> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 19.01.2010" .
+<http://catalogus-professorum.org/cpm/hasFamilyRelation> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://catalogus-professorum.org/cpm/has-period> .
+<http://catalogus-professorum.org/cpm/homeCity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/homeCity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/homeCity> <http://www.w3.org/2000/01/rdf-schema#label> "Ort"@de .
+<http://catalogus-professorum.org/cpm/homeCity> <http://www.w3.org/2000/01/rdf-schema#label> "city"@en .
+<http://catalogus-professorum.org/cpm/homeCity> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Home> .
+<http://catalogus-professorum.org/cpm/homeCity> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/homeCity> <http://www.w3.org/2000/01/rdf-schema#comment> "Stadt in der die Wohnung liegt, NICHT Heimatstadt!" .
+<http://catalogus-professorum.org/cpm/homeCity> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/homeCity> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 deprecated use Class periodPlace" .
+<http://catalogus-professorum.org/cpm/homeFloor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/homeFloor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/homeFloor> <http://www.w3.org/2000/01/rdf-schema#label> "Stockwerk, Etage"@de .
+<http://catalogus-professorum.org/cpm/homeFloor> <http://www.w3.org/2000/01/rdf-schema#label> "floor"@en .
+<http://catalogus-professorum.org/cpm/homeFloor> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Home> .
+<http://catalogus-professorum.org/cpm/homeFloor> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/homeFloor> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/homeFloor> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/homeQuarter> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/homeQuarter> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/homeQuarter> <http://www.w3.org/2000/01/rdf-schema#label> "Stadtviertel, Viertel"@en .
+<http://catalogus-professorum.org/cpm/homeQuarter> <http://www.w3.org/2000/01/rdf-schema#label> "quarter, district"@en .
+<http://catalogus-professorum.org/cpm/homeQuarter> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Home> .
+<http://catalogus-professorum.org/cpm/homeQuarter> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/homeQuarter> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/homeQuarter> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/homeStreet> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/homeStreet> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/homeStreet> <http://www.w3.org/2000/01/rdf-schema#label> "Strasse"@de .
+<http://catalogus-professorum.org/cpm/homeStreet> <http://www.w3.org/2000/01/rdf-schema#label> "street"@en .
+<http://catalogus-professorum.org/cpm/homeStreet> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Home> .
+<http://catalogus-professorum.org/cpm/homeStreet> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/homeStreet> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/homeStreet> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/incomeAmount> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/incomeAmount> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/incomeAmount> <http://www.w3.org/2000/01/rdf-schema#label> "Einkommen - Höhe, Betrag"@de .
+<http://catalogus-professorum.org/cpm/incomeAmount> <http://www.w3.org/2000/01/rdf-schema#label> "income - amount"@en .
+<http://catalogus-professorum.org/cpm/incomeAmount> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/incomeAmount> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#int> .
+<http://catalogus-professorum.org/cpm/incomeAmount> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/incomeAmount> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable domain moved from Income to PeriodOfLife" .
+<http://catalogus-professorum.org/cpm/incomeCurrency> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/incomeCurrency> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/incomeCurrency> <http://www.w3.org/2000/01/rdf-schema#label> "income - currency"@en .
+<http://catalogus-professorum.org/cpm/incomeCurrency> <http://www.w3.org/2000/01/rdf-schema#label> "Einkommen - Währung"@de .
+<http://catalogus-professorum.org/cpm/incomeCurrency> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/incomeCurrency> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/incomeCurrency> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/incomeCurrency> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable domain moved from Income to PeriodOfLife" .
+<http://catalogus-professorum.org/cpm/incomeReference> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/incomeReference> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/incomeReference> <http://www.w3.org/2000/01/rdf-schema#label> "income - reference"@en .
+<http://catalogus-professorum.org/cpm/incomeReference> <http://www.w3.org/2000/01/rdf-schema#label> "Einkommen - Quelle"@de .
+<http://catalogus-professorum.org/cpm/incomeReference> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/incomeReference> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/incomeReference> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/incomeReference> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable domain moved from Income to PeriodOfLife" .
+<http://catalogus-professorum.org/cpm/institutionName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/institutionName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/institutionName> <http://www.w3.org/2000/01/rdf-schema#label> "name of the institution"@en .
+<http://catalogus-professorum.org/cpm/institutionName> <http://www.w3.org/2000/01/rdf-schema#label> "Name der Institution"@de .
+<http://catalogus-professorum.org/cpm/institutionName> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Institution> .
+<http://catalogus-professorum.org/cpm/institutionName> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/institutionName> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/institutionName> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 deprecated use rdfs:Label" .
+<http://catalogus-professorum.org/cpm/is-part-of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/is-part-of> <http://www.w3.org/2000/01/rdf-schema#label> "eine Institution gehört zu"@de .
+<http://catalogus-professorum.org/cpm/is-part-of> <http://www.w3.org/2000/01/rdf-schema#label> "an institution is part of"@en .
+<http://catalogus-professorum.org/cpm/is-part-of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/is-part-of> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/is-part-of> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/is-part-of> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/is-part-of> <http://www.w3.org/2002/07/owl#inverseOf> <http://catalogus-professorum.org/cpm/consists-of> .
+<http://catalogus-professorum.org/cpm/is-related-to> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/is-related-to> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#SymmetricProperty> .
+<http://catalogus-professorum.org/cpm/is-related-to> <http://www.w3.org/2000/01/rdf-schema#label> "person is related to"@en .
+<http://catalogus-professorum.org/cpm/is-related-to> <http://www.w3.org/2000/01/rdf-schema#label> "Person ist steht in Beziehung mit"@de .
+<http://catalogus-professorum.org/cpm/is-related-to> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/is-related-to> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/is-related-to> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/is-related-to> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 depricated use cpm:relationship 09.09.2013" .
+<http://catalogus-professorum.org/cpm/is-related-to> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 changed Domain from Professor to Person, changed Range from Relative to Person" .
+<http://catalogus-professorum.org/cpm/is-related-to> <http://www.w3.org/2002/07/owl#inverseOf> <http://catalogus-professorum.org/cpm/is-related-to> .
+<http://catalogus-professorum.org/cpm/is-related-to> <http://ns.ontowiki.net/SysOnt/order> "250" .
+<http://catalogus-professorum.org/cpm/is-tutor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/is-tutor> <http://www.w3.org/2000/01/rdf-schema#label> "ist Betreuer"@de .
+<http://catalogus-professorum.org/cpm/is-tutor> <http://www.w3.org/2000/01/rdf-schema#label> "is tutor"@en .
+<http://catalogus-professorum.org/cpm/is-tutor> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/is-tutor> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/QualificationPaper> .
+<http://catalogus-professorum.org/cpm/is-tutor> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/is-tutor> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 26.06.2007" .
+<http://catalogus-professorum.org/cpm/is-tutor> <http://www.w3.org/2002/07/owl#inverseOf> <http://catalogus-professorum.org/cpm/has-tutor> .
+<http://catalogus-professorum.org/cpm/is-tutor> <http://ns.ontowiki.net/SysOnt/order> "330" .
+<http://catalogus-professorum.org/cpm/isFirstName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/isFirstName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/isFirstName> <http://www.w3.org/2000/01/rdf-schema#label> "ist Rufname?"@de .
+<http://catalogus-professorum.org/cpm/isFirstName> <http://www.w3.org/2000/01/rdf-schema#label> "is first name?"@en .
+<http://catalogus-professorum.org/cpm/isFirstName> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Forename> .
+<http://catalogus-professorum.org/cpm/isFirstName> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#boolean> .
+<http://catalogus-professorum.org/cpm/isFirstName> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/isFirstName> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/lectureLink> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/lectureLink> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/lectureLink> <http://www.w3.org/2000/01/rdf-schema#label> "Lectures"@en .
+<http://catalogus-professorum.org/cpm/lectureLink> <http://www.w3.org/2000/01/rdf-schema#label> "Vorlesungen"@de .
+<http://catalogus-professorum.org/cpm/lectureLink> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/lectureLink> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/lectureLink> <http://www.w3.org/2000/01/rdf-schema#comment> "This property is used for links to Lectures. The main use is to link into http://histvv.uni-leipzig.de/." .
+<http://catalogus-professorum.org/cpm/lectureLink> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/lectureLink> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/lectureLink> <http://ns.ontowiki.net/SysOnt/order> "186" .
+<http://catalogus-professorum.org/cpm/literature> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/literature> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/literature> <http://www.w3.org/2000/01/rdf-schema#label> "biographical, autobiographical literature"@en .
+<http://catalogus-professorum.org/cpm/literature> <http://www.w3.org/2000/01/rdf-schema#label> "biographische, autobiograhpische Literatur"@de .
+<http://catalogus-professorum.org/cpm/literature> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/literature> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/literature> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/literature> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 28.06.2007" .
+<http://catalogus-professorum.org/cpm/literature> <http://ns.ontowiki.net/SysOnt/order> "260" .
+<http://catalogus-professorum.org/cpm/locatedAtCity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/locatedAtCity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/locatedAtCity> <http://www.w3.org/2000/01/rdf-schema#label> "Ort"@de .
+<http://catalogus-professorum.org/cpm/locatedAtCity> <http://www.w3.org/2000/01/rdf-schema#label> "Bsp: Leipzig, München"@de .
+<http://catalogus-professorum.org/cpm/locatedAtCity> <http://www.w3.org/2000/01/rdf-schema#label> "is located at City"@en .
+<http://catalogus-professorum.org/cpm/locatedAtCity> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/locatedAtCity> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/locatedAtCity> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.12.2009" .
+<http://catalogus-professorum.org/cpm/locatedAtCity> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 deprecated use cpm:bodyPlace" .
+<http://catalogus-professorum.org/cpm/locatedAtCountry> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/locatedAtCountry> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/locatedAtCountry> <http://www.w3.org/2000/01/rdf-schema#label> "Bsp: Deutschland, England"@de .
+<http://catalogus-professorum.org/cpm/locatedAtCountry> <http://www.w3.org/2000/01/rdf-schema#label> "is located at Country"@en .
+<http://catalogus-professorum.org/cpm/locatedAtCountry> <http://www.w3.org/2000/01/rdf-schema#label> "Land"@de .
+<http://catalogus-professorum.org/cpm/locatedAtCountry> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/locatedAtCountry> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/locatedAtCountry> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.12.2009" .
+<http://catalogus-professorum.org/cpm/locatedAtCountry> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 deprecated use cpm:bodyPlace" .
+<http://catalogus-professorum.org/cpm/membership> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/membership> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/membership> <http://www.w3.org/2000/01/rdf-schema#label> "membership"@en .
+<http://catalogus-professorum.org/cpm/membership> <http://www.w3.org/2000/01/rdf-schema#label> "Mitgliedschaft"@de .
+<http://catalogus-professorum.org/cpm/membership> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/membership> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/membership> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/membership> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 11.12.2009; replaces prof-has-to-do-with" .
+<http://catalogus-professorum.org/cpm/motherName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/motherName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/motherName> <http://www.w3.org/2000/01/rdf-schema#label> "mothers name"@en .
+<http://catalogus-professorum.org/cpm/motherName> <http://www.w3.org/2000/01/rdf-schema#label> "Mutters Name"@de .
+<http://catalogus-professorum.org/cpm/motherName> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/motherName> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/motherName> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.03.2008" .
+<http://catalogus-professorum.org/cpm/motherName> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 deprecated use cpm:Family" .
+<http://catalogus-professorum.org/cpm/motherName> <http://ns.ontowiki.net/SysOnt/order> "220" .
+<http://catalogus-professorum.org/cpm/motherProfession> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/motherProfession> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/motherProfession> <http://www.w3.org/2000/01/rdf-schema#label> "mothers profession"@en .
+<http://catalogus-professorum.org/cpm/motherProfession> <http://www.w3.org/2000/01/rdf-schema#label> "Beruf der Mutter"@de .
+<http://catalogus-professorum.org/cpm/motherProfession> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/motherProfession> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/motherProfession> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/motherProfession> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.03.2008" .
+<http://catalogus-professorum.org/cpm/motherProfession> <http://ns.ontowiki.net/SysOnt/order> "240" .
+<http://catalogus-professorum.org/cpm/note> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/note> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/note> <http://www.w3.org/2000/01/rdf-schema#label> "note"@en .
+<http://catalogus-professorum.org/cpm/note> <http://www.w3.org/2000/01/rdf-schema#label> "Vermerk, Hinweis"@de .
+<http://catalogus-professorum.org/cpm/note> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/note> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/note> <http://www.w3.org/2000/01/rdf-schema#comment> "zusätzliche Informationen die nirgends sonst eingetragen werden können"@de .
+<http://catalogus-professorum.org/cpm/note> <http://www.w3.org/2000/01/rdf-schema#comment> "additional information that does not fit elsewhere"@en .
+<http://catalogus-professorum.org/cpm/note> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/note> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 changed Domain from Professor to Person" .
+<http://catalogus-professorum.org/cpm/note> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/note> <http://ns.ontowiki.net/SysOnt/order> "390" .
+<http://catalogus-professorum.org/cpm/officeName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/officeName> <http://www.w3.org/2000/01/rdf-schema#label> "Name des Amtes"@de .
+<http://catalogus-professorum.org/cpm/officeName> <http://www.w3.org/2000/01/rdf-schema#label> "name of the office"@en .
+<http://catalogus-professorum.org/cpm/officeName> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Office> .
+<http://catalogus-professorum.org/cpm/officeName> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/officeName> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/officeName> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 deprecated use rdfs:Label" .
+<http://catalogus-professorum.org/cpm/officeName> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 changed to DatatypeProperty - 13.11.07 by TR" .
+<http://catalogus-professorum.org/cpm/organisationName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/organisationName> <http://www.w3.org/2000/01/rdf-schema#label> "Name of organisation"@en .
+<http://catalogus-professorum.org/cpm/organisationName> <http://www.w3.org/2000/01/rdf-schema#label> "Organisationsname"@de .
+<http://catalogus-professorum.org/cpm/organisationName> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/SocialRole> .
+<http://catalogus-professorum.org/cpm/organisationName> <http://www.w3.org/2000/01/rdf-schema#comment> "Name of the organisation"@en .
+<http://catalogus-professorum.org/cpm/organisationName> <http://www.w3.org/2000/01/rdf-schema#comment> "Der Name der Organisation"@de .
+<http://catalogus-professorum.org/cpm/organisationName> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/organisationName> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 under discussion" .
+<http://catalogus-professorum.org/cpm/periodNote> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/periodNote> <http://www.w3.org/2000/01/rdf-schema#label> "Bemerkung"@de .
+<http://catalogus-professorum.org/cpm/periodNote> <http://www.w3.org/2000/01/rdf-schema#label> "Notes"@en .
+<http://catalogus-professorum.org/cpm/periodNote> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/periodNote> <http://www.w3.org/2000/01/rdf-schema#comment> "Bemerkungen zu einem Lebensabschnitt"@de .
+<http://catalogus-professorum.org/cpm/periodNote> <http://www.w3.org/2000/01/rdf-schema#comment> "Notes about period of life"@en .
+<http://catalogus-professorum.org/cpm/periodNote> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/periodNote> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date:  31.03.2008" .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/2000/01/rdf-schema#label> "Ort des Lebensabschnitts"@de .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/2000/01/rdf-schema#label> "Period place"@en .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/2000/01/rdf-schema#range> <http://ns.aksw.org/spatialHierarchy/SpatialArea> .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/2000/01/rdf-schema#comment> "Relation to a place of a period of life, this could be eather a City, a District or a Country"@en .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/2000/01/rdf-schema#comment> "Beziehung zu einem Ort eines Lebensabschnitts. Dies kann eine Stadt, eine Verwaltungseinheit oder ein Land sein"@de .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 initial creation - 09.09.2013, stable" .
+<http://catalogus-professorum.org/cpm/personalNumber> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/personalNumber> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/personalNumber> <http://www.w3.org/2000/01/rdf-schema#label> "Personalnummer"@de .
+<http://catalogus-professorum.org/cpm/personalNumber> <http://www.w3.org/2000/01/rdf-schema#label> "personal number"@en .
+<http://catalogus-professorum.org/cpm/personalNumber> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/personalNumber> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#int> .
+<http://catalogus-professorum.org/cpm/personalNumber> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/personalNumber> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable changed from cpm:pnNo to cpm:personalNumber on 09.09.2013" .
+<http://catalogus-professorum.org/cpm/picture> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/picture> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/picture> <http://www.w3.org/2000/01/rdf-schema#label> "Bild"@de .
+<http://catalogus-professorum.org/cpm/picture> <http://www.w3.org/2000/01/rdf-schema#label> "picture"@en .
+<http://catalogus-professorum.org/cpm/picture> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/picture> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/picture> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/picture> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/picture> <http://ns.ontowiki.net/SysOnt/order> "150" .
+<http://catalogus-professorum.org/cpm/pictureArchive> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/pictureArchive> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/pictureArchive> <http://www.w3.org/2000/01/rdf-schema#label> "picture archive"@en .
+<http://catalogus-professorum.org/cpm/pictureArchive> <http://www.w3.org/2000/01/rdf-schema#label> "Bildherkunft"@de .
+<http://catalogus-professorum.org/cpm/pictureArchive> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/pictureArchive> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Archive> .
+<http://catalogus-professorum.org/cpm/pictureArchive> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/pictureArchive> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 changed - 31.03.08" .
+<http://catalogus-professorum.org/cpm/pictureArchive> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.03.2008; replaces prof-has-to-do-with" .
+<http://catalogus-professorum.org/cpm/pictureArchive> <http://ns.ontowiki.net/SysOnt/order> "160" .
+<http://catalogus-professorum.org/cpm/pictureCredits> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/pictureCredits> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/pictureCredits> <http://www.w3.org/2000/01/rdf-schema#label> "Bildnachweis"@de .
+<http://catalogus-professorum.org/cpm/pictureCredits> <http://www.w3.org/2000/01/rdf-schema#label> "picture credits"@en .
+<http://catalogus-professorum.org/cpm/pictureCredits> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/pictureCredits> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/pictureCredits> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/pictureCredits> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/pictureCredits> <http://ns.ontowiki.net/SysOnt/order> "180" .
+<http://catalogus-professorum.org/cpm/pictureKey> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/pictureKey> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/pictureKey> <http://www.w3.org/2000/01/rdf-schema#label> "picture key"@en .
+<http://catalogus-professorum.org/cpm/pictureKey> <http://www.w3.org/2000/01/rdf-schema#label> "Bildnummer"@de .
+<http://catalogus-professorum.org/cpm/pictureKey> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/pictureKey> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/pictureKey> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/pictureKey> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.03.2008" .
+<http://catalogus-professorum.org/cpm/pictureKey> <http://ns.ontowiki.net/SysOnt/order> "170" .
+<http://catalogus-professorum.org/cpm/pictureOthers> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/pictureOthers> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/pictureOthers> <http://www.w3.org/2000/01/rdf-schema#label> "Hinweise auf weitere Bilder"@de .
+<http://catalogus-professorum.org/cpm/pictureOthers> <http://www.w3.org/2000/01/rdf-schema#label> "other picture"@en .
+<http://catalogus-professorum.org/cpm/pictureOthers> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/pictureOthers> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/pictureOthers> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/pictureOthers> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.03.2008" .
+<http://catalogus-professorum.org/cpm/pid> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/pid> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/pid> <http://www.w3.org/2000/01/rdf-schema#label> "Person ID"@de .
+<http://catalogus-professorum.org/cpm/pid> <http://www.w3.org/2000/01/rdf-schema#label> "person id"@en .
+<http://catalogus-professorum.org/cpm/pid> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/pid> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#int> .
+<http://catalogus-professorum.org/cpm/pid> <http://www.w3.org/2000/01/rdf-schema#comment> "kuenstliche ID als Primaerschluessel fuer Person. Sollte automatisch erstellt werden."@de .
+<http://catalogus-professorum.org/cpm/pid> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/pid> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 25.05.2007" .
+<http://catalogus-professorum.org/cpm/pid> <http://ns.ontowiki.net/SysOnt/order> "50" .
+<http://catalogus-professorum.org/cpm/pnd> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/pnd> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/pnd> <http://www.w3.org/2000/01/rdf-schema#label> "PND"@en .
+<http://catalogus-professorum.org/cpm/pnd> <http://www.w3.org/2000/01/rdf-schema#label> "PND"@de .
+<http://catalogus-professorum.org/cpm/pnd> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/pnd> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/pnd> <http://www.w3.org/2000/01/rdf-schema#comment> "Personennamendatei" .
+<http://catalogus-professorum.org/cpm/pnd> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/pnd> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.03.2008" .
+<http://catalogus-professorum.org/cpm/pnd> <http://ns.ontowiki.net/SysOnt/order> "370" .
+<http://catalogus-professorum.org/cpm/prof-has-to-do-with> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/prof-has-to-do-with> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/prof-has-to-do-with> <http://www.w3.org/2000/01/rdf-schema#label> "period has to do with institution"@en .
+<http://catalogus-professorum.org/cpm/prof-has-to-do-with> <http://www.w3.org/2000/01/rdf-schema#label> "Lebensabschnitt hat mit einer Institution zu tun"@de .
+<http://catalogus-professorum.org/cpm/prof-has-to-do-with> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/RelationToInstitution> .
+<http://catalogus-professorum.org/cpm/prof-has-to-do-with> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Institution> .
+<http://catalogus-professorum.org/cpm/prof-has-to-do-with> <http://www.w3.org/2000/01/rdf-schema#comment> "0.1 initial creation - 24.05.07" .
+<http://catalogus-professorum.org/cpm/prof-has-to-do-with> <http://www.w3.org/2000/01/rdf-schema#comment> "0.2 deprecated 10.03.2008 replaced by cpm:membership" .
+<http://catalogus-professorum.org/cpm/profession> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/profession> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/profession> <http://www.w3.org/2000/01/rdf-schema#label> "Beruf"@de .
+<http://catalogus-professorum.org/cpm/profession> <http://www.w3.org/2000/01/rdf-schema#label> "Profession"@en .
+<http://catalogus-professorum.org/cpm/profession> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/profession> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/profession> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/profession> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 12.02.2010" .
+<http://catalogus-professorum.org/cpm/publicationReference> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/publicationReference> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/publicationReference> <http://www.w3.org/2000/01/rdf-schema#label> "publication reference"@en .
+<http://catalogus-professorum.org/cpm/publicationReference> <http://www.w3.org/2000/01/rdf-schema#label> "Veröffentlichung Quellenangabe"@de .
+<http://catalogus-professorum.org/cpm/publicationReference> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Publication> .
+<http://catalogus-professorum.org/cpm/publicationReference> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/publicationReference> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/publicationReference> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 25.05.2007" .
+<http://catalogus-professorum.org/cpm/published> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/published> <http://www.w3.org/2000/01/rdf-schema#label> "published"@en .
+<http://catalogus-professorum.org/cpm/published> <http://www.w3.org/2000/01/rdf-schema#label> "veröffentlicht"@de .
+<http://catalogus-professorum.org/cpm/published> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Professor> .
+<http://catalogus-professorum.org/cpm/published> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Publication> .
+<http://catalogus-professorum.org/cpm/published> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/published> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 25.05.2007" .
+<http://catalogus-professorum.org/cpm/qualificationPaperAcademicalTitle> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/qualificationPaperAcademicalTitle> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/qualificationPaperAcademicalTitle> <http://www.w3.org/2000/01/rdf-schema#label> "Qualifikationsschrift - akademischer Titel"@de .
+<http://catalogus-professorum.org/cpm/qualificationPaperAcademicalTitle> <http://www.w3.org/2000/01/rdf-schema#label> "qualificationpaper academical title"@en .
+<http://catalogus-professorum.org/cpm/qualificationPaperAcademicalTitle> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/QualificationPaper> .
+<http://catalogus-professorum.org/cpm/qualificationPaperAcademicalTitle> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/qualificationPaperAcademicalTitle> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/qualificationPaperAcademicalTitle> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable changed from bodyPlaceom qualiPaperAcademicalTitle to qualificationPaperAcademicalTitle on 09.09.2013" .
+<http://catalogus-professorum.org/cpm/qualificationPaperSubject> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/qualificationPaperSubject> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/qualificationPaperSubject> <http://www.w3.org/2000/01/rdf-schema#label> "Qualifikationsschrift - Fach"@de .
+<http://catalogus-professorum.org/cpm/qualificationPaperSubject> <http://www.w3.org/2000/01/rdf-schema#label> "qualification paper - subject"@en .
+<http://catalogus-professorum.org/cpm/qualificationPaperSubject> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/QualificationPaper> .
+<http://catalogus-professorum.org/cpm/qualificationPaperSubject> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/qualificationPaperSubject> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/qualificationPaperSubject> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable changed from qualiPaperSubject to qualificationPaperSubject on 09.09.2013" .
+<http://catalogus-professorum.org/cpm/qualificationPaperTitle> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/qualificationPaperTitle> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/qualificationPaperTitle> <http://www.w3.org/2000/01/rdf-schema#label> "title of qualificationpaper"@en .
+<http://catalogus-professorum.org/cpm/qualificationPaperTitle> <http://www.w3.org/2000/01/rdf-schema#label> "Titel der Qualifikationsschrift"@de .
+<http://catalogus-professorum.org/cpm/qualificationPaperTitle> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/QualificationPaper> .
+<http://catalogus-professorum.org/cpm/qualificationPaperTitle> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/qualificationPaperTitle> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/qualificationPaperTitle> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable changed from qualiPaperTitle to qualificationPaperTitle on 09.09.2013" .
+<http://catalogus-professorum.org/cpm/qualificationPaperType> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/qualificationPaperType> <http://www.w3.org/2000/01/rdf-schema#label> "Art der Qualifikationsschrift"@de .
+<http://catalogus-professorum.org/cpm/qualificationPaperType> <http://www.w3.org/2000/01/rdf-schema#label> "qualification paper type"@en .
+<http://catalogus-professorum.org/cpm/qualificationPaperType> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/QualificationPaper> .
+<http://catalogus-professorum.org/cpm/qualificationPaperType> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/qualificationPaperType> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/qualificationPaperType> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable changed from qualiPaperType to qualificationPaperType on 09.09.2013" .
+<http://catalogus-professorum.org/cpm/qualificationPaperType> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 changed to DatatypeProperty - 13.11.2007 by TR" .
+<http://catalogus-professorum.org/cpm/qualificationPaperVeniaLegendi> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/qualificationPaperVeniaLegendi> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/qualificationPaperVeniaLegendi> <http://www.w3.org/2000/01/rdf-schema#label> "qualificationpaper - venia legendi"@en .
+<http://catalogus-professorum.org/cpm/qualificationPaperVeniaLegendi> <http://www.w3.org/2000/01/rdf-schema#label> "Qualifikationsschrift - Venia Legendi"@de .
+<http://catalogus-professorum.org/cpm/qualificationPaperVeniaLegendi> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/QualificationPaper> .
+<http://catalogus-professorum.org/cpm/qualificationPaperVeniaLegendi> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/qualificationPaperVeniaLegendi> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/qualificationPaperVeniaLegendi> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable changed from qualiPaperVeniaLegendi to qualificationPaperVeniaLegendi on 09.09.2013" .
+<http://catalogus-professorum.org/cpm/reasonForResigning> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/reasonForResigning> <http://www.w3.org/2000/01/rdf-schema#label> "Grund des Austritts"@de .
+<http://catalogus-professorum.org/cpm/reasonForResigning> <http://www.w3.org/2000/01/rdf-schema#label> "reason for resigning"@en .
+<http://catalogus-professorum.org/cpm/reasonForResigning> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Career> .
+<http://catalogus-professorum.org/cpm/reasonForResigning> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/reasonForResigning> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/reasonForResigning> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/reasonForResigning> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 changed to DatatypeProperty - 13.11.2007 by TR" .
+<http://catalogus-professorum.org/cpm/references> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/references> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/references> <http://www.w3.org/2000/01/rdf-schema#label> "Quellennachweis"@de .
+<http://catalogus-professorum.org/cpm/references> <http://www.w3.org/2000/01/rdf-schema#label> "reference"@en .
+<http://catalogus-professorum.org/cpm/references> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/references> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/references> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/references> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 changed Domain from Professor to Person" .
+<http://catalogus-professorum.org/cpm/references> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/references> <http://ns.ontowiki.net/SysOnt/order> "380" .
+<http://catalogus-professorum.org/cpm/relatedBody> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/relatedBody> <http://www.w3.org/2000/01/rdf-schema#label> "bei"@de .
+<http://catalogus-professorum.org/cpm/relatedBody> <http://www.w3.org/2000/01/rdf-schema#label> "at"@en .
+<http://catalogus-professorum.org/cpm/relatedBody> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/relatedBody> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/relatedBody> <http://www.w3.org/2000/01/rdf-schema#comment> "Connects a Period of Life with a Body"@en .
+<http://catalogus-professorum.org/cpm/relatedBody> <http://www.w3.org/2000/01/rdf-schema#comment> "Ordnet einem Lebensabschnitt eine Körperschaft zu"@de .
+<http://catalogus-professorum.org/cpm/relatedBody> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/relatedBody> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date:  24.05.2007" .
+<http://catalogus-professorum.org/cpm/relationship> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/relationship> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#SymmetricProperty> .
+<http://catalogus-professorum.org/cpm/relationship> <http://www.w3.org/2000/01/rdf-schema#label> "Verwandtschaftsbeziehung "@de .
+<http://catalogus-professorum.org/cpm/relationship> <http://www.w3.org/2000/01/rdf-schema#label> "relationship between persons"@en .
+<http://catalogus-professorum.org/cpm/relationship> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/relationship> <http://www.w3.org/2000/01/rdf-schema#range> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/relationship> <http://www.w3.org/2002/07/owl#versionInfo> "0.3 domain changed to Person - 18.01.2010 by Thomas Riechert" .
+<http://catalogus-professorum.org/cpm/relationship> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.12.2009 as cpm:relationship" .
+<http://catalogus-professorum.org/cpm/relationship> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007 as cpm:is-related-to" .
+<http://catalogus-professorum.org/cpm/relationship> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 changed to DatatypeProperty - 13.11.07 by Thomas Riechert" .
+<http://catalogus-professorum.org/cpm/relationship> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable changed to ObjectProperty on 09.09.2013" .
+<http://catalogus-professorum.org/cpm/relationship> <http://ns.ontowiki.net/SysOnt/order> "250" .
+<http://catalogus-professorum.org/cpm/relativeJob> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/relativeJob> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/relativeJob> <http://www.w3.org/2000/01/rdf-schema#label> "Beruf des Verwandten"@de .
+<http://catalogus-professorum.org/cpm/relativeJob> <http://www.w3.org/2000/01/rdf-schema#label> "the relatives job"@en .
+<http://catalogus-professorum.org/cpm/relativeJob> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/relativeJob> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/relativeJob> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 10.12.2009" .
+<http://catalogus-professorum.org/cpm/relativeJob> <http://www.w3.org/2002/07/owl#versionInfo> "0.2 domain changed to Person - 18.01.2010 by Thomas Riechert" .
+<http://catalogus-professorum.org/cpm/relativeJob> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 depricated as new Property cpm:profession has been defined" .
+<http://catalogus-professorum.org/cpm/studyStart> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/studyStart> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/studyStart> <http://www.w3.org/2000/01/rdf-schema#label> "Studienbeginn"@de .
+<http://catalogus-professorum.org/cpm/studyStart> <http://www.w3.org/2000/01/rdf-schema#label> "study start"@en .
+<http://catalogus-professorum.org/cpm/studyStart> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/studyStart> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
+<http://catalogus-professorum.org/cpm/studyStart> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gDay> .
+<http://catalogus-professorum.org/cpm/studyStart> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gMonth> .
+<http://catalogus-professorum.org/cpm/studyStart> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gMonthDay> .
+<http://catalogus-professorum.org/cpm/studyStart> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYear> .
+<http://catalogus-professorum.org/cpm/studyStart> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYearMonth> .
+<http://catalogus-professorum.org/cpm/studyStart> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/studyStart> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 deprecated use cpm:from, cpm:to" .
+<http://catalogus-professorum.org/cpm/subjectStudied> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/subjectStudied> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/subjectStudied> <http://www.w3.org/2000/01/rdf-schema#label> "Subject studied"@en .
+<http://catalogus-professorum.org/cpm/subjectStudied> <http://www.w3.org/2000/01/rdf-schema#label> "Studiumsthema"@de .
+<http://catalogus-professorum.org/cpm/subjectStudied> <http://www.w3.org/2000/01/rdf-schema#label> "Fach"@de .
+<http://catalogus-professorum.org/cpm/subjectStudied> <http://www.w3.org/2000/01/rdf-schema#label> "subject, the professor studied"@en .
+<http://catalogus-professorum.org/cpm/subjectStudied> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Study> .
+<http://catalogus-professorum.org/cpm/subjectStudied> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/subjectStudied> <http://www.w3.org/2000/01/rdf-schema#comment> "Das Thema/Gebiet des Studiums"@de .
+<http://catalogus-professorum.org/cpm/subjectStudied> <http://www.w3.org/2000/01/rdf-schema#comment> "The subject of Study"@en .
+<http://catalogus-professorum.org/cpm/subjectStudied> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/subjectStudied> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date:  24.05.2007" .
+<http://catalogus-professorum.org/cpm/subjectStudied> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/subjectsTaught> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/subjectsTaught> <http://www.w3.org/2000/01/rdf-schema#label> "subjects the professor taught"@en .
+<http://catalogus-professorum.org/cpm/subjectsTaught> <http://www.w3.org/2000/01/rdf-schema#label> "Fächer die Gelehrt wurden"@de .
+<http://catalogus-professorum.org/cpm/subjectsTaught> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Career> .
+<http://catalogus-professorum.org/cpm/subjectsTaught> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/subjectsTaught> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/subjectsTaught> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/surname> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/surname> <http://www.w3.org/2000/01/rdf-schema#label> "Surname"@en .
+<http://catalogus-professorum.org/cpm/surname> <http://www.w3.org/2000/01/rdf-schema#label> "Nachname"@de .
+<http://catalogus-professorum.org/cpm/surname> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/surname> <http://www.w3.org/2000/01/rdf-schema#comment> "Nachname einer Person"@de .
+<http://catalogus-professorum.org/cpm/surname> <http://www.w3.org/2000/01/rdf-schema#comment> "The surname of a person"@en .
+<http://catalogus-professorum.org/cpm/surname> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/surname> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/surname> <http://www.w3.org/2002/07/owl#versionInfo> "version 0.2  10.03.2008" .
+<http://catalogus-professorum.org/cpm/to> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/to> <http://www.w3.org/2000/01/rdf-schema#label> "Bis"@de .
+<http://catalogus-professorum.org/cpm/to> <http://www.w3.org/2000/01/rdf-schema#label> "To"@en .
+<http://catalogus-professorum.org/cpm/to> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/to> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
+<http://catalogus-professorum.org/cpm/to> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gDay> .
+<http://catalogus-professorum.org/cpm/to> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gMonth> .
+<http://catalogus-professorum.org/cpm/to> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gMonthDay> .
+<http://catalogus-professorum.org/cpm/to> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYear> .
+<http://catalogus-professorum.org/cpm/to> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYearMonth> .
+<http://catalogus-professorum.org/cpm/to> <http://www.w3.org/2000/01/rdf-schema#comment> "Das Enddatum eines Lebensabschnitts"@de .
+<http://catalogus-professorum.org/cpm/to> <http://www.w3.org/2000/01/rdf-schema#comment> "The date of the ending of a period of life"@en .
+<http://catalogus-professorum.org/cpm/to> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date:  24.05.2007" .
+<http://catalogus-professorum.org/cpm/to> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable other types added" .
+<http://catalogus-professorum.org/cpm/typeOfBody> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/typeOfBody> <http://www.w3.org/2000/01/rdf-schema#label> "Typ der Körperschaft"@de .
+<http://catalogus-professorum.org/cpm/typeOfBody> <http://www.w3.org/2000/01/rdf-schema#label> "type of body"@en .
+<http://catalogus-professorum.org/cpm/typeOfBody> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/typeOfBody> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/typeOfBody> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/typeOfBody> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/webLinks> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/webLinks> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/webLinks> <http://www.w3.org/2000/01/rdf-schema#label> "links to (e.g.Wikipedia) ("@en .
+<http://catalogus-professorum.org/cpm/webLinks> <http://www.w3.org/2000/01/rdf-schema#label> "Links (e.g.Wikipedia)"@de .
+<http://catalogus-professorum.org/cpm/webLinks> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Publication> .
+<http://catalogus-professorum.org/cpm/webLinks> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Person> .
+<http://catalogus-professorum.org/cpm/webLinks> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/Body> .
+<http://catalogus-professorum.org/cpm/webLinks> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://catalogus-professorum.org/cpm/webLinks> <http://www.w3.org/2000/01/rdf-schema#comment> "This property is used for links into the WWW. e.g. Wikipedia." .
+<http://catalogus-professorum.org/cpm/webLinks> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation - 24.05.2007" .
+<http://catalogus-professorum.org/cpm/webLinks> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable changed from webLinks to webLink on 09.09.2013" .
+<http://catalogus-professorum.org/cpm/webLinks> <http://ns.ontowiki.net/SysOnt/order> "185" .
