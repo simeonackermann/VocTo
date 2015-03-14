@@ -5,6 +5,8 @@ RDFGraphVis = function( settings ) {
 	/*if ( settings.id ) {
 		this.id = settings.id;
 	}*/
+	this.base = settings.base ? settings.base : null;
+	this.prefixes = settings.prefixes ? settings.prefixes : {};
 
 	this.state = {
 		'editorMarks' : []
@@ -928,17 +930,14 @@ RDFGraphVis.prototype.interface = function(){
 // fill editor with turtle
 RDFGraphVis.prototype.updateEditor = function() {
 	var _this = this;
-
 	// parse n3 to turtle for textarea editor
-    var triples = _this.nquads.split("\n");
-    var prefixes = {
-    	'rdfs' : 'http://www.w3.org/2000/01/rdf-schema#',
-    	'owl': 'http://www.w3.org/2002/07/owl#'
-    };
-	var writer = N3.Writer( prefixes );
+	var triples = _this.nquads.split("\n");
+    var prefixes = _this.prefixes;
+    
+    var writer = N3.Writer( prefixes );
 	$.each( triples, function( key, value) {
 		var parser = new N3.Parser();
-	    parser.parse(value, function (error, triple, prefixes) {
+	    parser.parse(value, function (error, triple, prefixes ) {
 	    	if (triple) {
                  writer.addTriple( triple.subject, triple.predicate, triple.object );
 			}
@@ -946,6 +945,13 @@ RDFGraphVis.prototype.updateEditor = function() {
 	            writer.end(function (error, result) { 
 	            	result = result.replace(/\.\n/g, ".\n\n");
 	            	result = result.replace(/\n@/g, "@");
+
+	            	if ( _this.base ) {
+	            		var regex = new RegExp( "<"+_this.base+"(\\S*)>", "g" );
+	            		result = result.replace(regex, "<$1>");
+	            		result = "@base <"+_this.base+"> .\n" + result;
+	            	}
+
 			        $("#editor").val( result );
 
 					// add tynax highlighting editor CodeMirror
@@ -980,6 +986,12 @@ RDFGraphVis.prototype.scrollEditorTo = function(str) {
 	if ( ( ! $('.CodeMirror').is(':visible') && ! $editor.is(':visible') ) || typeof str === undefined || str == "" ) {
 		return false;
 	}
+
+	if ( _this.base ) {
+		var regex = new RegExp( "<"+_this.base+"(.*)>", "g" );
+		str = str.replace(regex, "<$1>");
+	}
+
 	// scroll to syntax hihglighted editor line
 	if ( $('.CodeMirror').is(':visible') ) {
 
