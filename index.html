@@ -112,16 +112,21 @@
     <script type="text/javascript">
     $(document).ready(function(){
 
-        //var fileID = "http%3A%2F%2Fcatalogus-professorum.org%2Fcpm%2F";
-        //var fileID = "example";
-        var fileID = "cpm_2015";
+        var fileID = "example";
+        var base = "http://catalogus-professorum.org/cpm/";
+        var prefixes = {
+            'rdfs' : 'http://www.w3.org/2000/01/rdf-schema#',
+            'owl': 'http://www.w3.org/2002/07/owl#',
+        };
 
         $.post( "ajax/get.php", { name: fileID + ".n3" })      
             .done(function( jsondata ) {
                 if ( jsondata.result && jsondata.content != "" ) {
                     rdfgraphvis = new RDFGraphVis({
                         data: jsondata.content,
-                        id : fileID
+                        id : fileID,
+                        prefixes: prefixes,
+                        base: base,
                     });
                 } else {
                     console.log("Error", jsondata.msg);
