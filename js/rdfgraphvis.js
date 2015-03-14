@@ -943,7 +943,8 @@ RDFGraphVis.prototype.updateEditor = function() {
 			}
 			if ( key+1 == triples.length  ) {
 	            writer.end(function (error, result) { 
-	            	result = result.replace(/\.\n/g, ".\n\n");
+	            	result = result.replace(/\.\n/g, " .\n\n");
+	            	result = result.replace(/;\n/g, " ;\n");
 	            	result = result.replace(/\n@/g, "@");
 
 	            	if ( _this.base ) {
