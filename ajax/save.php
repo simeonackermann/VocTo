@@ -14,7 +14,7 @@ if ( $fileId && $voc && $layout ) {
 	$time = time();
 
 	if ( ! is_writable("../data") ) {
-		echo json_encode( array('result' => false, 'msg' => 'Data-Folder not writeable') );
+		echo json_encode( array('result' => false, 'msg' => 'Error: Data-Folder not writeable') );
 		exit;
 	}
 
@@ -22,7 +22,7 @@ if ( $fileId && $voc && $layout ) {
 	$filename = $fileId . ".n3";
 	if ( file_exists("../data/" . $filename) ) {
 		if ( ! rename( "../data/" . $filename , "../data/" . $fileId . "-" . $time . ".n3" ) ) {
-			echo json_encode( array('result' => false, 'msg' => 'Cannot backup file "'.$fileId.'.n3"') );
+			echo json_encode( array('result' => false, 'msg' => 'Error: Cannot backup file "'.$fileId.'.n3"') );
 			exit;
 		}
 	}	
@@ -30,12 +30,12 @@ if ( $fileId && $voc && $layout ) {
 	// write vocabulary	
 	$filename = $fileId . ".n3";
 	if (!$handle = fopen( "../data/" . $filename, "w")) {
-		echo json_encode( array('result' => false, 'msg' => 'Cannot create file "'.$filename.'"') );
+		echo json_encode( array('result' => false, 'msg' => 'Error: Cannot create file "'.$filename.'"') );
 		exit;
 	}
 
 	if (!fwrite($handle, $voc)) {
-		echo json_encode( array('result' => false, 'msg' => 'Cannot write file "'.$filename.'"') );
+		echo json_encode( array('result' => false, 'msg' => 'Error: Cannot write file "'.$filename.'"') );
 		exit;
 	}
 
@@ -43,7 +43,7 @@ if ( $fileId && $voc && $layout ) {
 	$filename = $fileId . ".json";
 	if ( file_exists("../data/" . $filename) ) {		
 		if ( ! rename( "../data/" . $filename , "../data/" . $fileId . "-" . $time . ".json" ) ) {
-			echo json_encode( array('result' => false, 'msg' => 'Cannot backup file "'.$fileId.'.json"') );
+			echo json_encode( array('result' => false, 'msg' => 'Error: Cannot backup file "'.$fileId.'.json"') );
 			exit;
 		}
 	}
@@ -51,24 +51,24 @@ if ( $fileId && $voc && $layout ) {
 	// write graph layout
 	$filename = $fileId . ".json";
 	if (!$handle = fopen( "../data/" . $filename, "w")) {
-		echo json_encode( array('result' => false, 'msg' => 'Cannot create file "'.$filename.'"') );
+		echo json_encode( array('result' => false, 'msg' => 'Error: Cannot create file "'.$filename.'"') );
 		exit;
 	}
 
 	if (!fwrite($handle, $layout)) {
-		echo json_encode( array('result' => false, 'msg' => 'Cannot write file "'.$filename.'"') );
+		echo json_encode( array('result' => false, 'msg' => 'Error: Cannot write file "'.$filename.'"') );
 		exit;
 	}
 
 	// write log
 	$filename = "log-" . $fileId . ".txt";
 	if (!$handle = fopen( "../data/" . $filename, "a")) {
-		echo json_encode( array('result' => false, 'msg' => 'Cannot open logfile') );
+		echo json_encode( array('result' => false, 'msg' => 'Error: Cannot open logfile') );
 		exit;
 	}
 
 	if (!fwrite($handle, $time . " " . $fileId . "\n")) {
-		echo json_encode( array('result' => false, 'msg' => 'Cannot write logfile') );
+		echo json_encode( array('result' => false, 'msg' => 'Error: Cannot write logfile') );
 		exit;
 	}
 
