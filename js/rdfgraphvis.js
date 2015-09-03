@@ -805,11 +805,15 @@ RDFGraphVis.prototype.save = function() {
 				$.post( "ajax/save.php", { name: graphId, voc: voc, layout: graphLayout })
 					.fail(function(e) {
 						console.log("Error", e);
-						//_this.addStatusMsg("Error: cannot write " + graphId + ".n3");
 						_this.addStatusMsg("Error: cannot save graph");
 					})
 					.done(function( jsondata ) {
-						_this.addStatusMsg(jsondata.msg);
+						if ( jsondata.result == true ) {
+							_this.addStatusMsg(jsondata.msg);
+						} else {
+							console.log(jsondata.msg);
+							_this.addStatusMsg(jsondata.msg);
+						}
 				});
 			}
 		});
