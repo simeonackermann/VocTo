@@ -113,20 +113,15 @@
     $(document).ready(function(){
 
         var fileID = "example";
-        var base = "http://catalogus-professorum.org/cpm/";
-        var prefixes = {
-            'rdfs' : 'http://www.w3.org/2000/01/rdf-schema#',
-            'owl': 'http://www.w3.org/2002/07/owl#',
-        };
-
+        
         $.post( "ajax/get.php", { name: fileID + ".n3" })      
             .done(function( jsondata ) {
                 if ( jsondata.result && jsondata.content != "" ) {
                     rdfgraphvis = new RDFGraphVis({
                         data: jsondata.content,
                         id : fileID,
-                        prefixes: prefixes,
-                        base: base,
+                        prefixes: jsondata.prefixes,
+                        base: jsondata.base,
                     });
                 } else {
                     console.log("Error", jsondata.msg);

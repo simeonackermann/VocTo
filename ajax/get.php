@@ -9,19 +9,28 @@ if ( $filename ) {
 
 	$filename = addslashes($filename);
 
-    if( file_exists("../data/" . $filename) ) {
+	if( file_exists("../data/" . $filename) ) {
 
-    	$content = file_get_contents("../data/" . $filename);
+		$content = file_get_contents("../data/" . $filename);
 
-    	echo json_encode( array('result' => true, 'content' => $content) );
+		preg_match( '/^@base.*<(.*)>.*\n/', $content, $base );
+		if ( sizeof( $base ) > 0 ) {
+			$base = $base[1];
+		}
+		preg_match_all( '/@prefix\s(.*):\s<(.*)>.*\n/', $content, $prefixes0, PREG_SET_ORDER );
+		$prefixes = [];
+		foreach ( $prefixes0 as $prefix ) {
+			$prefixes[ $prefix[1] ] = $prefix[2];
+		}
+		$content = preg_replace( '/^@.*\n/m', '', $content );	
 
-    } else {
-    	echo json_encode( array('result' => false, 'msg' => 'File "'.$filename.'" not found') );	
-    }
+		echo json_encode( array('result' => true, 'base' => $base, 'prefixes' => $prefixes, 'content' => $content) );
 
-    //closedir($handle);
-} 
-else {
+	} else {
+		echo json_encode( array('result' => false, 'msg' => 'File "'.$filename.'" not found') );	
+	}
+
+} else {
 	echo json_encode( array('result' => false, 'msg' => 'No name given') );
 }
 ?>
