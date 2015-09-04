@@ -1,0 +1,30 @@
+@base <http://catalogus-professorum.org/cpm/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/2000/01/rdf-schema#label> "Lebensabschnitt"@de .
+<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/2000/01/rdf-schema#label> "Period of Life"@en .
+<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/2000/01/rdf-schema#comment> "Diese Konzept beschreibt einen Lebensabschnitt"@de .
+<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/2000/01/rdf-schema#comment> "The concept Person describes a period of life "@en .
+<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/2002/07/owl#versionInfo> "0.1 initial creation date: 24.05.2007" .
+<http://catalogus-professorum.org/cpm/PeriodOfLife> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 stable" .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/2000/01/rdf-schema#label> "Ort des Lebensabschnitts"@de .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/2000/01/rdf-schema#label> "Period place"@en .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/2000/01/rdf-schema#range> <http://ns.aksw.org/spatialHierarchy/SpatialArea> .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/2000/01/rdf-schema#comment> "Relation to a place of a period of life, this could be eather a City, a District or a Country"@en .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/2000/01/rdf-schema#comment> "Beziehung zu einem Ort eines Lebensabschnitts. Dies kann eine Stadt, eine Verwaltungseinheit oder ein Land sein"@de .
+<http://catalogus-professorum.org/cpm/periodPlace> <http://www.w3.org/2002/07/owl#versionInfo> "2.0 initial creation - 09.09.2013, stable" .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#label> "Das Datum"@en .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#label> "Datum"@de .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#label> "date"@en .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#domain> <http://catalogus-professorum.org/cpm/PeriodOfLife> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#comment> "The date within a period of life"@en .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#comment> "Zeitpunkt innerhalb eines Lebensabschnitts"@de .
+<http://catalogus-professorum.org/cpm/date> <http://www.w3.org/2000/01/rdf-schema#comment> "0.1 initial creation - 21.11.13"^^<http://www.w3.org/2001/XMLSchema#string> .
