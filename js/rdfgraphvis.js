@@ -316,7 +316,7 @@ RDFGraphVis.prototype.createModel = function(){
 				// maybe add as subclass
 				if ( element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#subClassOf") ) {
 					$.each( element["http://www.w3.org/2000/01/rdf-schema#subClassOf"], function(key, subClass) {
-						tmpLinks.push( { "source": subClass["@id"], "target": element["@id"], "subClassOf": true } );
+						tmpLinks.push( { "source": element["@id"], "target": subClass["@id"], "subClassOf": true } );
 					});
 				}
 
