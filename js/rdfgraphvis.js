@@ -786,6 +786,15 @@ RDFGraphVis.prototype.save = function() {
 	// get vocabulary from frontend-editor
 	var parser = N3.Parser();
 	var voc = "";
+
+	if ( _this.base != null ) {
+		voc += "@base <" + _this.base + "> .\n";
+	}
+
+	$.each( _this.prefixes, function(prefix, puri) {
+		voc += "@prefix " + prefix + ": <" + puri + "> .\n";
+	});
+
 	parser.parse( $( "#editor" ).val() ,
 		function (error, triple, prefixes) {
 			if (triple) {
