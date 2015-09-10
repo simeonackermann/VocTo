@@ -13,6 +13,7 @@ if ( $filename ) {
 
 		$content = file_get_contents("../data/" . $filename);
 
+		// may get @base and/or @prefixes and remove for clean ntriples
 		preg_match( '/^@base.*<(.*)>.*\n/', $content, $base );
 		if ( sizeof( $base ) > 0 ) {
 			$base = $base[1];
