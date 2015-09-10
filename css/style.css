@@ -156,7 +156,8 @@ rect.class-hover {
   fill: rgb(100,100,100);
 }
 
-#history {
+#history,
+#voc {
   position: absolute;
   width: 300px;
   max-height: 300px;

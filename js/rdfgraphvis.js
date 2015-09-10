@@ -921,6 +921,54 @@ RDFGraphVis.prototype.interface = function(){
 		        });
 		    });
 	});
+
+	// toggle model selector
+    $(".select-voc").click(function() {
+        $("#voc").toggle();
+    });
+
+	// fill model selection
+	$.post( "ajax/getAll.php" )
+		.done(function( jsondata ) {
+			var $list = $(".voc-list");
+			
+		    //var lines = jsondata.content.split("\n");;
+		    $.each(jsondata.result, function(i, voc){
+		        if (voc == "") {
+		            return true;
+		        }
+		        $list.append('<a href="#" class="list-group-item" data-voc="'+voc+'">'+voc+'</a>');
+		    });
+
+		    // select a mode. Remove prev graph and actions and create a new
+		    $(".voc-list a").click(function() {
+				var voc = $(this).attr("data-voc");
+				$("#voc").toggle();
+				$("#graph").html('');
+				$(".history-list").html('');
+				$(".voc-list").html('');
+				$("*").off("click");
+
+				$.post( "ajax/get.php", { name: voc + ".n3" })      
+					.done(function( jsondata ) {
+						if ( jsondata.result && jsondata.content != "" ) {
+							rdfgraphvis = new RDFGraphVis({
+								data: jsondata.content,
+								id : voc,
+								prefixes: jsondata.prefixes,
+								base: jsondata.base,
+							});
+						} else {
+							console.log("Error", jsondata.msg);
+						}
+					})
+					.fail(function(e) {
+						console.log("Error", e);
+				});
+
+		    });
+	});
+
 	
     // editor search
     /*
