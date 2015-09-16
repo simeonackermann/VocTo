@@ -11,13 +11,27 @@ $files = array();
 if ($handle = opendir('../data/')) {
 
     while (false !== ($file = readdir($handle))) {
-    	if ( $file != "." && $file != ".." && preg_match('/\D\.n3$/', $file) ) {
+    	if ( $file != "." && $file != ".." && preg_match('/\.n3$/', $file) ) {
     		$name = substr($file,  0, strripos($file, ".") );
         	array_push($files, $name);
         }
     }
-    closedir($handle);
+    closedir($handle);    
 }
+
+//var_dump($files);
+
+// cut the log-timestamp from end of filename
+function removelogs($name) {
+	if ( strrpos($name, "-") != false ) {
+		return substr($name, 0, strripos($name, "-") );
+	} else {
+		return $name;
+	}
+}
+$files = array_map("removelogs", $files);
+
+$files = array_unique($files);
 
 sort($files);
 
