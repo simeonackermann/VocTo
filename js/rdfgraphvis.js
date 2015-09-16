@@ -126,7 +126,7 @@ RDFGraphVis.prototype.init = function() {
     _this.svg.on("mouseup", function(d){svgMouseUp.call(_this, d);});          
 
 	// listen for dragging
-    var dragSvg = d3.behavior.zoom()
+    var zoomSvg = d3.behavior.zoom()
           .on("zoom", function(){
             if (d3.event.sourceEvent.shiftKey){
               // TODO  the internal d3 state is still changing
@@ -136,14 +136,15 @@ RDFGraphVis.prototype.init = function() {
             }
             return true;
           })
-          .on("zoomstart", function(){
-            //if (!d3.event.sourceEvent.shiftKey) d3.select('body').style("cursor", "move");
+          .on("zoomstart", function(){ 
+          	_this.zoomStart = true;
+          	//if (!d3.event.sourceEvent.shiftKey) d3.select('body').style("cursor", "move");
           })
           .on("zoomend", function(){
             d3.select('body').style("cursor", "auto");
           });
 
-    _this.svg.call(dragSvg).on("dblclick.zoom", null);        
+    _this.svg.call(zoomSvg).on("dblclick.zoom", null);        
 	
 	// listen for resize
     window.onresize = function(){updateWindow();};    
@@ -156,9 +157,10 @@ RDFGraphVis.prototype.init = function() {
 	/* private init functions */
 	//zoomed
 	function zoomed() {
-		if ( this.zoom )
-    		d3.select(".this-graph")
-      			.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")"); 
+		if ( _this.zoom ) {			
+			d3.select(".this-graph")
+    			.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
+		}
 	}
 
 	function updateWindow() {
@@ -303,6 +305,7 @@ RDFGraphVis.prototype.createModel = function(){
 				break;
 
 			// add a class
+			case "http://www.w3.org/2000/01/rdf-schema#Class":
 			case "http://www.w3.org/2002/07/owl#Class":
 
 				element["@d3"].type = "Class";
@@ -326,6 +329,7 @@ RDFGraphVis.prototype.createModel = function(){
 				break;
 
 			// add a property
+			case "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property":
 			case "http://www.w3.org/2002/07/owl#DatatypeProperty":
 			case "http://www.w3.org/2002/07/owl#FunctionalProperty":
 				if ( ! element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#domain") ) {
@@ -490,14 +494,8 @@ RDFGraphVis.prototype.print = function(){
 		.attr("width", "60px")
 		.attr("height", "24px") 		
 		.attr("rx", "5").attr("ry", "5")		
-		.style("fill", "#4987AC")
-		.style("stroke", "#1D3C4F");
-		/*.on("mouseover", function(d){
-			d3.select(this).classed("class-hover", true);
-      	})
-      	.on("mouseout", function(d){
-        	d3.select(this).classed("class-hover", false);
-      	});*/
+		.on("mouseover", function(d){ d3.select(this).classed("class-hover", true); })
+      	.on("mouseout", function(d){ d3.select(this).classed("class-hover", false); });
 
 	// add classe relations
 	node.filter(function(d){
@@ -507,8 +505,8 @@ RDFGraphVis.prototype.print = function(){
 		}).append("svg:polygon")
 		.attr("class", "class-relation")
 		.attr("points", "-30,0 0,20 30,0 0,-20")
-		.style("fill", "#70A897")
-		.style("stroke", "#0E543F");	
+		.on("mouseover", function(d){ d3.select(this).classed("class-relation-hover", true); })
+      	.on("mouseout", function(d){ d3.select(this).classed("class-relation-hover", false); });
 
 	// add properties
 	node.filter(function(d){
@@ -521,9 +519,8 @@ RDFGraphVis.prototype.print = function(){
 		.attr("ry", 12)
 		.attr("cx", 0)
 		.attr("cy", 0)		
-		.style("fill", "#FFF564")
-		.style("stroke-width", "1")
-		.style("stroke", "#E5C23D");
+		.on("mouseover", function(d){ d3.select(this).classed("property-hover", true); })
+      	.on("mouseout", function(d){ d3.select(this).classed("property-hover", false); });
 
 	// add labels
 	node.append("svg:text")
@@ -600,7 +597,7 @@ RDFGraphVis.prototype.print = function(){
 				}
 			})
 			//.attr("rx", boxWidth-30);
-			.attr("points", "-"+(boxWidth/2)+",0 0,20 "+(boxWidth/2)+",0 0,-20");
+			.attr("points", "-"+(boxWidth/1.5)+",0 0,20 "+(boxWidth/1.5)+",0 0,-20");
 		//.attr("points", "-30,0 0,20 30,0 0,-20")
 
 		if ( boxWidth < 60 ) {
@@ -623,6 +620,7 @@ RDFGraphVis.prototype.print = function(){
 
 	// drag functions
 	function dragstart(d, i) {
+		d3.event.sourceEvent.stopPropagation();
 		_this.zoom = false;
 	    _this.force.stop() // stops the force auto positioning before you start dragging	    
 	}
@@ -867,6 +865,7 @@ RDFGraphVis.prototype.interface = function(){
 
     // toggle history
     $(".toggle-history").click(function() {
+    	$("#voc").hide();
         $("#history").toggle();
     });
 
@@ -924,6 +923,7 @@ RDFGraphVis.prototype.interface = function(){
 
 	// toggle model selector
     $(".select-voc").click(function() {
+    	$("#history").hide();
         $("#voc").toggle();
     });
 
