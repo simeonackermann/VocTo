@@ -141,7 +141,7 @@ body {
  	margin: 0;
  	padding: 0; 	
  }
- 
+
 /* hide remove link btn */
 .link-tools .tool-remove { display: none }
 .link-tools .tool-options { display: none }
@@ -152,17 +152,36 @@ ellipse.property,
 polygon.class-relation {
   cursor: move;
 }
+rect.class {
+  fill: #4987AC;
+  stroke: #1D3C4F;
+}
 rect.class-hover {
-  fill: rgb(100,100,100);
+  stroke-width: 2;
+}
+ellipse.property {
+  fill: #FFF564;
+  stroke: #E5C23D;
+    
+}
+ellipse.property-hover {
+  stroke-width: 2;
+}
+polygon.class-relation {
+  fill: #70A897;
+  stroke: #0E543F;
+}
+polygon.class-relation-hover {
+  stroke-width: 2;
 }
 
 #history,
 #voc {
   position: absolute;
   width: 300px;
-  max-height: 300px;
-  overflow: scroll;
-  top: 80px;
+  max-height: 100px;
+  overflow: auto;
+  top: 50px;
   right: 50px;
   background: white;
   border: 2px solid lightGray;
