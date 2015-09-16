@@ -27,7 +27,7 @@ if ( $fileId && $voc && $layout ) {
 		}
 	}	
 
-	// write vocabulary	
+	// write new ocabulary	
 	$filename = $fileId . ".n3";
 	if (!$handle = fopen( "../data/" . $filename, "w")) {
 		echo json_encode( array('result' => false, 'msg' => 'Error: Cannot create file "'.$filename.'"') );
@@ -48,7 +48,7 @@ if ( $fileId && $voc && $layout ) {
 		}
 	}
 
-	// write graph layout
+	// write new graph layout
 	$filename = $fileId . ".json";
 	if (!$handle = fopen( "../data/" . $filename, "w")) {
 		echo json_encode( array('result' => false, 'msg' => 'Error: Cannot create file "'.$filename.'"') );
