@@ -60,9 +60,6 @@ RDFGraphVis.prototype.init = function() {
 		.attr('fill', 'rgba(1,1,1,0)');
 	*/
 
-	//console.log( parseInt(_this.svg.attr("width")) );
-	//return false;
-
 	// define the arrow.
 	var defs = _this.svg.append("svg:defs").selectAll("marker")
 		.data(["end"])      // Different link/path types can be defined here
@@ -99,7 +96,7 @@ RDFGraphVis.prototype.init = function() {
 	//d3.select(".this-graph")
       		//.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")"); 
 
-// svg nodes and edges 
+	// svg nodes and edges 
     //_this.svgLinks = _this.svgGraph.append("g").selectAll("g");
     //_this.svgNodes = _this.svgGraph.append("g").selectAll("g");		
 
@@ -113,36 +110,39 @@ RDFGraphVis.prototype.init = function() {
           })
           .on("dragend", function() {
             // todo check if edge-mode is selected
-          });
+	});
 
-// listen for key events
-    d3.select(window).on("keydown", function(){
-      svgKeyDown.call(_this);
-    })
-    .on("keyup", function(){
-      svgKeyUp.call(_this);
-    });
-    _this.svg.on("mousedown", function(d){svgMouseDown.call(_this, d);});
-    _this.svg.on("mouseup", function(d){svgMouseUp.call(_this, d);});          
+	// listen for key events
+	d3.select(window)
+		.on("keydown", function(){
+			svgKeyDown.call(_this);
+		})
+		.on("keyup", function(){
+			svgKeyUp.call(_this);
+	});
+	_this.svg.on("mousedown", function(d){svgMouseDown.call(_this, d);});
+	_this.svg.on("mouseup", function(d){svgMouseUp.call(_this, d);});          
+
+	_this.svg.on("mouseover", function(d){ d3.select('body').style("cursor", "move"); });          
 
 	// listen for dragging
-    var zoomSvg = d3.behavior.zoom()
-          .on("zoom", function(){
-            if (d3.event.sourceEvent.shiftKey){
-              // TODO  the internal d3 state is still changing
-              return false;
-            } else{
-              zoomed.call(_this);
-            }
-            return true;
-          })
-          .on("zoomstart", function(){ 
-          	_this.zoomStart = true;
-          	//if (!d3.event.sourceEvent.shiftKey) d3.select('body').style("cursor", "move");
-          })
-          .on("zoomend", function(){
-            d3.select('body').style("cursor", "auto");
-          });
+	var zoomSvg = d3.behavior.zoom()
+		.on("zoom", function(){
+			if (d3.event.sourceEvent.shiftKey){
+				// TODO  the internal d3 state is still changing
+				return false;
+			} else{
+				zoomed.call(_this);
+			}
+			return true;
+		})
+		.on("zoomstart", function(){ 
+			_this.zoomStart = true;
+			//if (!d3.event.sourceEvent.shiftKey) d3.select('body').style("cursor", "move");
+		})
+		.on("zoomend", function(){
+			//d3.select('body').style("cursor", "auto");
+	});
 
     _this.svg.call(zoomSvg).on("dblclick.zoom", null);        
 	
@@ -189,44 +189,9 @@ RDFGraphVis.prototype.init = function() {
     
 
 } // end of init
+
 /*
-RDFGraphVis.prototype.zoomed = function(){
-    //this.state.justScaleTransGraph = true;
-    //console.log( d3.event );
-    if ( this.zoom )
-    	d3.select(".this-graph")
-      		.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")"); 
-  };
-
- RDFGraphVis.prototype.updateWindow = function(){
- 	var _this = this;
-    var docEl = document.documentElement,
-        bodyEl = document.getElementsByTagName('body')[0];
-    var x = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth;
-    var y = window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
-    _this.svg.attr("width", x).attr("height", y);
-
-    $( "#editor" ).height( $(".sidebar").height() - 75 );
-  };
-
-// mousedown on main svg
-  RDFGraphVis.prototype.svgMouseDown = function(){
-    this.state.graphMouseDown = true;
-  };  
-
- // mouseup on main svg
-  RDFGraphVis.prototype.svgMouseUp = function(){
-    this.state.graphMouseDown = false;
-    $(".status-bar").text("");	
-  };  
-
-  RDFGraphVis.prototype.svgKeyDown = function(){
-    
-  };
-
-  RDFGraphVis.prototype.svgKeyUp = function(){
-    
-  };  
+Parse the model from the nquads-file to json (with jsonld). If exists get the stored graph-positions
 */
 RDFGraphVis.prototype.parse = function(){
 	var _this = this;
@@ -234,6 +199,7 @@ RDFGraphVis.prototype.parse = function(){
 	jsonld.fromRDF(_this.nquads, {format: 'application/nquads'}, function(err, doc) {		
 		_this.model = doc;
 		if ( err ) {
+			_this.setStatusMsg( err, "error");
 			console.log("Error: ", err);
 			return false;
 		}
@@ -251,7 +217,9 @@ RDFGraphVis.prototype.parse = function(){
 	});
 } // end of parse
 
-// parse the rdf to json-ld
+/*
+Create our model from json object
+*/
 RDFGraphVis.prototype.createModel = function(){
 	var _this  = this;
 
@@ -267,12 +235,14 @@ RDFGraphVis.prototype.createModel = function(){
 
 		if ( ! element.hasOwnProperty("@type") ) {
 			console.log("No @type in: ", element);
-			return false;
+			_this.addStatusMsg("No attribute @type in element: " + JSON.stringify( element ) + "<br />It cannot added to the graph!", "warning");
+			return true;
 		}
 
 		if ( ! element.hasOwnProperty("@id") ) {
-			console.log("No @id in: ", element);
-			return false;
+			console.log("No @id in element: ", element);
+			_this.addStatusMsg("No attribute @id in: " + JSON.stringify( element ) + "<br />It cannot added to the graph!", "warning");
+			return true;
 		}
 
 		var label = basename( element["@id"] );
@@ -334,7 +304,8 @@ RDFGraphVis.prototype.createModel = function(){
 			case "http://www.w3.org/2002/07/owl#FunctionalProperty":
 				if ( ! element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#domain") ) {
 					console.log("No domain in property: ", element);
-					return false;
+					_this.addStatusMsg( "<b>No @domain in property:</b> " + JSON.stringify(element) + "<br /><b>It cannot added to the graph.</b>", "warning");
+					break;
 				}					
 				element["@d3"].type = "Property";
 				
@@ -351,11 +322,44 @@ RDFGraphVis.prototype.createModel = function(){
 						thisElement.y = _this.graphLayout[ thisKey ].y;
 					}
 
-					// add as node and link to its class					
-					_this.classProperties[domain["@id"]].push( thisElement );
+					/*
+					if ( _this.classProperties.hasOwnProperty( domain["@id"] ) ) {
+						// add as node and link to its class					
+						_this.classProperties[domain["@id"]].push( thisElement );
+						tmpLinks.push( { "source": thisKey, "target": domain["@id"], "isProperty" : true } );
+						nodeIndexes[thisKey] = _this.graphModel.nodes.length;
+						_this.graphModel.nodes.push( thisElement );
+					} else {
+						_this.addStatusMsg("<b>Domain-Class \""+domain["@id"]+"\" not found for Element:</b> " + JSON.stringify(thisElement) + "<br /><b>It cannot added to the graph!</b>", "warning");
+					}
+					*/
+					
+					// domain-class not found -> add extern class
+					if ( ! _this.classProperties.hasOwnProperty( domain["@id"] ) ) {
+						var externClass = { 
+							"@id" : domain["@id"],
+							"@d3" : {
+								"type" : "Class",
+								"label" : basename( domain["@id"] )
+							}
+						};
+						// maybe merge existing position
+						if ( _this.graphLayout.hasOwnProperty(domain["@id"]) ) {
+							externClass.x = _this.graphLayout[ domain["@id"] ].x;
+							externClass.y = _this.graphLayout[ domain["@id"] ].y;
+						}
+						_this.classProperties[domain["@id"]] = [];
+						nodeIndexes[domain["@id"]] = _this.graphModel.nodes.length;
+						_this.graphModel.nodes.push( externClass );
+
+					}				
+					
+					// add link
 					tmpLinks.push( { "source": thisKey, "target": domain["@id"], "isProperty" : true } );
+					// add node
+					_this.classProperties[domain["@id"]].push( thisElement );
 					nodeIndexes[thisKey] = _this.graphModel.nodes.length;
-					_this.graphModel.nodes.push( thisElement );
+					_this.graphModel.nodes.push( thisElement );									
 				});
 				break;
 
@@ -363,8 +367,9 @@ RDFGraphVis.prototype.createModel = function(){
 			case "http://www.w3.org/2002/07/owl#ObjectProperty":
 				if ( ! element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#domain")
 					|| ! element.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#range") ) {
-					console.log("No range or domain in property: ", element);
-					return false;
+					console.log("No range or domain in relation: ", element);
+					_this.addStatusMsg( "<b>No @range or @domain in relation:</b> " + JSON.stringify(element) + "<br /><b>It cannot added to the graph.</b>" , "warning");
+					break;
 				}					
 				element["@d3"].type = "ClassRelation";
 
@@ -413,6 +418,7 @@ RDFGraphVis.prototype.createModel = function(){
 
 			default:
 				console.log("Unknown @type in: ", element);
+				_this.addStatusMsg( "Unknown @type in: " + JSON.stringify(element) , "warning");
 				break;
 		}
 	});
@@ -428,7 +434,6 @@ RDFGraphVis.prototype.createModel = function(){
 
 	});		
 
-	//console.log( "nodeIndexes:  ", nodeIndexes );
 	console.log( "Graph:  ", _this.graphModel );
 	
 
@@ -441,7 +446,6 @@ RDFGraphVis.prototype.createModel = function(){
 // print the model as JointJS graph
 RDFGraphVis.prototype.print = function(){
 	var _this = this;
-
 
 	// node drag by funktion
 	// http://bl.ocks.org/norrs/2883411	
@@ -461,9 +465,7 @@ RDFGraphVis.prototype.print = function(){
 			if ( d.hasOwnProperty("isClassRelation") ) { c += " class-relation" }
 			return c;
 		})
-		.attr("marker-end", function(d) { if ( d.hasOwnProperty("subClassOf") ) { return "url(#end)" } } )
-		.style("stroke-width", "2")
-		.style("stroke", "gray");    
+		.attr("marker-end", function(d) { if ( d.hasOwnProperty("subClassOf") ) { return "url(#end)" } } ); 
 		
 	// add nodes
 	var node = _this.svgGraph.selectAll(".node")
@@ -666,10 +668,12 @@ RDFGraphVis.prototype.print = function(){
 			msg["@type"] = d["@type"];
 		}
 		if ( d.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#label") ) {
-			msg["rdfs:label"] = JSON.stringify(d["http://www.w3.org/2000/01/rdf-schema#label"])			
+			//msg["rdfs:label"] = JSON.stringify(d["http://www.w3.org/2000/01/rdf-schema#label"])			
+			msg["rdfs:label"] = d["http://www.w3.org/2000/01/rdf-schema#label"][0]["@value"];
 		}	
 		if ( d.hasOwnProperty("http://www.w3.org/2000/01/rdf-schema#comment") ) {
-			msg["rdfs:comment"] = JSON.stringify(d["http://www.w3.org/2000/01/rdf-schema#comment"]);
+			//msg["rdfs:comment"] = JSON.stringify(d["http://www.w3.org/2000/01/rdf-schema#comment"]);
+			msg["rdfs:comment"] = d["http://www.w3.org/2000/01/rdf-schema#comment"][0]["@value"];
 		}		
 		_this.setStatusMsg(msg);	
 	}
@@ -697,9 +701,7 @@ RDFGraphVis.prototype.createGraphLayout = function() {
 // update the graph
 RDFGraphVis.prototype.update = function() {
 	var _this = this;
-
-	_this.setStatusMsg("Updating the graph...");
-	//console.log("Layout:", _this.graphLayout);	
+	_this.setStatusMsg("Updating the graph...", "info");
 
 	// from turtle to triples to json-ld
 	var parser = N3.Parser();
@@ -708,36 +710,24 @@ RDFGraphVis.prototype.update = function() {
 	parser.parse( $( "#editor" ).val() ,
 		function (error, triple, prefixes) {
 			if (error) {
-				_this.setStatusMsg("N3 Parse-Error: " + error);
+				_this.setStatusMsg("N3 Parse-Error: " + error, "error");
 				return false;
 			}
 			if (triple) {
-		 		//console.log("Triple:", triple.subject, triple.predicate, triple.object, '.');
 		 		triple.object = triple.object.replace(/\n/g, "\\n");
 		 		triple.object = triple.object.replace(/\r/g, "\\r");
 		 		triple.object = triple.object.replace(/\t/g, "\\t");
 		 		triple.object = triple.object.replace(/\f/g, "\\f");
 		 		triple.object = triple.object.replace(/^(http:\/\/\S*)/g, "<$1>");
 		 		triple.object = triple.object.replace(/\^\^(http:\/\/\S*)/g, "^^<$1>");
-		 		//console.log("Object: " + triple.object);
 
 		 		triples += "<" + triple.subject + "> <" + triple.predicate + "> " + triple.object + " .\n";
 		 		
 			} else {
-		 		//console.log("# That's all, folks!", prefixes);		 		
-		 		
-		 		//triples = triples.replace(/(http:\/\/\S*)/g, "<$1>");
-		 		//console.log("TRIPLES VOR REPLACE", triples);
-		 		//triples = triples.replace(/(http:\/\/[a-zA-Z0-9_\-\.\/#]*)/g, "<$1>");
-		 		
-		 		//triples = triples.replace(/(http:\/\/\S*)/g, "<$1>");
-		 		//triples = triples.replace(/"<(.*)">/g, "\"$1\"");
-		 		
-		 		//console.log("TRIPLES NACH REPLACE: " + triples);
 		 		
 		 		jsonld.fromRDF(triples, {format: 'application/nquads'}, function(err, doc) {
 		 			if ( err ) {
-		 				_this.setStatusMsg("JSON-LD fromRDF-Error: " + err);
+		 				_this.setStatusMsg("JSON-LD fromRDF-Error: " + err, "error");
 		 				return false;
 		 			}
 
@@ -826,6 +816,9 @@ RDFGraphVis.prototype.save = function() {
 		});
 }
 
+/*
+Set interface functions (navi, sidebar, history, voc-selector...)
+*/
 RDFGraphVis.prototype.interface = function(){
 	var _this = this;
 
@@ -844,13 +837,6 @@ RDFGraphVis.prototype.interface = function(){
 	        _this.update();
 	    }, 1500);
 	})
-
-	// toggle properties
-	var hide = true;
-	$(".toggle-properties").click( function() {
-	    _this.toggleProperties(hide);
-	    hide = ! hide;
-	});
 
 	// toggle sidebar	
 	$(".toggle-sidebar").click(function() {
@@ -969,17 +955,18 @@ RDFGraphVis.prototype.interface = function(){
 		    });
 	});
 
-	
-    // editor search
-    /*
-	$(".editor-search").keyup(function() {
-		var search = $(this).val();
-		window.setTimeout(function(){
-			//searchStore(search)
-			_this.scrollEditorTo(search);
-		}, 300);
-	})
-	*/
+	// toggle properties
+	var hide = true;
+	$(".toggle-properties").click( function() {
+		var display = hide ? "none" : "inline";
+		_this.svgGraph.selectAll(".property-node")
+			.style("display", display);
+
+		_this.svgGraph.selectAll(".property-link")
+			.style("display", display);
+
+	    hide = ! hide;
+	});
 
 	// toggle editor syntax highlighting
 	$(".toggle-editorSyntax").click(function() {
@@ -1023,7 +1010,7 @@ RDFGraphVis.prototype.updateEditor = function() {
 						matchBrackets: true,
 						//autofocus: true,
 						//lineWrapping: true,
-						//lineNumbers: true
+						lineNumbers: true
 					});
 					
 					editor.on('change',function(cMirror){
@@ -1103,23 +1090,21 @@ RDFGraphVis.prototype.scrollEditorTo = function(str) {
 }
 
 
-// sow or hide proprties
-RDFGraphVis.prototype.toggleProperties = function(hide) {
-	var _this = this;
-	var display = hide ? "none" : "inline";
-	_this.svgGraph.selectAll(".property-node")
-		.style("display", display);
-
-	_this.svgGraph.selectAll(".property-link")
-		.style("display", display);
-}
-
 RDFGraphVis.prototype.addStatusMsg = function(msg) {
 	$(".status-bar").show();
 	$(".status-bar").html( $(".status-bar").html() + "<br />" + msg );
 }
 
-RDFGraphVis.prototype.setStatusMsg = function(msg) {
+/*
+Set the status message
+@msg String The wessages
+@type String info|warning|error
+*/
+RDFGraphVis.prototype.setStatusMsg = function(msg, type) {
+	if ( typeof type === undefined ) {
+		type = "info";
+	}
+	// TODO: alert errors and warnings
 	$(".status-bar").show();
 	if( typeof msg === "string" ) {
 		$(".status-bar").text(msg);
