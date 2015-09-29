@@ -19,6 +19,7 @@ body {
   background-color: #f5f5f5;  
   color: #333;
   font-size: 0.9em;
+  margin-left: 40%;
 }
 
 .container .text-muted {
@@ -29,6 +30,7 @@ body {
 }
 .footer p {
   padding: 7px;
+  margin: 0;
 }
 
 
@@ -55,7 +57,7 @@ body {
 
 /* Hide for mobile, show later */
 .sidebar {
-  display: none;
+  /*display: none;*/
 }
 @media (min-width: 768px) {
   .sidebar {
@@ -73,6 +75,18 @@ body {
     border-right: 1px solid #eee;
     */
   }
+}
+.sidebar-dragzone {
+  position: absolute;
+  width:10px;
+  height: 100%;
+  left:100%;
+  margin-left: -3px;
+  z-index: 1001;
+}
+.sidebar-dragzone:hover {
+  cursor: e-resize;
+  background: lightGray;
 }
 
 /* Sidebar navigation */
@@ -118,7 +132,7 @@ body {
  .sidebar {
  	height: 100%;
   width: 40%;
- 	left: -40%;
+ 	left: 0%;
  	top: 50px;
  	overflow: visible;  
   padding: 0;
@@ -139,7 +153,8 @@ body {
  	//width: 1002px;
  	width:auto;
  	margin: 0;
- 	padding: 0; 	
+ 	padding: 0;
+  margin-left: 40%;
  }
 
 /* hide remove link btn */
@@ -150,30 +165,30 @@ body {
 rect.class,
 ellipse.property,
 polygon.class-relation {
-  cursor: move;
+
 }
+
 rect.class {
   fill: #4987AC;
   stroke: #1D3C4F;
-}
-rect.class-hover {
-  stroke-width: 2;
 }
 ellipse.property {
   fill: #FFF564;
   stroke: #E5C23D;
     
 }
-ellipse.property-hover {
-  stroke-width: 2;
-}
 polygon.class-relation {
   fill: #70A897;
   stroke: #0E543F;
 }
-polygon.class-relation-hover {
+.node.selected rect,
+.node.hover rect,
+.node.selected ellipse,
+.node.hover ellipse,
+.node.selected polygon,
+.node.hover polygon {
   stroke-width: 2;
-}
+} 
 line.link {
   stroke-width: 2;
   stroke: gray;
@@ -183,7 +198,7 @@ line.link {
 #voc {
   position: absolute;
   width: 300px;
-  max-height: 100px;
+  max-height: 300px;
   overflow: auto;
   top: 50px;
   right: 50px;
@@ -194,6 +209,14 @@ line.link {
 
 .CodeMirror {
   width: 100%;
+
+  /* disable selection to fix dragging-issues */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #editor {

@@ -2,9 +2,8 @@
 RDFGraphVis = function( settings ) {
 	this.nquads = settings.data;
 	this.id = settings.id;
-	/*if ( settings.id ) {
-		this.id = settings.id;
-	}*/
+	this.layoutFile = this.id + ".json";
+	
 	this.base = settings.base ? settings.base : null;
 	this.prefixes = settings.prefixes ? settings.prefixes : {};
 
@@ -12,18 +11,16 @@ RDFGraphVis = function( settings ) {
 		'editorMarks' : []
 	};
 
-	//this.thisGraph = null;
 	this.svg = null;
 	this.svgGraph = null;
-	//this.svgLinks = null;
-	//this.svgNodes = null;
+	//TODO: statusBar toggler
+	//this.extendStatusBar = true;
 
 	this.model = []; // store json-ls model
 	this.graphModel = { "nodes" : [], "links" : [] }; // store nodes and links
 	this.graphLayout = {}; // stored model-layout with xy-positions
 	this.classProperties = {};
 
-	//this.vis = null;
 	this.force = null;
 	this.zoom = true;
 	
@@ -31,7 +28,7 @@ RDFGraphVis = function( settings ) {
 	return this;
 }
 
-// init the graph, element and links
+// init the d3 graph svg, element and links
 RDFGraphVis.prototype.init = function() {
 	var _this = this;
 
@@ -52,13 +49,6 @@ RDFGraphVis.prototype.init = function() {
 		.call(d3.behavior.zoom().on("zoom", redraw))
 		.append('svg:g');
 		*/
-	/*
-	// append content rect
-	_this.vis.append('svg:rect')
-		.attr('width', w)
-		.attr('height', h)
-		.attr('fill', 'rgba(1,1,1,0)');
-	*/
 
 	// define the arrow.
 	var defs = _this.svg.append("svg:defs").selectAll("marker")
@@ -81,13 +71,6 @@ RDFGraphVis.prototype.init = function() {
 		.distance(100)
 		.linkDistance( 100 )
 		.size([w, h]);
-
-	/*
-	function redraw() {
-		if ( _this.zoom )
-			_this.vis.attr("transform","translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
-	}
-	*/
 
 	_this.svgGraph = _this.svg.append("g")	
 		.attr("class", "this-graph");
@@ -122,8 +105,7 @@ RDFGraphVis.prototype.init = function() {
 	});
 	_this.svg.on("mousedown", function(d){svgMouseDown.call(_this, d);});
 	_this.svg.on("mouseup", function(d){svgMouseUp.call(_this, d);});          
-
-	_this.svg.on("mouseover", function(d){ d3.select('body').style("cursor", "move"); });          
+	_this.svg.on("mouseover", function(d){ });          
 
 	// listen for dragging
 	var zoomSvg = d3.behavior.zoom()
@@ -175,12 +157,17 @@ RDFGraphVis.prototype.init = function() {
 	}
 
 	function svgMouseDown() {
+		$("#voc").hide();
+        $("#history").hide();
 		this.state.graphMouseDown = true;
+		d3.select('body').style("cursor", "move");
 	}
 
 	function svgMouseUp() {
     	this.state.graphMouseDown = false;
     	$(".status-bar").hide();
+    	d3.selectAll(".node").classed("selected", false);
+    	d3.select('body').style("cursor", "auto");
   	}
 
 	function svgKeyDown() {}
@@ -206,7 +193,7 @@ RDFGraphVis.prototype.parse = function(){
 		console.log( "Model:  ", _this.model );
 			
 		// maybe get stored graph
-		$.post( "ajax/get.php", { name: _this.id + ".json" })		
+		$.post( "ajax/get.php", { name: _this.layoutFile })		
 			.done(function( jsondata ) {
 				if ( jsondata.result && jsondata.content != "" ) {
 					_this.graphLayout = $.parseJSON( jsondata.content );
@@ -222,9 +209,6 @@ Create our model from json object
 */
 RDFGraphVis.prototype.createModel = function(){
 	var _this  = this;
-
-	//$("#graph-id").val(  _this.id );
-
 
 	var nodeIndexes = new Object();
 	var tmpLinks = new Array();	
@@ -422,10 +406,8 @@ RDFGraphVis.prototype.createModel = function(){
 				break;
 		}
 	});
-	//console.log( "tmpLinks:  ", tmpLinks );
 
 	$.each( tmpLinks, function(key, element) {
-		//console.log( nodeIndexes[element.source] );
 		var link = element;
 		link["source"] = nodeIndexes[element.source];
 		link["target"] = nodeIndexes[element.target];
@@ -465,23 +447,38 @@ RDFGraphVis.prototype.print = function(){
 			if ( d.hasOwnProperty("isClassRelation") ) { c += " class-relation" }
 			return c;
 		})
-		.attr("marker-end", function(d) { if ( d.hasOwnProperty("subClassOf") ) { return "url(#end)" } } ); 
+		.attr("marker-end", function(d) { 
+			if ( d.hasOwnProperty("subClassOf") ) { 
+				//console.log("TODO: Fix head pos here: ", d);
+				return "url(#end)";
+			}
+		}); 
 		
 	// add nodes
 	var node = _this.svgGraph.selectAll(".node")
 		.data(_this.graphModel.nodes)
 		.enter().append("svg:g")
-		//.attr("class", "node")
 		.attr("class", function(d) {
 			var c = "node";
 			if ( d["@d3"].type == "Class" ) { c += " class-node" }
 			if ( d["@d3"].type == "ClassRelation" ) { c += " class-relation-node" }
 			if ( d["@d3"].type == "Property" ) { c += " property-node" }
 			return c;
-		})		
+		})
+		.on("mouseover", function() {
+			d3.select(this).classed("hover", true);
+			d3.select('body').style("cursor", "pointer");
+		})
+		.on("mouseout", function() {
+			d3.select(this).classed("hover", false);
+			d3.select('body').style("cursor", "auto");
+		})
+		.on("mousedown", function() {
+			d3.select('body').style("cursor", "move");
+		})
 		.on("click", function(d) {
-			//console.log( d );
-			//$(".status-bar").text( JSON.stringify( d ) );
+			d3.selectAll(".node").classed("selected", false);
+			d3.select(this).classed("selected", true);
 			showNodeAttributes(d);
 		})		
 		.call(node_drag);		
@@ -495,9 +492,7 @@ RDFGraphVis.prototype.print = function(){
 		.attr("y", "-12px")
 		.attr("width", "60px")
 		.attr("height", "24px") 		
-		.attr("rx", "5").attr("ry", "5")		
-		.on("mouseover", function(d){ d3.select(this).classed("class-hover", true); })
-      	.on("mouseout", function(d){ d3.select(this).classed("class-hover", false); });
+		.attr("rx", "5").attr("ry", "5");
 
 	// add classe relations
 	node.filter(function(d){
@@ -506,9 +501,7 @@ RDFGraphVis.prototype.print = function(){
 		}
 		}).append("svg:polygon")
 		.attr("class", "class-relation")
-		.attr("points", "-30,0 0,20 30,0 0,-20")
-		.on("mouseover", function(d){ d3.select(this).classed("class-relation-hover", true); })
-      	.on("mouseout", function(d){ d3.select(this).classed("class-relation-hover", false); });
+		.attr("points", "-30,0 0,20 30,0 0,-20");
 
 	// add properties
 	node.filter(function(d){
@@ -520,9 +513,7 @@ RDFGraphVis.prototype.print = function(){
 		.attr("rx", 24)
 		.attr("ry", 12)
 		.attr("cx", 0)
-		.attr("cy", 0)		
-		.on("mouseover", function(d){ d3.select(this).classed("property-hover", true); })
-      	.on("mouseout", function(d){ d3.select(this).classed("property-hover", false); });
+		.attr("cy", 0);
 
 	// add labels
 	node.append("svg:text")
@@ -556,7 +547,8 @@ RDFGraphVis.prototype.print = function(){
 		if ( d.hasOwnProperty("x") && d.hasOwnProperty("y") ) {
 			d.fixed = true;
 			return true;
-		}})
+		}
+	});
 
 	/*
 	// TODO: initial zoom/translation
@@ -575,7 +567,6 @@ RDFGraphVis.prototype.print = function(){
 		_this.zoomed();
 	}
 	*/
-
 	
 
 	// auto width class and property-boxes
@@ -598,9 +589,7 @@ RDFGraphVis.prototype.print = function(){
 					return true;
 				}
 			})
-			//.attr("rx", boxWidth-30);
 			.attr("points", "-"+(boxWidth/1.5)+",0 0,20 "+(boxWidth/1.5)+",0 0,-20");
-		//.attr("points", "-30,0 0,20 30,0 0,-20")
 
 		if ( boxWidth < 60 ) {
 			boxWidth = 60;
@@ -624,7 +613,7 @@ RDFGraphVis.prototype.print = function(){
 	function dragstart(d, i) {
 		d3.event.sourceEvent.stopPropagation();
 		_this.zoom = false;
-	    _this.force.stop() // stops the force auto positioning before you start dragging	    
+	    _this.force.stop() // stops the force auto positioning before you start dragging
 	}
 
 	function dragmove(d, i) {
@@ -643,13 +632,31 @@ RDFGraphVis.prototype.print = function(){
 			    this.y += d3.event.dy; 
 	    	});
 	    }
+
+	    d3.select('body').style("cursor", "move");
 	}
 
 	function dragend(d, i) {
 		_this.zoom = true;
-	    //d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
-	    //tick();
-	    //force.resume();
+
+		// TODO: fix arrow-head-positions
+		/*
+		_this.svgGraph.select("line.subclass-link").filter(function(l){
+				if ( l.source == d || l.target == d ) {
+					//console.log(l);
+					return true;
+				}
+			}).attr("x2", function(l) { 
+				console.log(l); 
+				//console.log( l.target.attr("width") );
+				console.log( l.target.getAttr("width") );
+				this.svgGraph.select("rect#"+l.target["@id"].split(/[\\/]/).pop() ).filter(function(ltr){
+					console.log("ltr: ",  ltr.attr("width") );
+				});
+				return ( l.target.x + ( l.source.x - l.target.x ) );
+			  });
+			//.attr("marker-end", function(d) { if ( d.hasOwnProperty("subClassOf") ) { return "url(#end)" } } ); 			
+		*/
 	}
 	function tick() {
 	    link.attr("x1", function(d) { return d.source.x; })
@@ -710,7 +717,7 @@ RDFGraphVis.prototype.update = function() {
 	parser.parse( $( "#editor" ).val() ,
 		function (error, triple, prefixes) {
 			if (error) {
-				_this.setStatusMsg("N3 Parse-Error: " + error, "error");
+				_this.setStatusMsg("<b>N3 Parse-Error:</b> " + error, "error");
 				return false;
 			}
 			if (triple) {
@@ -823,11 +830,47 @@ RDFGraphVis.prototype.interface = function(){
 	var _this = this;
 
 	// file editor with turtle
-    _this.updateEditor();
-	
-	$(".save-graph").click( function() {
-	    _this.save();
+	hideSidebar = function() { 
+		/*$(".sidebar").css("width", "0");*/
+	 };
+    _this.updateEditor(
+    	hideSidebar
+    );
+
+    // drag sidebar
+    dragSidebar = null;
+    mouseX = 0;
+    $(".sidebar-dragzone").on("mousedown", function(e) {
+    	dragSidebar = window.setInterval(function() {
+	        dragSidebarFct();
+	    }, 100);
+    });
+    $("body").mousemove(function(e){
+    	mouseX = e.pageX;
+    });
+		
+	$("body, .sidebar-dragzone").on("mouseup, click", function() {		
+		window.clearInterval(dragSidebar);
+	    dragSidebar = null;
 	} );
+
+	function dragSidebarFct() {
+		if ( dragSidebar != null ) {
+			$( ".sidebar" ).css("width", mouseX + "px" );
+			$( "#graph, .footer" ).css( "marginLeft", mouseX + "px" );	
+		}		
+	}
+
+	// toggle sidebar	
+	$(".toggle-sidebar").click(function() {
+		if ( $(".sidebar").width() > 100 ) {
+			$( ".sidebar" ).animate({ width: "0" });
+			$( "#graph, .footer" ).animate({ marginLeft: "0" });
+		} else {			
+			$( ".sidebar" ).animate({ width: "40%" });			
+			$( "#graph, .footer" ).animate({ marginLeft: "40%" });
+		}
+    });
 
 	// update graph after keypress in editor
 	autoUpdateInterval = null;
@@ -837,17 +880,6 @@ RDFGraphVis.prototype.interface = function(){
 	        _this.update();
 	    }, 1500);
 	})
-
-	// toggle sidebar	
-	$(".toggle-sidebar").click(function() {
-		if ( $(".sidebar").position().left < 0 ) {
-			$( ".sidebar" ).animate({ left: "0" });
-			$( "#graph, .footer" ).animate({ marginLeft: "40%" });
-		} else {
-			$( ".sidebar" ).animate({ left: "-40%" });
-			$( "#graph, .footer" ).animate({ marginLeft: "0" });
-		}
-    });
 
     // toggle history
     $(".toggle-history").click(function() {
@@ -875,18 +907,13 @@ RDFGraphVis.prototype.interface = function(){
 		    });
 
 		    $(".history-list a").click(function() {
-		        //console.log($(this).attr("data-time"));
 		        var time = $(this).attr("data-time");
 		        $("#history").hide();
+		        _this.setStatusMsg("");
 
 		        $.post( "ajax/get.php", { name: _this.id + "-" + time + ".n3" })      
 		            .done(function( jsondata ) {
-
 		                if ( jsondata.result && jsondata.content != "" ) {
-		                    //console.log( "big: ", jsondata );
-		                    //var data = jsondata.content;
-		                    var oldId = _this.id;
-
 		                    // reset model
 							_this.graphModel.nodes = [];
 							_this.graphModel.links = [];
@@ -895,25 +922,21 @@ RDFGraphVis.prototype.interface = function(){
 							_this.svg.selectAll("line").remove();
 
 		                    _this.nquads = jsondata.content;
-		                    _this.id = _this.id + "-" + time;
+		                    _this.layoutFile = _this.id + "-" + time + ".json";
 		                    _this.updateEditor();
 		                    _this.parse();
-
-		                    // set old id as new id (without timestamp)
-		                    // TODO: do it a better way!
-		                    window.setTimeout( function() { _this.id = oldId; }, 1000 );
 		                }
 		        });
 		    });
 	});
 
-	// toggle model selector
+	// toggle voc selector
     $(".select-voc").click(function() {
     	$("#history").hide();
         $("#voc").toggle();
     });
 
-	// fill model selection
+	// fill voc selection
 	$.post( "ajax/getAll.php" )
 		.done(function( jsondata ) {
 			var $list = $(".voc-list");
@@ -926,7 +949,7 @@ RDFGraphVis.prototype.interface = function(){
 		        $list.append('<a href="#" class="list-group-item" data-voc="'+voc+'">'+voc+'</a>');
 		    });
 
-		    // select a mode. Remove prev graph and actions and create a new
+		    // select a vocabulary. Remove prev graph and actions and create a new
 		    $(".voc-list a").click(function() {
 				var voc = $(this).attr("data-voc");
 				$("#voc").toggle();
@@ -934,6 +957,7 @@ RDFGraphVis.prototype.interface = function(){
 				$(".history-list").html('');
 				$(".voc-list").html('');
 				$("*").off("click");
+				_this.setStatusMsg("");
 
 				$.post( "ajax/get.php", { name: voc + ".n3" })      
 					.done(function( jsondata ) {
@@ -955,6 +979,22 @@ RDFGraphVis.prototype.interface = function(){
 		    });
 	});
 
+	// reset positions
+	$(".reset-position").click( function() {
+		// reset values
+		_this.layoutFile = "";
+		_this.model = []; // store json-ls model
+		_this.graphModel = { "nodes" : [], "links" : [] }; // store nodes and links
+		_this.graphLayout = {}; // stored model-layout with xy-positions
+		_this.classProperties = {};
+
+		// remove nodes and links
+		_this.svg.selectAll("g.node").remove();
+		_this.svg.selectAll("line").remove();
+
+		_this.parse();
+	});
+
 	// toggle properties
 	var hide = true;
 	$(".toggle-properties").click( function() {
@@ -968,15 +1008,43 @@ RDFGraphVis.prototype.interface = function(){
 	    hide = ! hide;
 	});
 
+	$(".zoom-in").click( function() {
+	});
+	$(".zoom-out").click( function() {
+	});
+
+	// create a new empty vocabulary
+	$(".new-voc").click( function() {
+
+		var newId = prompt("Define a name (TODO: test if exists!):");
+
+		$("#graph").html('');
+		$(".history-list").html('');
+		$(".voc-list").html('');
+		$("*").off("click");
+
+		new RDFGraphVis({
+			data: "<http://example.com/Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> . \n",
+			id : newId,
+			prefixes: { 
+				"rdfs" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+				"owl" : "http://www.w3.org/2002/07/owl#"
+			},
+			base: "http://example.com/",
+		});
+	});
+
 	// toggle editor syntax highlighting
+	/*
 	$(".toggle-editorSyntax").click(function() {
 		$(".CodeMirror").toggle();
 		$("#editor").toggle();
 	});
+	*/
 }
 
 // fill editor with turtle
-RDFGraphVis.prototype.updateEditor = function() {
+RDFGraphVis.prototype.updateEditor = function(onFilled) {
 	var _this = this;
 	// parse n3 to turtle for textarea editor
 	var triples = _this.nquads.split("\n");
@@ -1012,6 +1080,10 @@ RDFGraphVis.prototype.updateEditor = function() {
 						//lineWrapping: true,
 						lineNumbers: true
 					});
+					editor.execCommand("find");
+					if ( typeof onFilled !== undefined ) {
+						onFilled();
+					}
 					
 					editor.on('change',function(cMirror){
 						// get value right from instance
@@ -1109,11 +1181,17 @@ RDFGraphVis.prototype.setStatusMsg = function(msg, type) {
 	if( typeof msg === "string" ) {
 		$(".status-bar").text(msg);
 	} else {
+		/*
 		var txt = "<table class='table table-condensed'>";
 		$.each(msg,function(key, value) {
 			txt += "<tr><td>"+key+"&nbsp;</td><td>"+value+"</td></tr>";
 		})
 		txt += "</table>";
+		*/
+		var txt = "| ";
+		$.each(msg,function(key, value) {
+			txt += "<strong>"+key+": </strong>"+value+" | ";
+		})
 		$(".status-bar").html(txt);
 	}
 }
