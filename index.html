@@ -29,17 +29,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>--
+          </button>
           <a class="navbar-brand" href="#">VocTo</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a class="toggle-editorSyntax" href="#">Toggle Syntax Highlighting</a></li>
+            <!--<li><a class="toggle-editorSyntax" href="#">Toggle Syntax Highlighting</a></li>-->
+            <!--<li><a class="zoom-in" href="#"> + </a></li>
+            <li><a class="zoom-out" href="#"> - </a></li>-->
             <li><a class="toggle-properties" href="#">Toggle Properties</a></li>
+            <li><a class="reset-position" href="#">Reset Positions</a></li>
             
             <li><a class="toggle-history" href="#">History</a></li>
 
             <li><a class="select-voc" href="#">Select Voc</a></li>
+            <!--<li><a class="new-voc" href="#">New Voc</a></li>-->
             <li>
                 <button class="btn btn-primary save-graph" type="button" style="margin:7px;">
                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save
@@ -53,13 +57,14 @@
     </nav>
 
     <div class="sidebar">
+        <div class="sidebar-dragzone"></div>
+        
                 <button type="button" class="btn btn-default toggle-sidebar">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </button>
                 
                 <textarea id="editor" wrap="off" rows="30"></textarea>
-                <!--<input type="text" class="form-control input-sm editor-search" placeholder="Search..." value="">-->
-                
+                <!--<input type="text" class="form-control input-sm editor-search" placeholder="Search..." value="">-->                                
     </div>
 
     <div id="graph" class="container"></div>
