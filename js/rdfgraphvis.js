@@ -831,11 +831,14 @@ RDFGraphVis.prototype.interface = function(){
 
 	// set title
 	$(".navbar-brand").html("VocTo - " + _this.id );
+	document.title = "VocTo - " + _this.id ;
+
 
 
 	// file editor with turtle
 	hideSidebar = function() { 
-		/*$(".sidebar").css("width", "0");*/
+		$( ".sidebar" ).css("width", "0" );
+		$( "#graph, .footer" ).css("marginLeft", "0" );
 	 };
     _this.updateEditor(
     	hideSidebar
@@ -1089,7 +1092,6 @@ RDFGraphVis.prototype.updateEditor = function(onFilled) {
 						//lineWrapping: true,
 						lineNumbers: true
 					});
-					editor.execCommand("find");
 					if ( typeof onFilled !== undefined ) {
 						onFilled();
 					}
