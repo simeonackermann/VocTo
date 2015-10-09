@@ -1034,6 +1034,10 @@ RDFGraphVis.prototype.interface = function(){
 		});
 	});
 
+	$(".save-graph").click( function() {
+		_this.save();
+	});
+
 	// toggle editor syntax highlighting
 	/*
 	$(".toggle-editorSyntax").click(function() {
