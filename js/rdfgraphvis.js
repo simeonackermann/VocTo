@@ -829,6 +829,10 @@ Set interface functions (navi, sidebar, history, voc-selector...)
 RDFGraphVis.prototype.interface = function(){
 	var _this = this;
 
+	// set title
+	$(".navbar-brand").html("VocTo - " + _this.id );
+
+
 	// file editor with turtle
 	hideSidebar = function() { 
 		/*$(".sidebar").css("width", "0");*/
@@ -1034,6 +1038,7 @@ RDFGraphVis.prototype.interface = function(){
 		});
 	});
 
+	// save file
 	$(".save-graph").click( function() {
 		_this.save();
 	});
