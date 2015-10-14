@@ -1020,25 +1020,26 @@ RDFGraphVis.prototype.interface = function(){
 	$(".zoom-out").click( function() {
 	});
 
+
+	function testNewVoc() {
+		var id = prompt("Unique ID (Title):");
+		var uri = prompt("Baseuri:");
+
+		$.post( "ajax/get.php", { name: id +".n3" })
+			.done(function( jsondata ) {
+				if ( jsondata.result == false ) {
+					_this.newVocabulary(id, uri);
+				} else {
+					alert("This name already exists. Please choose another ID.");
+					testNewVoc();
+				}
+			}
+		);
+	}
+
 	// create a new empty vocabulary
 	$(".new-voc").click( function() {
-
-		var newId = prompt("Define a name (TODO: test if exists!):");
-
-		$("#graph").html('');
-		$(".history-list").html('');
-		$(".voc-list").html('');
-		$("*").off("click");
-
-		new RDFGraphVis({
-			data: "<http://example.com/Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> . \n",
-			id : newId,
-			prefixes: { 
-				"rdfs" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-				"owl" : "http://www.w3.org/2002/07/owl#"
-			},
-			base: "http://example.com/",
-		});
+		testNewVoc();
 	});
 
 	// save file
@@ -1053,6 +1054,38 @@ RDFGraphVis.prototype.interface = function(){
 		$("#editor").toggle();
 	});
 	*/
+}
+
+RDFGraphVis.prototype.newVocabulary = function(newId, newUri) {
+	var _this = this;
+
+	// may append slash to uri
+	if ( newUri.substr(-1) != "/" ) {
+		newUri += "/";
+	}
+
+	$("#graph").html('');
+	$(".history-list").html('');
+	$(".voc-list").html('');
+	$("*").off("click");
+
+	new RDFGraphVis({
+		data: '<'+newUri+'Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> . \n' +
+			'<'+newUri+'Person> <http://www.w3.org/2000/01/rdf-schema#label> "A person" . \n' +
+			'<'+newUri+'title> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> . \n' +
+			'<'+newUri+'title> <http://www.w3.org/2000/01/rdf-schema#domain> <'+newUri+'Person> . \n' +
+			'<'+newUri+'knows> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> . \n' +
+			'<'+newUri+'knows> <http://www.w3.org/2000/01/rdf-schema#domain> <'+newUri+'Person> . \n' +
+			'<'+newUri+'knows> <http://www.w3.org/2000/01/rdf-schema#range> <'+newUri+'Person> . \n'
+			,
+		id : newId,
+		prefixes: {
+			"rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+			"owl" : "http://www.w3.org/2002/07/owl#",
+			"rdfs" : "http://www.w3.org/2000/01/rdf-schema#"
+		},
+		base: newUri,
+	});
 }
 
 // fill editor with turtle
