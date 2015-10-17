@@ -52,11 +52,12 @@ RDFGraphVis.prototype.init = function() {
 
 	// define the arrow.
 	var defs = _this.svg.append("svg:defs").selectAll("marker")
-		.data(["end"])      // Different link/path types can be defined here
+		.data(["endArrow"])      // Different link/path types can be defined here
 		.enter().append("svg:marker")    // This section adds in the arrows
 		.attr("id", String)
 		.attr("viewBox", "0 -5 10 10")
-		.attr("refX", 18)
+		//.attr("refX", 18)
+		.attr("refX", 8)
 		.attr("refY", 0)
 		.attr("markerWidth", 6)
 		.attr("markerHeight", 6)
@@ -110,12 +111,10 @@ RDFGraphVis.prototype.init = function() {
 	// listen for dragging
 	var zoomSvg = d3.behavior.zoom()
 		.on("zoom", function(){
-			if (d3.event.sourceEvent.shiftKey){
-				// TODO  the internal d3 state is still changing
+			/* if (d3.event.sourceEvent.shiftKey){
 				return false;
-			} else{
-				zoomed.call(_this);
-			}
+			} */
+			zoomed.call(_this);
 			return true;
 		})
 		.on("zoomstart", function(){ 
@@ -449,8 +448,7 @@ RDFGraphVis.prototype.print = function(){
 		})
 		.attr("marker-end", function(d) { 
 			if ( d.hasOwnProperty("subClassOf") ) { 
-				//console.log("TODO: Fix head pos here: ", d);
-				return "url(#end)";
+				return "url(#endArrow)";
 			}
 		}); 
 		
@@ -577,6 +575,7 @@ RDFGraphVis.prototype.print = function(){
 		var boxWidth = arr[i].getBBox().width;
 		d3.select(x).filter(function(d){
 				if ( d["@d3"].type == "Class" ) {
+					d.width = boxWidth+10; // add this to node to fix the arrow positions
 					return true;
 				}
 			})
@@ -613,7 +612,7 @@ RDFGraphVis.prototype.print = function(){
 	function dragstart(d, i) {
 		d3.event.sourceEvent.stopPropagation();
 		_this.zoom = false;
-	    _this.force.stop() // stops the force auto positioning before you start dragging
+	    _this.force.stop(); // stops the force auto positioning before you start dragging
 	}
 
 	function dragmove(d, i) {
@@ -638,31 +637,37 @@ RDFGraphVis.prototype.print = function(){
 
 	function dragend(d, i) {
 		_this.zoom = true;
-
-		// TODO: fix arrow-head-positions
-		/*
-		_this.svgGraph.select("line.subclass-link").filter(function(l){
-				if ( l.source == d || l.target == d ) {
-					//console.log(l);
-					return true;
-				}
-			}).attr("x2", function(l) { 
-				console.log(l); 
-				//console.log( l.target.attr("width") );
-				console.log( l.target.getAttr("width") );
-				this.svgGraph.select("rect#"+l.target["@id"].split(/[\\/]/).pop() ).filter(function(ltr){
-					console.log("ltr: ",  ltr.attr("width") );
-				});
-				return ( l.target.x + ( l.source.x - l.target.x ) );
-			  });
-			//.attr("marker-end", function(d) { if ( d.hasOwnProperty("subClassOf") ) { return "url(#end)" } } ); 			
-		*/
 	}
+	// TODO ticks too often on start ?!
+	// the t(r)ick - set node and link positions on start and drag
 	function tick() {
+		
 	    link.attr("x1", function(d) { return d.source.x; })
 	        .attr("y1", function(d) { return d.source.y; })
 	        .attr("x2", function(d) { return d.target.x; })
 	        .attr("y2", function(d) { return d.target.y; });
+		
+		// fix the subClass-link arrow positions, set it to the border of our target
+		link.each(function(d) {
+			if ( d.hasOwnProperty("subClassOf") ) {
+				var x2 = 0;
+				var y2 = 0;
+				var targetH = ( d.target.y > d.source.y ) ? -13 : 13; // 13 => target box height			
+				var m = ( d.target.y - d.source.y ) / ( d.target.x - d.source.x );
+				var n = d.source.y - ( m * d.source.x );
+				x2 = ( d.target.y + targetH - n ) / m ;	
+				y2 = d.target.y + targetH;
+
+				// test if the link is on the sides				
+				if ( x2 < d.target.x - ( d.target.width / 2 ) || x2 > d.target.x + ( d.target.width / 2 ) ) {			
+					x2 = ( d.target.x > d.source.x ) ? d.target.x - (d.target.width / 2) : d.target.x + (d.target.width / 2);
+					y2 = m * x2 + n;
+				}
+				$(this).attr("x2", x2);
+				$(this).attr("y2", y2);
+			}
+		});
+
 	    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });    
 	}
 	function showNodeAttributes(d) {
@@ -814,6 +819,7 @@ RDFGraphVis.prototype.save = function() {
 					.done(function( jsondata ) {
 						if ( jsondata.result == true ) {
 							_this.addStatusMsg(jsondata.msg);
+							_this.interface.fillHistory();
 						} else {
 							console.log(jsondata.msg);
 							_this.addStatusMsg(jsondata.msg);
@@ -833,12 +839,10 @@ RDFGraphVis.prototype.interface = function(){
 	$(".navbar-brand").html("VocTo - " + _this.id );
 	document.title = "VocTo - " + _this.id ;
 
-
-
 	// file editor with turtle
 	hideSidebar = function() { 
 		$( ".sidebar" ).css("width", "0" );
-		$( "#graph, .footer" ).css("marginLeft", "0" );
+		$( ".footer" ).css("marginLeft", "0" );
 	 };
     _this.updateEditor(
     	hideSidebar
@@ -864,7 +868,7 @@ RDFGraphVis.prototype.interface = function(){
 	function dragSidebarFct() {
 		if ( dragSidebar != null ) {
 			$( ".sidebar" ).css("width", mouseX + "px" );
-			$( "#graph, .footer" ).css( "marginLeft", mouseX + "px" );	
+			$( "footer" ).css( "marginLeft", mouseX + "px" );	
 		}		
 	}
 
@@ -872,10 +876,10 @@ RDFGraphVis.prototype.interface = function(){
 	$(".toggle-sidebar").click(function() {
 		if ( $(".sidebar").width() > 100 ) {
 			$( ".sidebar" ).animate({ width: "0" });
-			$( "#graph, .footer" ).animate({ marginLeft: "0" });
+			$( ".footer" ).animate({ marginLeft: "0" });
 		} else {			
 			$( ".sidebar" ).animate({ width: "40%" });			
-			$( "#graph, .footer" ).animate({ marginLeft: "40%" });
+			$( ".footer" ).animate({ marginLeft: "40%" });
 		}
     });
 
@@ -892,50 +896,56 @@ RDFGraphVis.prototype.interface = function(){
     $(".toggle-history").click(function() {
     	$("#voc").hide();
         $("#history").toggle();
-    });
+    });    
 
     // fill history
-    $.post( "ajax/get.php", { name: "log-" + _this.id + ".txt" })  
-		.done(function( jsondata ) {
-			var $list = $(".history-list");
-		    if ( ! jsondata.result || jsondata.content == "" ) {
-		    	$list.append('No older versions found');
-		        return false;
-		    }
-		    
-		    var lines = jsondata.content.split("\n");;		    
-		    $.each(lines, function(lineIndex, line){
-		        if (line == "") {
-		            return true;
-		        }
-		        var vals = line.split(" ");
-		        var date = new Date(parseInt(vals[0])*1000);
-		        $list.append('<a href="#" class="list-group-item" data-time="'+vals[0]+'">'+date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+', '+date.getHours()+'h '+date.getMinutes()+':'+date.getSeconds()+'s</a>');
-		    });
+    _this.interface.fillHistory = function() {
+    	var $list = $(".history-list");
+    	$list.html('');
+	    $.post( "ajax/get.php", { name: "log-" + _this.id + ".txt" })  
+			.done(function( jsondata ) {
+				
+			    if ( ! jsondata.result || jsondata.content == "" ) {
+			    	$list.append('No older versions found');
+			        return false;
+			    }
+			    
+			    var lines = jsondata.content.split("\n");;		    
+			    $.each(lines, function(lineIndex, line){
+			        if (line == "") {
+			            return true;
+			        }
+			        var vals = line.split(" ");
+			        var date = new Date(parseInt(vals[0])*1000);
+			        $list.append('<a href="#" class="list-group-item" data-time="'+vals[0]+'">'+date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+', '+date.getHours()+'h '+date.getMinutes()+':'+date.getSeconds()+'s</a>');
+			    });
 
-		    $(".history-list a").click(function() {
-		        var time = $(this).attr("data-time");
-		        $("#history").hide();
-		        _this.setStatusMsg("");
+			    $(".history-list a").click(function() {
+			        var time = $(this).attr("data-time");
+			        $("#history").hide();
+			        _this.setStatusMsg("");
 
-		        $.post( "ajax/get.php", { name: _this.id + "-" + time + ".n3" })      
-		            .done(function( jsondata ) {
-		                if ( jsondata.result && jsondata.content != "" ) {
-		                    // reset model
-							_this.graphModel.nodes = [];
-							_this.graphModel.links = [];
-							// remove nodes and links
-							_this.svg.selectAll("g.node").remove();
-							_this.svg.selectAll("line").remove();
+			        $.post( "ajax/get.php", { name: _this.id + "-" + time + ".n3" })      
+			            .done(function( jsondata ) {
+			                if ( jsondata.result && jsondata.content != "" ) {
+			                    // reset model
+								_this.graphModel.nodes = [];
+								_this.graphModel.links = [];
+								// remove nodes and links
+								_this.svg.selectAll("g.node").remove();
+								_this.svg.selectAll("line").remove();
 
-		                    _this.nquads = jsondata.content;
-		                    _this.layoutFile = _this.id + "-" + time + ".json";
-		                    _this.updateEditor();
-		                    _this.parse();
-		                }
-		        });
-		    });
-	});
+			                    _this.nquads = jsondata.content;
+			                    _this.layoutFile = _this.id + "-" + time + ".json";
+			                    _this.updateEditor();
+			                    _this.parse();
+			                }
+			        });
+			    });
+		});
+    };
+    _this.interface.fillHistory();
+    
 
 	// toggle voc selector
     $(".select-voc").click(function() {
