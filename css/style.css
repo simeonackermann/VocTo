@@ -154,7 +154,7 @@ body {
  	width:auto;
  	margin: 0;
  	padding: 0;
-  margin-left: 40%;
+  margin-left: 0%;
  }
 
 /* hide remove link btn */
@@ -192,6 +192,9 @@ polygon.class-relation {
 line.link {
   stroke-width: 2;
   stroke: gray;
+}
+#endArrow {
+  fill: #4D4C4C; 
 }
 
 #history,
