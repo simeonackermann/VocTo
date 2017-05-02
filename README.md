@@ -3,10 +3,14 @@
 
 is an OWL/RDF vocabulary graphical visualisation and editing tool. Its implemented in JS/PHP/HTML and based on the JavaScript library [D3](http://d3js.org/).
 
+**Screenshot:**
+
+![](https://github.com/simeonackermann/VocTo/raw/master/screenshot.png)
+
 
 # Getting started
 
-- save your RDF vocabulary as [N3](http://www.w3.org/TeamSubmission/n3/) notation in data/filename.n3 
+- save your RDF vocabulary as [N3](http://www.w3.org/TeamSubmission/n3/) notation in data/filename.n3
 - open index.html for an example implementation
 
 # RDF / OWL notation
